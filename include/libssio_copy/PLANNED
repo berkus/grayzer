@@ -1,0 +1,14 @@
+This library should take over where madFile and easyio have dropped off.
+
+
+Extra stuff like compressing/encrypting are added using Decorator pattern.
+Need a co-existing interface to Open damn streams in modes: read, write, append, seek (think on it).
+Seekability will be important for Serial/HTTP Sources/Sinks...
+Peeking into stream would be useful (?? never used that since many years)
+
+
+Archive support.
+HTTP/FTP/other network support.
+Console support.
+Temporary source/sink support (uhm?).
+ 

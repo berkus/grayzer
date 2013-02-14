@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<title>Untitled</title>
+</head>
+<body>
+Codename Graycer – Specifications<br>
+Last change December 8th 2004, 02:22 AM (GMT+1)<br>
+(c) by Peter Marquardt<br>
+<br>
+1. What is Graycer?<br>
+2. Splitting Graycer into modules<br>
+&nbsp;&nbsp;2.1 Scene based effects<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2.1.1 Gravity on Rays<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1.1.1 Camera Rays<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1.1.2 Light Rays<br>
+&nbsp;&nbsp;2.2 Time based effects<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2.2.1 Slowing down Rays<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.1.1 The light source way<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.1.2 The camera way<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2.2.2 Image recomposition<br>
+&nbsp;&nbsp;2.3 Scene and time independent effects<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2.3.1 Inverted perspective<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2.3.2 Parameter maps<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2.3.3 Per pixel exposure correction<br>
+3. Consequences<br>
+&nbsp;&nbsp;3.1 ...for the makers<br>
+&nbsp;&nbsp;3.2 ...for the artists<br>
+&nbsp;&nbsp;3.3 <br>
+    <br>
+<br>
+<br>
+1. What is Graycer?<br>
+<br>
+Graycer is a standalone ray tracer or a modification of an existing ray tracer which produces imagery that defies a number of physical laws and is not reproducible in any current ray tracer available. The word Graycer is put together from the word gravity and the word ray tracer because of the initial idea as seen in 2.1.1 which formed to a concept. I think of the modules that make up Graycer as being designed to appeal to the surreal artist, however it could also be put to scientific use, e.g. in the visualization of optical phenomena happening in places outside earths atmosphere. So generally speaking Graycer's sole purpose is to play with the way light acts in a scientific and artistic way.<br>
+<br>
+Attention: In order to understand parts of this document you will have to know how a ray tracer works.<br>
+<br>
+<br>
+2. Splitting Graycer into modules<br>
+<br>
+In order to create Physically impossible effects there are a number of physical laws which can be altered. They can be grouped into effects that rely on information from the scene, effects that only apply in time and effects that are independent and are not affected by the scene or time.<br>
+<br>
+<br>
+2.1 Scene based effects<br>
+<br>
+2.1.1 Gravity on Rays<br>
+<br>
+2.1.1.1 Camera Rays<br>
+<br>
+In our everyday Life vision is affected by gravity. Just like mass, light is being affected by objects. The effect is far too small to notice it at all, but it gets noticeable when taking a look at black holes and big celestial bodies.<br>
+My original Idea for the Graycer project was to apply this concept to the camera rays and have the phenomenon amplified. It doesn't matter if the light hitting our retina is being bent or if the ray is being reversed. The effect is the same. Thus the camera rays would be affected by gravity of objects in the scene, giving the artist the possibility to put emphasis on certain objects or to reveal details that would have otherwise been hidden to the camera.<br>
+The most common effect of having camera rays affected by gravity of objects is of course that Objects with a higher gravity index are being displayed larger than objects with a low gravity index. This could for example be put to use to show an entire scene but still put emphasis on a detail that would have been easily overlooked.<br>
+Another effect is that rays can suddenly reach places they wouldn't have had access to with regular linear rays. You could see six sides of a cube or things happening behind the camera, you could look around corners or generally into more than one direction.<br>
+<br>
+Requirement for this to work is a simple ray tracer.<br>
+The only additional parameter would be the force at which rays are being sent out.<br>
+A problem would be detecting rays that are caught in an orbit around one or more gravity centers. This could be done by specifying a fixed lifetime for each ray or by checking each ray's motion against a set of formulas describing such a motion.<br>
+Another problem would be that if a ray does not hit anything due to getting caught in an orbit it stays undefined. Possible Solutions would be to<br>
+a) tint it in the background color<br>
+b) tint it black<br>
+c) interpolate its color from the surrounding pixels after rendering completed<br>
+&nbsp;&nbsp;&nbsp;If there is a whole array of pixels remaining undefined<br>
+&nbsp;&nbsp;&nbsp;c.I) interpolate one color from all surrounding pixels and use it for all undefined pixels in the array<br>
+&nbsp;&nbsp;&nbsp;c.II) measure the distance to the center of the array, then interpolate one color from all surrounding pixels and use gradients from the outer pixel colors towards the center mixed color<br>
+<br>
+<br>
+2.1.1.2 Light Rays<br>
+<br>
+Similar to camera rays light rays have to be bent as well. However since we have absolute control, the amplitude or even the gravity centers themselves can be decoupled for both types of rays.<br>
+Common effects of light being bent by gravity would be smaller shadows or no shadows at all. They could even be seemingly reversed since from both sides of an object light rays could bend to hit the same area.<br>
+Also light would be shed into regions that would otherwise stay dark.<br>
+<br>
+Requirement for this to work would be a ray tracer which makes use of photon lights.<br>
+The only additional Parameter would be the force, just like for camera rays.<br>
+The problem with rays getting caught in an orbit is also the same, however I don't see a reasonable action that could be taken taken to compensate the loss of one or more photons.<br>
+<br>
+<br>
+2.2 Time based effects<br>
+<br>
+2.2.1 Slowing down Rays ("Vision at the speed of sound")<br>
+<br>
+The sudden impact of gravity on rays discussed in 2.1.1 would usually imply the speed of rays being reduced. That's why I thought of another concept which fits Graycer nicely, slow vision. We have all experienced the effect of sound being slower than light when it comes to lightning and thunder. The effect is even more impressive when you can actually link a motion with a sound, e.g. somebody hammering on a roof about 100 meters away. The idea of having this reversed fascinated me, especially if you reduced the speed of light even more, perhaps to 10 km/h (6 mph). Again we have absolute control and can decouple gravity impact and ray speed, however an option linking the two together would be fun.<br>
+<br>
+<br>
+2.2.1.1 The light source way<br>
+<br>
+The correct way to solve said phenomenon would be the way where photons of a light source are being slowed down, making the objects from which they bounce off indirect light sources. Objects could be faster than their light and two persons could hit each other before seeing who they bumped into. Also the Doppler effect applying to light is a funny thought with objects seeming less deep when they approach you and deeper after they passed. Unfortunately this would require insane amounts of CPU time, since in time the direction of a ray suddenly gains importance and thus can't be simulated by slowing down camera rays. You would need to have photon lights emit a crazy number of photons so that they would finally hit a virtual image sensor. Nobody has ever been mad enough to do that as far as I know and so I won't elaborate on this any further since it is not possible with today's technology.<br>
+<br>
+<br>
+2.2.1.2 The camera way<br>
+<br>
+Instead of doing it the physically correct way we have to revert to the camera rays. Of course the effect is totally different and it stirs up a number of problems, but if handled correctly it can still give very interesting results.<br>
+<br>
+Requirement would be a simple ray tracer.<br>
+A parameter would need to be the speed of the rays, probably best measured in length unit per frame. The other parameter would need to be the number of frames or the length that they start off with, since otherwise you would not see anything in the beginning of an animation until the first ray hits a target. This second parameter could be automatically set, because the course of all rays would have to be precalculated anyway in order to eliminate orbiting rays as discussed in 2.1.1.1 as long as gravity is not turned off.<br>
+<br>
+<br>
+2.2.2 Image recomposition<br>
+<br>
+<br>
+...coming soon
+</body>
+</html>

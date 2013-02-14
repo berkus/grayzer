@@ -1,0 +1,8 @@
+Source/Sink Input/Output library.
+
+Uses notion of Sources and Sinks, allowing rather device independent I/O.
+
+Some implementations provided that use memory, C++ streams and C FILEs.
+
+Code pieces ripped from Exult project. http://exult.sourceforge.net.
+That code is Copyright (c) 1998-2002 Jeffrey S. Freedman and The Exult Team.

@@ -1,0 +1,4 @@
+add:
+
+- PhotonRay (subclass of Ray) which consists of photons with certain speed()
+- Force for simulating gravity forces (according to Newtonian laws)
