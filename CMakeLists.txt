@@ -7,5 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 message("Supported features = ${CMAKE_CXX_COMPILE_FEATURES}")
 
+enable_testing()
+
 add_subdirectory(src)
 add_subdirectory(examples)
