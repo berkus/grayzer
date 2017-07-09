@@ -28,11 +28,11 @@ class targa_header
         void save(DataSink &ds);
 };
 
-class targa_image : public image
+class TargaImage : public Image
 {
     public:
-        targa_image( char *, int, int, char *comment = 0 );
-       ~targa_image();
+        TargaImage( char const*, int, int, char *comment = 0 );
+       ~TargaImage();
 
         virtual rgb get_pixel( int, int ) { return rgb(0); } // $NB$
         virtual void put_pixel( rgb );

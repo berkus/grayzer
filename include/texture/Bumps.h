@@ -5,12 +5,12 @@
 
 #include "texture/Texture.h"
 
-class bumps : public texture
+class Bumps : public Texture
 {
     public:
         double amount;
 
-        bumps( double a = 1.0 ) : texture(), amount( a ) {}
+        Bumps( double a = 1.0 ) : Texture(), amount(a) {}
 
-        virtual void apply( Vector&, surface_data& );
+        void apply(Vector&, Grayzer::SurfaceData&) override;
 };

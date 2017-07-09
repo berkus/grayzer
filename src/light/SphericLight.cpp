@@ -1,14 +1,15 @@
 //
-//  @brief spheric_light light source realization
+//  @brief SphericLight light source realization
 //
 #include "light/SphericLight.h"
 #include "SurfaceData.h"
 #include "geom/GeomObj.h"
-#include "environment/Environment.h"
+#include "environment/Scene.h"
 #include "Tracer.h"
 
+using Grayzer::SurfaceData;
 
-double spheric_light::shadow( Vector& p, Vector& l )
+double SphericLight::shadow( Vector& p, Vector& l )
 {
    l =   loc   - p   + Vector::rnd_vector() * radius;
    double dist = !l;
@@ -16,9 +17,10 @@ double spheric_light::shadow( Vector& p, Vector& l )
    double t;
 
    l /= dist;  // normalize vector l
-   ray   ray(p,l);
-   surface_data texture;
-   geometric_object *occlude;
+
+   Ray   ray(p,l);
+   SurfaceData texture;
+   GeometricObject *occlude;
 
    while( (occlude   = scene->intersect(ray,t)) != 0 && dist >  t )
    {

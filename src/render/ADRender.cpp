@@ -9,14 +9,16 @@
 #include "Ray.h"
 #include "Draw.h"
 
+auto& air = Grayzer::Medium::air;
+
 void adaptive_distributed_render_scene(
    double HalfWidth,double HalfHeight,
    int   nx,int ny,int nxSub,int nySub,
    double Variance,
-   char *PicFileName)
+   char const*PicFileName)
 {
    double x,y;                // sample point
-   ray   ray;                 // pixel ray
+   Ray   ray;                 // pixel ray
    double hx = 2.0   * HalfWidth / nx;   // pixel width
    double hy = 2.0   * HalfHeight / ny;     // pixel height
    double hxSub = hx /  nxSub;
@@ -29,7 +31,7 @@ void adaptive_distributed_render_scene(
    int   Count;
 
    // make  next in  some higher-level module as: RenderOutFile = new Targa...
-   targa_image *tga = new targa_image(PicFileName, nx, ny);
+   TargaImage *tga = new TargaImage(PicFileName, nx, ny);
    rgb   c;
 
 //    display_init( nx, ny );

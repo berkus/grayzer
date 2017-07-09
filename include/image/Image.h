@@ -5,13 +5,14 @@
 
 #include "image/RGB.h"
 
-class image
+class Image
 {
     public:
         int width, height;
 
-        image() {}
-        virtual ~image() {}
+        Image() {}
+        virtual ~Image() {}
+
         virtual rgb get_pixel( int, int ) = 0;
         virtual void put_pixel( rgb ) = 0;
 };

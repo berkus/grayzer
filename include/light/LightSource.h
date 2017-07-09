@@ -5,13 +5,13 @@
 
 #include "math/Vector.h"
 
-class light_source
+class LightSource
 {
     public:
         Vector color;
 
-        light_source() : color( 1 ) {}
-        virtual ~light_source() {}
+        LightSource() : color( 1 ) {}
+        virtual ~LightSource() {}
 
         virtual double shadow( Vector&, Vector& ) = 0;
 };

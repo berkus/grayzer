@@ -1,9 +1,11 @@
 #pragma once
 
+#include <cstdint>
+
 struct rgb {
-    char r;
-    char g;
-    char b;
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
     
-    rgb(int v=0) { r = g = b = v; }
+    rgb(uint8_t v=0) { r = g = b = v; }
 };

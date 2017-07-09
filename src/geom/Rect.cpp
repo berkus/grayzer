@@ -5,8 +5,7 @@
 #include "environment/Geometry.h"
 #include "geom/Rect.h"
 
-
-rectangle::rectangle( const Vector& l, const Vector& s1, const Vector& s2  )
+Rectangle::Rectangle( const Vector& l, const Vector& s1, const Vector& s2  )
 {
    loc   = l;
    side1 =  s1;
@@ -24,8 +23,7 @@ rectangle::rectangle( const Vector& l, const Vector& s1, const Vector& s2  )
    v0 = -(loc & kv);
 }
 
-
-bool rectangle::intersect( ray&  r, double& t )
+bool Rectangle::intersect(Ray& r, double& t)
 {
    STAT( RectTestCount++  );
    STAT( RectTestMisses++ );

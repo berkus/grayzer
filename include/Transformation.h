@@ -1,38 +1,34 @@
-//
-//  File.........: transfrm.hpp
-//  Description..: class transformation
-//
 #pragma once
 
 #include "math/Matrix.h"
 
-class transformation
+class Transformation
 {
     public:
-        matrix m;   // direct transform
-        matrix inv; // inverse transform
+        Matrix m;   // direct transform
+        Matrix inv; // inverse transform
 
-        transformation() : m(1), inv(1) {}
+        Transformation() : m(1), inv(1) {}
         //
         //  MTransformVector(result,trans,vector)
         //
-        friend vector operator * ( const transformation&, const vector& );
+        friend Vector operator * (Transformation const&, Vector const&);
         //
         //  MInverseTransformVector
         //
-        friend vector operator / ( const transformation&, const vector& );
+        friend Vector operator / (Transformation const&, Vector const&);
         // MTransVector??,MInvTransVector??,MTransNormal??
 
         //
         //  Compose two transformations into one
         //
-        transformation& operator *= ( const transformation& );
-        friend transformation operator * ( const transformation&,
-                                           const transformation& );
+        Transformation& operator *= (Transformation const&);
+        friend Transformation operator * (Transformation const&,
+                                          Transformation const&);
 };
 
 // clashes with `matrix scale( const vector& )'
-transformation t_scale( const vector& );
-transformation t_translate( const vector& );
-transformation t_rotate( const vector& );
-//transformation t_inversion();
+Transformation t_scale(Vector const&);
+Transformation t_translate(Vector const&);
+Transformation t_rotate(Vector const&);
+//Transformation t_inversion();

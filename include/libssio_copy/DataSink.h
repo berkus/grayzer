@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DataTypes.h"
+#include <algorithm>
 
 namespace libssio {
 
@@ -25,7 +26,7 @@ namespace libssio {
          }
          virtual void writepstr(char *str, int len)
          {
-            len = len <? 255; // no more 255 bytes
+            len = std::min(len, 255); // no more 255 bytes
             write1(len);
             write(str, len);
          }

@@ -6,7 +6,7 @@
 #include "texture/BumpMap.h"
 
 
-void bump_map::apply( Vector& p, surface_data& t )
+void BumpMap::apply( Vector& p, Grayzer::SurfaceData& t )
 {
    double x = mod(   offs.x + scale.x * /*p.x*/ t.map_coord.x, map->width  );
    double y = mod(   offs.y + scale.y * /*p.y*/ t.map_coord.y, map->height );

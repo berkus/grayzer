@@ -5,10 +5,10 @@
 
 #include "geom/Rect.h"
 
-class triangle : public rectangle
+class Triangle : public Rectangle
 {
     public:
-        triangle( Vector& l, Vector& s1, Vector& s2 ) : rectangle(l,s1,s2) {}
+        Triangle( Vector& l, Vector& s1, Vector& s2 ) : Rectangle(l,s1,s2) {}
 
-        virtual bool intersect( ray&, double& );
+        bool intersect(Ray&, double&) override;
 };

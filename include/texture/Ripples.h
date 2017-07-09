@@ -5,7 +5,7 @@
 
 #include "texture/Texture.h"
 
-class ripples : public texture
+class Ripples : public Texture
 {
     public:
         Vector center;
@@ -13,15 +13,13 @@ class ripples : public texture
         double phase;
         double amount;
 
-        ripples( const Vector& c, double a, double l, double p = 0 );
+        Ripples( const Vector& c, double a, double l, double p = 0 )
+            : Texture()
+            , center( c )
+            , wave_len( l )
+            , phase( p )
+            , amount( a )
+        {}
 
-        virtual void apply( Vector&, surface_data& );
+        void apply( Vector&, Grayzer::SurfaceData& ) override;
 };
-
-inline ripples::ripples(const Vector& c, double a, double l, double p)
-: texture()
-, center( c )
-, wave_len( l )
-, phase( p )
-, amount( a )
-{}

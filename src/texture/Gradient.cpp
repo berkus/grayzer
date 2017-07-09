@@ -6,8 +6,7 @@
 #include "SurfaceData.h"
 #include "Tracer.h" // only for frac() -- move it  from there
 
-
-void gradient::apply( Vector& p, surface_data& t )
+void Gradient::apply( Vector& p, Grayzer::SurfaceData& t )
 {
    Vector r = p * scale + offs;
 

@@ -6,21 +6,19 @@
 #include "texture/Texture.h"
 #include "ColorTable.h"
 
-class marble : public texture
+class Marble : public Texture
 {
     public:
-        int         squeeze;
-        color_table tbl;
+        int        squeeze;
+        ColorTable tbl;
 
-        marble( double t = 1.0, int s = 1 );
+        Marble( double t = 1.0, int s = 1 )
+            : Texture()
+            , squeeze( s )
+            , tbl()
+        {
+            turb = t;
+        }
 
-        virtual void apply( Vector&, surface_data& );
+        void apply( Vector&, Grayzer::SurfaceData& ) override;
 };
-
-inline marble::marble( double t, int s )
-: texture()
-, squeeze( s )
-, tbl()
-{
-    turb = t;
-}

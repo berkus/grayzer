@@ -6,13 +6,13 @@
 #include "texture/Texture.h"
 #include "ColorTable.h"
 
-class gradient : public texture
+class Gradient : public Texture
 {
     public:
-        Vector      grad;
-        color_table tbl;
+        Vector     grad;
+        ColorTable tbl;
 
-        gradient( Vector g ) : texture(), grad( g ), tbl() {}
+        Gradient( Vector g ) : Texture(), grad( g ), tbl() {}
 
-        virtual void apply( Vector&, surface_data& );
+        void apply(Vector&, Grayzer::SurfaceData&) override;
 };

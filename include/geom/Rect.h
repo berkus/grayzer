@@ -5,7 +5,7 @@
 
 #include "geom/GeomObj.h"
 
-class rectangle : public geometric_object
+class Rectangle : public GeometricObject
 {
     public:
         Vector loc;
@@ -14,8 +14,8 @@ class rectangle : public geometric_object
         Vector ku, kv;
         double u0,v0;
 
-        rectangle( const Vector&, const Vector&, const Vector& );
+        Rectangle( const Vector&, const Vector&, const Vector& );
 
-        virtual bool intersect( ray&, double& );
-        virtual Vector find_normal( Vector& ) { return n; }
+        bool intersect(Ray&, double&) override;
+        Vector find_normal(Vector&) override { return n; }
 };

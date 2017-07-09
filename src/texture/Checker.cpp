@@ -5,7 +5,7 @@
 #include "texture/Checker.h"
 
 
-void checker::apply( Vector& p,  surface_data& t   )
+void Checker::apply( Vector& p,  Grayzer::SurfaceData& t   )
 {
    Vector r = p * scale + offs;
 

@@ -1,5 +1,5 @@
 //
-//  @brief targa_image realization
+//  @brief TargaImage realization
 //
 #include <string.h>
 #include "image/Targa.h"
@@ -19,7 +19,7 @@ void targa_header::save(DataSink& ds) {
    ds.write1(im_type);
 }
 
-targa_image::targa_image( char *name, int width, int height, char *comment )
+TargaImage::TargaImage( char const*name, int width, int height, char *comment )
 {
     FILE *fp = fopen(name, "w");
     file = new FileDataSink(fp);
@@ -42,7 +42,7 @@ targa_image::targa_image( char *name, int width, int height, char *comment )
 }
 
 
-targa_image::~targa_image()
+TargaImage::~TargaImage()
 {
    if(pos > 0) flush();
    delete buffer;
@@ -50,7 +50,7 @@ targa_image::~targa_image()
 }
 
 
-void targa_image::put_pixel( rgb color )
+void TargaImage::put_pixel( rgb color )
 {
    buffer[pos].r =   color.b; // swap red & blue   colors
    buffer[pos].g =   color.g;
@@ -60,7 +60,7 @@ void targa_image::put_pixel( rgb color )
 }
 
 
-void targa_image::flush()
+void TargaImage::flush()
 {
    file->write((char *)buffer, pos * sizeof(rgb));
    pos = 0;

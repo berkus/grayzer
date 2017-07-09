@@ -5,18 +5,17 @@
 #include "environment/Geometry.h"
 #include "geom/Cylinder.h"
 
-
-cylinder::cylinder(  Vector&  l, Vector& d, double r )
+Cylinder::Cylinder(Vector& l, Vector& d, double r)
 {
    loc   = l;
    dir   = d;
    len2 = dir & dir;
    len   = (double)sqrt(len2);
    radius = r;
-   radius2  = r   * r;
+   radius2  = r * r;
    radius4  = radius2 * radius2;
 
-   if(   fabs(dir.x) + fabs(dir.y) >   fabs(dir.z) )
+   if (fabs(dir.x) + fabs(dir.y) > fabs(dir.z))
       e1 = Vector(dir.y,-dir.x,0.0);
    else
       e1 = Vector(0.0,dir.z,-dir.y);
@@ -27,8 +26,7 @@ cylinder::cylinder(  Vector&  l, Vector& d, double r )
    d2 = -((loc + dir) & dir);
 }
 
-
-bool cylinder::intersect( ray& r,double& t )
+bool Cylinder::intersect(Ray& r,double& t)
 {
 #ifdef STATISTICS
    CylinderTestCount++;
@@ -140,16 +138,15 @@ bool cylinder::intersect( ray& r,double& t )
 #endif
 }
 
-
-Vector cylinder::find_normal( Vector& p   )
+Vector Cylinder::find_normal(Vector& p)
 {
    double t = ((p - loc) & dir)/len2;
    Vector n;
 
-   if(   t <   EPS   )
-      n =   -dir/len;
+   if(t < EPS)
+      n = -dir/len;
    else
-      if(   t >   1.0   - EPS )
+      if(t > 1.0 - EPS)
          n =   dir   / len;
       else
          n =   normalize( p - loc - dir * t );

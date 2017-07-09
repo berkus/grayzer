@@ -5,11 +5,10 @@
 #include "environment/Geometry.h"
 #include "geom/Plane.h"
 
-
 //
 // plane constructor: equation   ax + by  + cz + d = 0
 //
-plane::plane( double a, double b, double c,  double d )
+Plane::Plane( double a, double b, double c,  double d )
 {
    normal = Vector(a,b,c);
    double norm = !normal;
@@ -18,8 +17,7 @@ plane::plane( double a, double b, double c,  double d )
    dist = d / norm;
 }
 
-
-bool plane::intersect( ray&   r, double& t )
+bool Plane::intersect(Ray& r, double& t)
 {
    STAT( PlaneTestCount++  );
    STAT( PlaneTestMisses++ );

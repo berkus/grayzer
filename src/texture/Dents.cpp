@@ -5,8 +5,7 @@
 #include "Noise.h"
 #include "SurfaceData.h"
 
-
-void dents::apply( Vector& p, surface_data&  t )
+void Dents::apply( Vector& p, Grayzer::SurfaceData&  t )
 {
    if(   amount == 0.0 )   return;
 

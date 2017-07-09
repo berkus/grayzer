@@ -1,11 +1,10 @@
 //
-// Description......: color_map image mapping realization
+// Description......: ColorMap image mapping realization
 //
 #include "Tracer.h"
 #include "texture/ColorMap.h"
 
-
-void color_map::apply( Vector&,  surface_data& t   )
+void ColorMap::apply(Vector&, Grayzer::SurfaceData& t)
 {
    double x = mod(   offs.x + scale.x * t.map_coord.x, map->width  );
    double y = mod(   offs.y + scale.y * t.map_coord.y, map->height );

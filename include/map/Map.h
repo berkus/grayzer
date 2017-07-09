@@ -5,10 +5,10 @@
 
 #include "math/Vector.h"
 
-class map
+class Map
 {
     public:
-        virtual ~map() {}
+        virtual ~Map() {}
 
         // проектирует точку согласно типа проектирования
         virtual Vector apply( Vector& ) = 0;

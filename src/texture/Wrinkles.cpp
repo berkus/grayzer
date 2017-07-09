@@ -5,8 +5,7 @@
 #include "Noise.h"
 #include "SurfaceData.h"
 
-
-void wrinkles::apply( Vector& p, surface_data& t )
+void Wrinkles::apply( Vector& p, Grayzer::SurfaceData& t )
 {
    Vector result (0.0);
    Vector value;

@@ -6,7 +6,7 @@ add_library(grayzer STATIC
     Noise.cpp
     Shade.cpp
     Tracer.cpp
-    environment/Environment.cpp
+    environment/Scene.cpp
     environment/Fog.cpp
     geom/GeomObj.cpp
     geom/Box.cpp

@@ -9,29 +9,35 @@
 #include "math/Vector.h"
 #include "Ray.h"
 #include "SurfaceData.h"
-#include "texture/Texture.h"
 #include "map/Map.h"
 
-extern surface_data default_material;
+extern Grayzer::SurfaceData defaultMaterial;
+class Texture;
 
-class geometric_object
+class GeometricObject
 {
     public:
-        surface_data def_material;
-        map *mapping;
-        texture *material;
-//      transformation *transform;
+        Grayzer::SurfaceData def_material;
+        Map *mapping;
+        Texture *material;
+//      Transformation *transform;
 
     public:
-        geometric_object();
-        virtual ~geometric_object();
+        GeometricObject()
+            : def_material(defaultMaterial)
+            , mapping(0)
+            , material(0)
+            //, transform(0)
+        {}
 
-        void find_texture( Vector&, surface_data& );
+        virtual ~GeometricObject();
 
-        void add( texture * );
+        void find_texture(Vector&, Grayzer::SurfaceData&);
 
-        virtual bool intersect( ray&, double& ) = 0;
-        virtual Vector find_normal( Vector& ) = 0;
+        void add(Texture*);
+
+        virtual bool intersect(Ray&, double&) = 0;
+        virtual Vector find_normal(Vector&) = 0;
 
         //
         //  transformations
@@ -48,24 +54,19 @@ class geometric_object
         void reflection( double kr ) { def_material.kr = kr; }
         void transmittance( double kt ) { def_material.kt = kt; }
         void ior( double ior ) { def_material.med.ior = ior; }
+        void beta(double beta) { def_material.med.beta = beta; }
         void phong_size( int p ) { def_material.p = p; }
         void color( Vector c ) { def_material.color = c; }
         void map_coord( Vector c ) { def_material.map_coord = c; }
 
-        const double ambient() const { return def_material.ka; }
-        const double diffuse() const { return def_material.kd; }
-        const double specular() const { return def_material.ks; }
-        const double reflection() const { return def_material.kr; }
-        const double transmittance() const { return def_material.kt; }
-        const double ior() const { return def_material.med.ior; }
-        const int phong_size() const { return def_material.p; }
-        const Vector& color() const { return def_material.color; }
-        const Vector& map_coord() const { return def_material.map_coord; }
+        double const ambient() const { return def_material.ka; }
+        double const diffuse() const { return def_material.kd; }
+        double const specular() const { return def_material.ks; }
+        double const reflection() const { return def_material.kr; }
+        double const transmittance() const { return def_material.kt; }
+        double const ior() const { return def_material.med.ior; }
+        double const beta() const { return def_material.med.beta; }
+        int const    phong_size() const { return def_material.p; }
+        Vector const& color() const { return def_material.color; }
+        Vector const& map_coord() const { return def_material.map_coord; }
 };
-
-inline geometric_object::geometric_object()
-: def_material( default_material )
-, mapping( 0 )
-, material( 0 )
-//, transform( 0 )
-{}

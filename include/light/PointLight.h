@@ -5,19 +5,17 @@
 
 #include "light/LightSource.h"
 
-class point_light : public light_source
+class PointLight : public LightSource
 {
     public:
         Vector loc;
         double dist_scale;
 
-        point_light( const Vector& l, double d = 1.0 );
+        PointLight( const Vector& l, double d = 1.0 )
+            : LightSource()
+            , loc( l )
+            , dist_scale( d )
+        {}
 
-        virtual double shadow( Vector&, Vector& );
+        double shadow( Vector&, Vector& ) override;
 };
-
-inline point_light::point_light( const Vector& l, double d )
-: light_source()
-, loc( l )
-, dist_scale( d )
-{}

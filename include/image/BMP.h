@@ -5,7 +5,7 @@
 
 #include "image/Image.h"
 
-class bmp_image : public image
+class BmpImage : public Image
 {
     public:
         class error {};
@@ -15,8 +15,8 @@ class bmp_image : public image
         rgb   *palette;
         unsigned char *data;
 
-        bmp_image( char * );
-       ~bmp_image();
+        BmpImage( char * );
+       ~BmpImage();
 
         virtual rgb get_pixel( int, int );
         inline void put_pixel( rgb ) {}

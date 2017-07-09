@@ -5,21 +5,19 @@
 
 #include "light/LightSource.h"
 
-class spheric_light : public light_source
+class SphericLight : public LightSource
 {
     public:
         Vector loc;
         double radius;
         double dist_scale;
 
-        spheric_light( Vector& l, double r, double d = 1.0 );
+        SphericLight( Vector& l, double r, double d = 1.0 )
+            : LightSource()
+            , loc( l )
+            , radius( r )
+            , dist_scale( d )
+        {}
 
-        virtual double shadow( Vector&, Vector& );
+        double shadow( Vector&, Vector& ) override;
 };
-
-inline spheric_light::spheric_light( Vector& l, double r, double d )
-: light_source()
-, loc( l )
-, radius( r )
-, dist_scale( d )
-{}

@@ -6,8 +6,7 @@
 #include "environment/Geometry.h"
 #include "geom/Sphere.h"
 
-
-bool sphere::intersect( ray& ray, double& t  )
+bool Sphere::intersect(Ray& ray, double& t)
 {
    STAT( SphereTestCount++  );
    STAT( SphereTestMisses++ );
@@ -53,7 +52,7 @@ bool sphere::intersect( ray& ray, double& t  )
 }
 
 
-Vector sphere::find_normal(   Vector&  p )
+Vector Sphere::find_normal(   Vector&  p )
 {
    return (p - loc) / radius;
 }

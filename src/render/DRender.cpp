@@ -11,15 +11,16 @@
 #include "Ray.h"
 #include "Draw.h"
 
+auto& air = Grayzer::Medium::air;
 
 void distributed_render_scene(
    double half_width, double half_height,
    int   nx,   int   ny,
    int   nx_sub,  int   ny_sub,
-   char *fname )
+   char const* fname )
 {
    double x,y;                // sample point
-   ray   ray;                 // pixel ray
+   Ray   ray;                 // pixel ray
    double hx = 2.0   * half_width / nx;      // pixel width
    double hy = 2.0   * half_height /   ny;      // pixel height
    double hx_sub =   hx / nx_sub;         // hz subdivision
@@ -29,7 +30,7 @@ void distributed_render_scene(
    Vector color;
 
    // make  next in  some higher-level module as: RenderOutFile = new Targa...
-   targa_image *tga = new targa_image( fname,nx,ny );
+   TargaImage *tga = new TargaImage( fname,nx,ny );
    rgb   c;
 
 //    display_init( nx,ny  );

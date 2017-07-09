@@ -1,68 +1,66 @@
 //
-//  @brief base class geometric_object realization
+//  @brief base class GeometricObject realization
 //
 #include "geom/GeomObj.h"
+#include "texture/Texture.h"
 
+using Grayzer::SurfaceData;
 
-geometric_object::~geometric_object()
+GeometricObject::~GeometricObject()
 {
-	texture	*m;
+    Texture *m;
 
-	if(mapping) delete mapping;
+    if(mapping) delete mapping;
 
-	for( m = material; m !=	0; m = material )
-	{
-		material = material->next;
-		delete m;
-	}
+    for( m = material; m != 0; m = material )
+    {
+        material = material->next;
+        delete m;
+    }
 
-//	if(transform) delete transform;
+//  if(transform) delete transform;
 }
 
-
-void geometric_object::add(texture *m)
+void GeometricObject::add(Texture *m)
 {
-	m->next	= material;
-	m->object =	this;
-	material = m;
+    m->next = material;
+    m->object = this;
+    material = m;
 }
 
-
-void geometric_object::find_texture( Vector& p, surface_data& t	)
+void GeometricObject::find_texture(Vector& p, SurfaceData& t)
 {
-	texture	*m;
+    Texture *m;
 
-	t =	def_material;
-	t.n	= find_normal(p);
+    t = def_material;
+    t.n = find_normal(p);
 
-	if(mapping) t.map_coord = mapping->apply(p);
+    if(mapping) t.map_coord = mapping->apply(p);
 
-	for( m = material; m !=	0; m = m->next) m->apply(p,t);
+    for( m = material; m != 0; m = m->next) m->apply(p,t);
 }
 
-
-void geometric_object::scale( const Vector& factor )
+void GeometricObject::scale(Vector const& factor)
 {
-/*	if(	!transform ) transform = new transformation;
+/*  if( !transform ) transform = new transformation;
 
-	(*transform) *=	t_scale(factor);
+    (*transform) *= t_scale(factor);
+*/
+}
+
+void GeometricObject::translate(Vector const& loc)
+{
+/*  if( !transform) transform = new transformation;
+
+    (*transform) *= t_translate(loc);
 */
 }
 
 
-void geometric_object::translate( const	Vector&	loc	)
+void GeometricObject::rotate(Vector const& rot)
 {
-/*	if(	!transform)	transform =	new	transformation;
+/*  if( !transform ) transform = new transformation;
 
-	(*transform) *=	t_translate(loc);
-*/
-}
-
-
-void geometric_object::rotate( const Vector& rot )
-{
-/*	if(	!transform ) transform = new transformation;
-
-	(*transform) *=	t_rotate(rot);
+    (*transform) *= t_rotate(rot);
 */
 }

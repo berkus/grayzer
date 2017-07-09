@@ -5,12 +5,12 @@
 
 #include "texture/Texture.h"
 
-class wrinkles : public texture
+class Wrinkles : public Texture
 {
     public:
         double amount;
 
-        wrinkles( double a = 1.0 ) : texture(), amount( a ) {}
+        Wrinkles( double a = 1.0 ) : Texture(), amount( a ) {}
 
-        virtual void apply( Vector&, surface_data& );
+        void apply( Vector&, Grayzer::SurfaceData& ) override;
 };

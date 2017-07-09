@@ -6,12 +6,12 @@
 
 #include "texture/Texture.h"
 
-class dents : public texture
+class Dents : public Texture
 {
     public:
         double amount;
 
-        dents( double a = 1.0 ) : texture(), amount( a ) {}
+        Dents( double a = 1.0 ) : Texture(), amount( a ) {}
 
-        virtual void apply( Vector&, surface_data& );
+        void apply(Vector&, Grayzer::SurfaceData&) override;
 };

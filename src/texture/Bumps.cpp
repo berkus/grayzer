@@ -5,8 +5,7 @@
 #include "SurfaceData.h"
 #include "texture/Bumps.h"
 
-
-void bumps::apply( Vector& p, surface_data&  t )
+void Bumps::apply( Vector& p, Grayzer::SurfaceData&  t )
 {
    if(   amount == 0.0 )   return;  // no bumps
 

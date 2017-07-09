@@ -5,18 +5,18 @@
 
 #include "math/Vector.h"
 
-class color_table_entry
+class ColorTable
 {
-    public:
-        double ta,tb;
-        Vector ca,cb;
-};
+        class Entry
+        {
+            public:
+                double ta,tb;
+                Vector ca,cb;
+        };
 
-class color_table
-{
     public:
-        color_table( int = 10 );
-       ~color_table() { delete entries; }
+        ColorTable( int = 10 );
+       ~ColorTable() { delete entries; }
 
         void add_entry( double, double, const Vector&, const Vector& );
         Vector find_color( double );
@@ -26,5 +26,5 @@ class color_table
     private:
         int color_entries;
         int max_entries;
-        color_table_entry *entries;
+        Entry *entries;
 };

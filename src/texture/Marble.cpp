@@ -5,11 +5,10 @@
 #include "Tracer.h"
 #include "Noise.h"
 
-
-void marble::apply(  Vector&  p, surface_data& t )
+void Marble::apply(  Vector&  p, Grayzer::SurfaceData& t )
 {
    double x = p.x * scale.x + offs.x;
-   double s = pow(   saw_wave( x + turb * turbulence(p,octaves) ), squeeze );
+   double s = pow(   sawWave( x + turb * turbulence(p,octaves) ), squeeze );
 
 // if(!Tbl.IsEmpty())
 // {

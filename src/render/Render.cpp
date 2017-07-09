@@ -11,19 +11,18 @@
 #include "Ray.h"
 #include "Draw.h"
 
-
 void render_scene( double half_width, double half_height,
                int nx, int ny,
-               char  *fname )
+               char const* fname)
 {
    double x, y;
    double hx = 2.0   * half_width  /   nx;
    double hy = 2.0   * half_height /   ny;
-   ray   ray;
+   Ray   ray;
    Vector color;
    int   i, j;
 
-   targa_image *tga = new targa_image( fname, nx, ny );
+   TargaImage *tga = new TargaImage( fname, nx, ny );
    rgb   c;
 //    display_init(nx,ny);
 
@@ -47,7 +46,7 @@ void render_scene( double half_width, double half_height,
 
          camera(  x, y, ray );
 
-         color =  trace( air, 1.0, ray );
+         color =  trace( Grayzer::Medium::air, 1.0, ray );
          clip( color );
 
          c.r   = color.x * 255;

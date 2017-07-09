@@ -1,14 +1,15 @@
 //
-//  @brief spot_light light source realization
+//  @brief SpotLight light source realization
 //
 #include "light/SpotLight.h"
 #include "SurfaceData.h"
 #include "geom/GeomObj.h"
-#include "environment/Environment.h"
+#include "environment/Scene.h"
 #include "Tracer.h"
 
+using Grayzer::SurfaceData;
 
-double spot_light::shadow( Vector& p, Vector& l )
+double SpotLight::shadow( Vector& p, Vector& l )
 {
    l =   loc   - p;
    double dist = !l;
@@ -22,9 +23,10 @@ double spot_light::shadow( Vector& p, Vector& l )
    double f2 = ld > cone_angle   ? 1.0 :  (ld   - end_cone_angle) /
             (cone_angle - end_cone_angle);
    double t;
-   ray   ray(p,l);
-   surface_data texture;
-   geometric_object *occlude;
+
+   Ray   ray(p,l);
+   SurfaceData texture;
+   GeometricObject *occlude;
 
    attenuation *= attenuation * f1  * f2;
 

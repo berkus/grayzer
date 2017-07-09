@@ -6,14 +6,14 @@
 
 #include "math/Vector.h"
 
-class ray
+class Ray
 {
     public:
         Vector org;
         Vector dir; // direction must be normalized
 
-        ray() {};
-        ray( Vector& o, Vector& d ) : org( o ), dir( d ) {}
+        Ray() {};
+        Ray( Vector& o, Vector& d ) : org( o ), dir( d ) {}
 
         Vector point( double t ) { return org + dir * t; }
 };

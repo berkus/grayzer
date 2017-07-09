@@ -5,8 +5,7 @@
 #include "environment/Geometry.h"
 #include "geom/Triangle.h"
 
-
-bool triangle::intersect( ray& r, double& t  )
+bool Triangle::intersect(Ray& r, double& t)
 {
    STAT( TriangleTestCount++  );
    STAT( TriangleTestMisses++ );

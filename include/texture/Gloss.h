@@ -5,10 +5,10 @@
 
 #include "texture/Texture.h"
 
-class gloss : public texture
+class Gloss : public Texture
 {
     public:
-        gloss() : texture() {}
+        Gloss() : Texture() {}
 
-        virtual void apply( Vector&, surface_data& );
+        void apply(Vector&, Grayzer::SurfaceData&) override;
 };

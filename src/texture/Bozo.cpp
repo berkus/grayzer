@@ -7,7 +7,7 @@
 //#include "externs.h"
 //#include "colortbl.hpp"
 
-void bozo::apply( Vector& p, surface_data& t )
+void Bozo::apply( Vector& p, Grayzer::SurfaceData& t )
 {
    if(   turb !=  0.0   )
    {

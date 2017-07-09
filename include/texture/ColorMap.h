@@ -3,16 +3,17 @@
 //
 #pragma once
 
+#include <memory>
 #include "texture/Texture.h"
 #include "image/Image.h"
 
-class color_map : public texture
+class ColorMap : public Texture
 {
     public:
-        image *map;
+        std::shared_ptr<Image> map;
 
-        color_map( image *i ) : texture(), map( i ) {}
-       ~color_map() { delete map; }
+        ColorMap( Image *i ) : Texture(), map(i) {}
+       ~ColorMap() {}
 
-        virtual void apply( Vector&, surface_data& );
+        void apply(Vector&, Grayzer::SurfaceData&) override;
 };

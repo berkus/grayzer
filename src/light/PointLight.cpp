@@ -1,14 +1,15 @@
 //
-//  @brief point_light light source realization
+//  @brief PointLight light source realization
 //
 #include "light/PointLight.h"
 #include "SurfaceData.h"
 #include "geom/GeomObj.h"
-#include "environment/Environment.h"
+#include "environment/Scene.h"
 #include "Tracer.h"
 
+using Grayzer::SurfaceData;
 
-double point_light::shadow(   Vector&  p, Vector& l )
+double PointLight::shadow(   Vector&  p, Vector& l )
 {
    l =   loc   - p;
    double t;
@@ -17,9 +18,10 @@ double point_light::shadow(   Vector&  p, Vector& l )
    attenuation = attenuation *   attenuation;
 
    l /= dist;
-   ray   r(p,l);
-   surface_data texture;
-   geometric_object *occlude;
+
+   Ray   r(p,l);
+   SurfaceData texture;
+   GeometricObject *occlude;
 
    while( (occlude   = scene->intersect(r,t)) !=   0   && dist  > t   )
    {

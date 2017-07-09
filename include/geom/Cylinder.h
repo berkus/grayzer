@@ -6,17 +6,17 @@
 #include "math/Vector.h"
 #include "geom/GeomObj.h"
 
-class cylinder : public geometric_object
+class Cylinder : public GeometricObject
 {
     public:
         Vector loc;
         Vector dir;
         double radius;
 
-        cylinder( Vector&, Vector&, double );
+        Cylinder( Vector&, Vector&, double );
 
-        virtual bool intersect( ray&, double& );
-        virtual Vector find_normal( Vector& );
+        bool intersect( Ray&, double& ) override;
+        Vector find_normal( Vector& ) override;
 
     protected:
         Vector e1, e2;

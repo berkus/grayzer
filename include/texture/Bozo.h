@@ -6,20 +6,18 @@
 #include "texture/Texture.h"
 #include "ColorTable.h"
 
-class bozo : public texture
+class Bozo : public Texture
 {
     public:
-        bozo( double t = 0.0 );
+        Bozo( double t = 0.0 )
+            : Texture()
+            , tbl()
+        {
+            turb = t;
+        }
 
-        virtual void apply( Vector&, surface_data& );
+        void apply( Vector&, Grayzer::SurfaceData& ) override;
 
     public:
-        color_table tbl;
+        ColorTable tbl;
 };
-
-inline bozo::bozo( double t )
-: texture()
-, tbl()
-{
-    turb = t;
-}

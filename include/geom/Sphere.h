@@ -5,20 +5,18 @@
 
 #include "geom/GeomObj.h"
 
-class sphere : public geometric_object
+class Sphere : public GeometricObject
 {
     public:
         Vector loc;             // center
         double radius,radius2;  // radius & radius squared
 
-        sphere( Vector& c, double r );
+        Sphere(Vector const& c, double r)
+            : loc(c)
+            , radius(r)
+            , radius2(r * r)
+        {}
 
-        virtual bool intersect( ray&, double& );
-        virtual Vector find_normal( Vector& );
+        bool intersect(Ray&, double&) override;
+        Vector find_normal(Vector&) override;
 };
-
-inline sphere::sphere( Vector& c, double r )
-: loc( c )
-, radius( r )
-, radius2( r * r )
-{}

@@ -4,8 +4,7 @@
 #include "Tracer.h"
 #include "texture/Brick.h"
 
-
-void brick::apply( Vector& p, surface_data&  t )
+void Brick::apply( Vector& p, Grayzer::SurfaceData&  t )
 {
    Vector r = (p *   scale +  offs) /  brick_size;
    double bx,by,bz;

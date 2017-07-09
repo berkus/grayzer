@@ -5,8 +5,7 @@
 #include "SurfaceData.h"
 #include "Noise.h"
 
-
-void granite::apply( Vector& p,  surface_data& t   )
+void Granite::apply( Vector& p,  Grayzer::SurfaceData& t   )
 {
    double _noise =   0.0, freq = 1.0, temp;
    int   i;

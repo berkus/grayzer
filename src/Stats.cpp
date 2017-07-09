@@ -1,5 +1,5 @@
 unsigned long
-   TotalRays = 0, TotalPixels = 0,
+   totalRays = 0, TotalPixels = 0,
    BoxTestCount = 0, BoxTestMisses  = 0,
    CylinderTestCount =  0, CylinderTestMisses = 0,
    SphereTestCount   = 0, SphereTestMisses = 0,

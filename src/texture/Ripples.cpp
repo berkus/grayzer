@@ -5,7 +5,7 @@
 #include "texture/Ripples.h"
 
 
-void ripples::apply( Vector& p,  surface_data& t   )
+void Ripples::apply( Vector& p,  Grayzer::SurfaceData& t   )
 {
    Vector r = p - center;
    double l = !r;

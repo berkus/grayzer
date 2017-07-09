@@ -4,39 +4,41 @@
 #include <math.h>
 #include <stdlib.h>
 #include "Tracer.h"
-#include "environment/Environment.h"
+#include "environment/Scene.h"
 #include "geom/GeomObj.h"
 #include "environment/Geometry.h"
 #include "light/LightSource.h"
+
+using namespace Grayzer;
 
 //
 // Globals
 //
 Vector eye      (0, 0, 0); //camera
-Vector eyeDir   (0, 0, 1); //camera
+Vector eye_dir  (0, 0, 1); //camera
 
-Vector viewX    (1, 0, 0); //camera
-Vector viewY    (0, 1, 0); //camera
+Vector view_x   (1, 0, 0); //camera
+Vector view_y   (0, 1, 0); //camera
 
 Color ambient   (1.0);
 Color background (0.0, 0.05, 0.05);
 
-Medium Medium::air   =   { 1.0, 0 };
-Medium Medium::glass =   { 1.6, 0 };
+Grayzer::Medium Grayzer::Medium::air   =   { 1.0, 0 };
+Grayzer::Medium Grayzer::Medium::glass =   { 1.6, 0 };
 
 SurfaceData defaultMaterial;
 
 int   level    =  0;
 int   maxLevel = 10;
 
-double threshold     = 0.01;
-double geomThreshold = 0.001;
+double threshold      = 0.01;
+double geom_threshold = 0.001;
 
-Environment *scene;
+Scene *scene;
 extern unsigned long totalRays;
 
 
-void initDefaultMaterial(double ka, double kd, double ks, double kr, double kt, Color color, Medium med, int phong)
+void initDefaultMaterial(double ka, double kd, double ks, double kr, double kt, Color color, Grayzer::Medium med, int phong)
 {
    defaultMaterial.ka     = ka;
    defaultMaterial.kd     = kd;
@@ -52,14 +54,14 @@ void initDefaultMaterial(double ka, double kd, double ks, double kr, double kt, 
 void setCamera(const Vector &org, const Vector &dir, const Vector &up)
 {
    eye     = org;                  // eye point
-   eyeDir  = dir;                  // viewing direction
-   viewX   = normalize(up ^ dir);  // basis vectors
-   viewY   = normalize(dir ^ viewX);
+   eye_dir = dir;                  // viewing direction
+   view_x  = normalize(up ^ dir);  // basis vectors
+   view_y  = normalize(dir ^ view_x);
 }
 
 // Scene::trace??
 // Casts a ray, computing its intersection with the scene objects and computes light coming with this ray.
-Color trace(Medium& curMed, double weight, Ray& ray)
+Color trace(Grayzer::Medium& curMed, double weight, Ray& ray)
 {
    GeometricObject *obj;
    double t = GEOM_INFINITY;
@@ -74,7 +76,7 @@ Color trace(Medium& curMed, double weight, Ray& ray)
       if(curMed.beta > threshold) color *= exp(-t * curMed.beta);
    }
    else
-      color = scene->shadeBackground(ray);
+      color = scene->shade_background(ray);
    //
    // added fog
    //

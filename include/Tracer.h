@@ -10,8 +10,8 @@
 #include "SurfaceData.h"
 
 class GeometricObject;
-class Environment;
-class ray;
+class Scene;
+class Ray;
 
 //
 //  Globals
@@ -25,14 +25,14 @@ extern double threshold;
 extern Color ambient;
 extern Color background;
 
-extern Environment *scene;
+extern Scene *scene;
 extern long timeUsed;
 //
 //  camera parameters
 //
 extern Vector eye;
-extern Vector eyeDir;
-extern Vector viewX, viewY;
+extern Vector eye_dir;
+extern Vector view_x, view_y;
 extern double aperture;
 extern double focus;
 
@@ -43,10 +43,10 @@ void initDefaultMaterial( double ka = 0.3, double kd = 0.7, double ks = 0.0,
                           double kr = 0.0, double kt = 0.0, Color color = 0,
                           Grayzer::Medium med = Grayzer::Medium::glass, int phong = 1 );
 
-void camera( double, double, ray& );
+void camera( double, double, Ray& );
 void setCamera( const Vector&, const Vector&, const Vector& );
 
-Color trace( Grayzer::Medium&, double, ray& );
+Color trace( Grayzer::Medium&, double, Ray& );
 Color shade( Grayzer::Medium&, double, Vector, Vector, GeometricObject * );
 
 void error( bool, char *, ... );
@@ -71,6 +71,7 @@ inline double mod( double x, double y )
         return x;
 }
 
+// @todo replace with std::random
 inline double rnd()
 {
     return (double)rand() / (double)RAND_MAX;

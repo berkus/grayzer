@@ -6,12 +6,12 @@
 #include "texture/Texture.h"
 #include "ColorTable.h"
 
-class granite : public texture
+class Granite : public Texture
 {
     public:
-        color_table tbl;
+        ColorTable tbl;
 
-        granite() : texture(), tbl() {}
+        Granite() : Texture(), tbl() {}
 
-        virtual void apply( Vector&, surface_data& );
+        void apply( Vector&, Grayzer::SurfaceData& ) override;
 };

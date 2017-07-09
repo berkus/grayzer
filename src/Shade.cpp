@@ -3,9 +3,11 @@
 //
 #include "Tracer.h"
 #include "geom/GeomObj.h"
-#include "environment/Environment.h"
+#include "environment/Scene.h"
 #include "light/LightSource.h"
 #include "Externs.h"
+
+using namespace Grayzer;
 
 // Scene::shade?
 // compute light coming from point `p' in the direction `view'
@@ -23,7 +25,7 @@ Color shade(Medium& curMed, double weight, Vector p, Vector view, GeometricObjec
    bool entering = true; // flag whether we're entering object
    int   i;
 
-   obj->findTexture(p, txt);
+   obj->find_texture(p, txt);
    if((vn = view & txt.n) > 0) // force (-View,n) > 0
    {
       txt.n = -txt.n;
@@ -34,7 +36,7 @@ Color shade(Medium& curMed, double weight, Vector p, Vector view, GeometricObjec
    ray.org = p;
    color = ambient * txt.color * txt.ka; // get ambient light
 
-   for(i = 0; i < scene->lightsCount; i++)
+   for(i = 0; i < scene->light.size(); i++)
    {
       if((sh = scene->light[i]->shadow(p,l)) > threshold)
       {
@@ -64,7 +66,7 @@ Color shade(Medium& curMed, double weight, Vector p, Vector view, GeometricObjec
             if(t > threshold)
                if((view - l) > threshold)
                {
-                  double eta = (entering ? txt.med.ior : air.ior) / curMed.ior;
+                  double eta = (entering ? txt.med.ior : Grayzer::Medium::air.ior) / curMed.ior;
                   h = normalize( -view - l * eta );
                   color += scene->light[i]->color * t * pow(txt.n & h, txt.p);
                }
@@ -85,7 +87,7 @@ Color shade(Medium& curMed, double weight, Vector p, Vector view, GeometricObjec
    // check for transmitted ray
    if(tWeight > threshold && level < maxLevel)
    {
-      double eta = curMed.ior / (entering ? txt.med.ior : air.ior);
+      double eta = curMed.ior / (entering ? txt.med.ior : Grayzer::Medium::air.ior);
       double ci = -vn; //  cosine of incident angle
       double ctSq = 1 + eta * eta * (ci *  ci - 1);
 
@@ -95,7 +97,7 @@ Color shade(Medium& curMed, double weight, Vector p, Vector view, GeometricObjec
          if(entering) // ray enters object
             color += txt.kt * trace(txt.med, tWeight, ray);
          else          // ray leaves   object
-            color += txt.kt * trace(air, tWeight, ray);
+            color += txt.kt * trace(Grayzer::Medium::air, tWeight, ray);
       }
    }
    return color;

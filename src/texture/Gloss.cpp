@@ -7,8 +7,7 @@
 #include "Externs.h"
 // #include "debug.h"
 
-
-void gloss::apply( Vector& p, surface_data&  t )
+void Gloss::apply( Vector& p, Grayzer::SurfaceData&  t )
 {
    double t1, t2;
 

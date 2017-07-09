@@ -6,24 +6,22 @@
 #include "texture/Texture.h"
 #include "image/Image.h"
 
-class bump_map : public texture
+class BumpMap : public Texture
 {
     public:
-        bump_map( image *i,double a );
-       ~bump_map();
+        BumpMap(Image *i, double a)
+            : Texture()
+            , map(i)
+            , amount(a)
+        {}
+       ~BumpMap()
+        {
+            delete map;
+        }
 
-        virtual void apply( Vector&, surface_data& );
+        void apply( Vector&, Grayzer::SurfaceData& ) override;
 
     public:
-        image *map;
+        Image *map;
         double amount;
 };
-
-inline bump_map::bump_map( image *i, double a )
-: texture()
-, map( i )
-, amount( a )
-{}
-
-inline bump_map::~bump_map()
-{   delete map; }
