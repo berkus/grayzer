@@ -14,7 +14,7 @@ int main()
     Plane *p;
     PointLight *Light1;
 
-    scene = new Scene();
+    Scene* scene = new Scene();
     s1 = new Sphere(Vector(0,1,5),1.5);
     s2 = new Sphere(Vector(-3,0,4),1);
     s3 = new Sphere(Vector(3,0,4),1);
@@ -50,7 +50,7 @@ int main()
     scene->add(p);
     scene->add(Light1);
     background = SkyBlue;
-    setCamera(Vector(0),Vector(0,0,1),Vector(0,1,0));
-    render_scene(1.5,1.0,300,200,"SAMPLE20.TGA");
-    distributed_render_scene(1.5,1.0,300,200,5,5,"SAMPLE21.TGA");
+    scene->setCamera(Vector(0),Vector(0,0,1),Vector(0,1,0));
+    render_scene(scene, 1.5,1.0,300,200,"SAMPLE20.TGA");
+    distributed_render_scene(scene, 1.5,1.0,300,200,5,5,"SAMPLE21.TGA");
 }

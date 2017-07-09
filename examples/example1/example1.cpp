@@ -19,7 +19,7 @@ int main()
 #ifndef DEBUG
     printf("Rendering scene.It may take a few minutes.Please wait...");
 #endif
-    scene=new Scene();
+    Scene* scene=new Scene();
     plane=new Plane(5,5,25,15); /////////|
     Solid=new Sphere(Vector(15,10,-30),15);
     Solid2=new Sphere(Vector(10,-40,-5),15);
@@ -46,7 +46,7 @@ int main()
     scene->add(Solid2);
     scene->add(Light1);
     scene->add(Light2);
+    scene->setCamera(Vector(0,10,20),Vector(-5,-32,-35),Vector(1,1,1));
 
-    setCamera(Vector(0,10,20),Vector(-5,-32,-35),Vector(1,1,1));
-    render_scene(160,100,320,200,"PIC01.OUT");
+    render_scene(scene, 160,100,320,200,"PIC01.OUT");
 }

@@ -13,7 +13,7 @@ int main()
     PointLight  *light1;
     int i,j,k;
 
-    scene = new Scene();
+    Scene* scene = new Scene();
 
     for( i = k = 0 ; i < 4; i++ )
         for( j = 0; j < 4; j++, k++ )
@@ -48,8 +48,8 @@ int main()
     scene->add( light1 );
 
     background = SkyBlue;
-    setCamera(Vector(0,0,-10), Vector(0,0,1), Vector(0,1,0) );
+    scene->setCamera(Vector(0,0,-10), Vector(0,0,1), Vector(0,1,0) );
 //  RenderScene(0.3,0.2,300,200,"SAMP0010.TGA");
 //  DistributedRenderScene(0.3,0.2,300,200,5,5,"SAMP0011.TGA");
-    adaptive_distributed_render_scene(0.3,0.2,300,200,3,3,0.01,"SAMP0012.TGA");
+    adaptive_distributed_render_scene(scene, 0.3,0.2,300,200,3,3,0.01,"SAMP0012.TGA");
 }

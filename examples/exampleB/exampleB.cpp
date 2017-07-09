@@ -4,7 +4,7 @@
 #include "Tracer.h"
 #include "environment/Geometry.h"
 #include "light/PointLight.h"
-#include "environment/Environment.h"
+#include "environment/Scene.h"
 #include "Externs.h"
 #include "geom/Rect.h"
 // textures
@@ -31,7 +31,7 @@ int main()
    default_material.color = Green;
    default_material.p = 30;
 
-   scene =  new   environment;
+   scene = new Scene;
 
 //
 // screen area 22 x 13
@@ -117,10 +117,10 @@ int main()
 // Scene->Fog = new Fog(200,White);
 
    init_noise();
-   set_camera(Vector(0),Vector(0,0,1.5),Vector(0,1,0));
+   scene->setCamera(Vector(0),Vector(0,0,1.5),Vector(0,1,0));
 //   render_scene(1.6,1.0,320,200,"SAMP0100.TGA");
 // distributed_render_scene(1.6,1.0,320,200,5,5,"SAMP0101.TGA");
-   adaptive_distributed_render_scene(1.6,1.0,1280,1024,5,5,0.01,"SAMP0102.TGA");
+   adaptive_distributed_render_scene(scene, 1.6,1.0,1280,1024,5,5,0.01,"SAMP0102.TGA");
    done_noise();
 
    return 0;
