@@ -1,12 +1,10 @@
 //
 //  Description......: gradient color texture
 //
-#ifndef _GRADIENT_
-#define _GRADIENT_
+#pragma once
 
 #include "texture/Texture.h"
 #include "ColorTable.h"
-
 
 class gradient : public texture
 {
@@ -18,6 +16,3 @@ class gradient : public texture
 
         virtual void apply( Vector&, surface_data& );
 };
-
-
-#endif // _GRADIENT_ //

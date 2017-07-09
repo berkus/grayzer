@@ -1,5 +1,4 @@
-#ifndef _FILEDATASOURCE_H
-#define _FILEDATASOURCE_H
+#pragma once
 
 #include <stdio.h>  // for FILE, puts()
 #include <stdlib.h> // for exit()
@@ -22,16 +21,16 @@ namespace libssio {
 
          virtual ~FileDataSource() {};
 
-	 virtual uint32_t read01()
-	 {
-	    puts("Unimplemented"); exit(1);
-	 };
-	 
-	 virtual uint32_t read04()
-	 {
-	    puts("Unimplemented"); exit(1);
-	 };
-	 
+         virtual uint32_t read01()
+         {
+            puts("Unimplemented"); exit(1);
+         };
+
+         virtual uint32_t read04()
+         {
+            puts("Unimplemented"); exit(1);
+         };
+    
          virtual uint32_t read1()
          {
             unsigned char b0;
@@ -99,6 +98,4 @@ namespace libssio {
          };
    };
 
-};
-
-#endif /* _FILEDATASOURCE_H */
+} // libssio namespace

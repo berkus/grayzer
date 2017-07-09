@@ -1,11 +1,9 @@
 //
 //  @brief spheric_light light source - casts soft shadows
 //
-#ifndef _SPHRCLIT_
-#define _SPHRCLIT_
+#pragma once
 
 #include "light/LightSource.h"
-
 
 class spheric_light : public light_source
 {
@@ -19,13 +17,9 @@ class spheric_light : public light_source
         virtual double shadow( Vector&, Vector& );
 };
 
-
 inline spheric_light::spheric_light( Vector& l, double r, double d )
 : light_source()
 , loc( l )
 , radius( r )
 , dist_scale( d )
 {}
-
-
-#endif // _SPHRCLIT_

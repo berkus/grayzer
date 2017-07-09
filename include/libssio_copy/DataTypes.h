@@ -1,5 +1,4 @@
-#ifndef _DATATYPES_H
-#define _DATATYPES_H
+#pragma once
 
 #include <stdint.h>
 
@@ -9,6 +8,4 @@ namespace libssio {
    typedef int64_t  offset;
    typedef uint64_t size;
 
-};
-
-#endif /* _DATATYPES_H */
+} // libssio namespace

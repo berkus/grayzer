@@ -2,8 +2,7 @@
 //  File.............: geometry.hpp
 //  Description......: Some common geometric #defines
 //
-#ifndef _GEOMETRY_
-#define _GEOMETRY_
+#pragma once
 
 //
 //  epsilon (object threshold)
@@ -18,6 +17,3 @@
     if ray length is less than this value => NO INTERSECTION
 */
 extern double geom_threshold;
-
-
-#endif // _GEOMETRY_

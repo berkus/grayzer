@@ -1,9 +1,7 @@
 //
 //  @brief Some common raytracing globals/protos/inlines
 //
-#ifndef _TRACER_
-#define _TRACER_
-
+#pragma once
 
 #include <math.h>
 #include <stdlib.h>
@@ -11,11 +9,9 @@
 #include "math/Vector.h"
 #include "SurfaceData.h"
 
-
 class GeometricObject;
 class Environment;
 class ray;
-
 
 //
 //  Globals
@@ -39,7 +35,6 @@ extern Vector eyeDir;
 extern Vector viewX, viewY;
 extern double aperture;
 extern double focus;
-
 
 //
 //  Function prototypes
@@ -85,6 +80,3 @@ inline double frac(double x)
 {
     return x - floor(x);
 }
-
-
-#endif // _TRACER_

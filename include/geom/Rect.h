@@ -1,11 +1,9 @@
 //
 //  @brief rectangle geometric object
 //
-#ifndef _RECT_
-#define _RECT_
+#pragma once
 
 #include "geom/GeomObj.h"
-
 
 class rectangle : public geometric_object
 {
@@ -21,6 +19,3 @@ class rectangle : public geometric_object
         virtual bool intersect( ray&, double& );
         virtual Vector find_normal( Vector& ) { return n; }
 };
-
-
-#endif // _RECT_

@@ -1,12 +1,10 @@
 //
 //  Description......: Bozo procedural texture
 //
-#ifndef _BOZO_
-#define _BOZO_
+#pragma once
 
 #include "texture/Texture.h"
 #include "ColorTable.h"
-
 
 class bozo : public texture
 {
@@ -19,13 +17,9 @@ class bozo : public texture
         color_table tbl;
 };
 
-
 inline bozo::bozo( double t )
 : texture()
 , tbl()
 {
     turb = t;
 }
-
-
-#endif // _BOZO_ //

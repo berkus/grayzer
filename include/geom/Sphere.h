@@ -1,11 +1,9 @@
 //
 //  @brief basic geometric object sphere
 //
-#ifndef _SPHERE_
-#define _SPHERE_
+#pragma once
 
 #include "geom/GeomObj.h"
-
 
 class sphere : public geometric_object
 {
@@ -19,12 +17,8 @@ class sphere : public geometric_object
         virtual Vector find_normal( Vector& );
 };
 
-
 inline sphere::sphere( Vector& c, double r )
 : loc( c )
 , radius( r )
 , radius2( r * r )
 {}
-
-
-#endif // _SPHERE_

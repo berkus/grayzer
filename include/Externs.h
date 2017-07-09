@@ -2,9 +2,7 @@
 //  File.........: externs.h
 //  Description..: some external statistic vars declaration
 //
-#ifndef _EXTERNS_
-#define _EXTERNS_
-
+#pragma once
 
 #define TICKS_PER_SEC ((double)18.2)
 
@@ -18,7 +16,6 @@
 //
 #define OPT_DISPLAY   1
 #define OPT_DEBUG   128
-
 
 extern unsigned long
     TotalRays,TotalPixels,
@@ -35,12 +32,8 @@ extern unsigned long
 extern long
     Options;
 
-
 #ifdef STATISTICS
 #define STAT(x) x
 #else
 #define STAT(x)
-#endif
-
-
 #endif

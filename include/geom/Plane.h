@@ -1,8 +1,7 @@
 //
 //  @brief base geometric object plane
 //
-#ifndef _PLANE_
-#define _PLANE_
+#pragma once
 
 #include "math/Vector.h"
 #include "geom/GeomObj.h"
@@ -23,11 +22,7 @@ class plane : public geometric_object
         virtual Vector find_normal( Vector& ) { return normal; }
 };
 
-
 inline plane::plane( Vector& n, double d )
 : normal( n )
 , dist( d )
 {}
-
-
-#endif // _PLANE_

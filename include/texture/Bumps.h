@@ -1,11 +1,9 @@
 //
 //  Description......: Bumps noise texture
 //
-#ifndef _BUMPS_
-#define _BUMPS_
+#pragma once
 
 #include "texture/Texture.h"
-
 
 class bumps : public texture
 {
@@ -16,6 +14,3 @@ class bumps : public texture
 
         virtual void apply( Vector&, surface_data& );
 };
-
-
-#endif // _BUMPS_

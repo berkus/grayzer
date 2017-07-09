@@ -2,11 +2,9 @@
 //  File.............: dents.hpp
 //  Description......: Dents procedural perturbation texture
 //
-#ifndef _DENTS_
-#define _DENTS_
+#pragma once
 
 #include "texture/Texture.h"
-
 
 class dents : public texture
 {
@@ -17,6 +15,3 @@ class dents : public texture
 
         virtual void apply( Vector&, surface_data& );
 };
-
-
-#endif // _DENTS_ //

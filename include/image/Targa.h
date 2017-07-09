@@ -1,8 +1,7 @@
 //
 //  @brief targa_image class for .TGA images handling
 //
-#ifndef _TARGA_
-#define _TARGA_
+#pragma once
 
 #include "image/Image.h"
 #include "libssio_copy/FileDataSink.h"
@@ -29,7 +28,6 @@ class targa_header
         void save(DataSink &ds);
 };
 
-
 class targa_image : public image
 {
     public:
@@ -49,6 +47,3 @@ class targa_image : public image
     private:
         void flush();
 };
-
-
-#endif // _TARGA_

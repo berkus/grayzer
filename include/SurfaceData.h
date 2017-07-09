@@ -1,8 +1,7 @@
 //
 //  @brief surface_data & medium classes for objects props control
 //
-#ifndef _SURFDATA_
-#define _SURFDATA_
+#pragma once
 
 #include "math/Vector.h"
 
@@ -40,6 +39,4 @@ class SurfaceData
         Vector map_coord;   // mapping coordinates
 };
 
-}
-
-#endif // _SURFDATA_
+} // Grayzer namespace

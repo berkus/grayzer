@@ -1,10 +1,7 @@
-#ifndef BASEMATH_VECTOR_HPP
-#define BASEMATH_VECTOR_HPP
-
+#pragma once
 
 #include <math.h>
 #include <stdlib.h>
-
 
 class Vector
 {
@@ -188,5 +185,3 @@ inline Vector clip(Vector v)
 
 // A handy type substitution.
 typedef Vector Color;
-
-#endif

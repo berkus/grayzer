@@ -2,11 +2,9 @@
 //  File.........: spotlit.hpp
 //  Description..: spot_light light source
 //
-#ifndef _SPOTLIT_
-#define _SPOTLIT_
+#pragma once
 
 #include "light/LightSource.h"
-
 
 class spot_light : public light_source
 {
@@ -24,7 +22,6 @@ class spot_light : public light_source
         virtual double shadow( Vector&, Vector& );
 };
 
-
 inline spot_light::spot_light( Vector& l, Vector& d,
                                double a, double da,
                                int bd, double ds )
@@ -36,6 +33,3 @@ inline spot_light::spot_light( Vector& l, Vector& d,
 , beam_distribution( bd )
 , dist_scale( ds )
 {}
-
-
-#endif // _SPOTLIT_

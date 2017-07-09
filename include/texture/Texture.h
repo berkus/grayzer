@@ -1,15 +1,12 @@
 //
 //  @brief base class texture
 //
-#ifndef _TEXTURE_
-#define _TEXTURE_
+#pragma once
 
 #include "math/Vector.h"
 
-
 class surface_data;
 class geometric_object;
-
 
 class texture
 {
@@ -26,7 +23,6 @@ class texture
         virtual void apply( Vector&, surface_data& ) = 0;
 };
 
-
 inline texture::texture()
 : next( 0 )
 , object( 0 )
@@ -35,6 +31,3 @@ inline texture::texture()
 , offs( 0 )
 , scale( 1 )
 {}
-
-
-#endif // _TEXTURE_

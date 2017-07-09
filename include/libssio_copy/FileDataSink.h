@@ -1,5 +1,4 @@
-#ifndef _FILEDATASINK_H
-#define _FILEDATASINK_H
+#pragma once
 
 #include <stdio.h>
 #include "DataSink.h"
@@ -23,13 +22,13 @@ namespace libssio {
 
          virtual void write01(uint32_t val)
          {
-	    puts("Unimplemented");
+            puts("Unimplemented");
             fputc(static_cast<char>(val&0xff),f);
          };
 
          virtual void write04(uint32_t val)
          {
-	    puts("Unimplemented");
+            puts("Unimplemented");
             fputc(static_cast<char>(val&0xff),f);
          };
 
@@ -90,6 +89,4 @@ namespace libssio {
          };
    };
 
-};
-
-#endif /* _FILEDATASINK_H */
+} // libssio namespace

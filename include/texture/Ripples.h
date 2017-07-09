@@ -1,11 +1,9 @@
 //
 //  Description..: ripples procedural perturbation texture
 //
-#ifndef _RIPPLES_
-#define _RIPPLES_
+#pragma once
 
 #include "texture/Texture.h"
-
 
 class ripples : public texture
 {
@@ -20,7 +18,6 @@ class ripples : public texture
         virtual void apply( Vector&, surface_data& );
 };
 
-
 inline ripples::ripples(const Vector& c, double a, double l, double p)
 : texture()
 , center( c )
@@ -28,6 +25,3 @@ inline ripples::ripples(const Vector& c, double a, double l, double p)
 , phase( p )
 , amount( a )
 {}
-
-
-#endif // _RIPPLES_

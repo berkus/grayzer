@@ -2,11 +2,9 @@
 //  File.........: colors.h
 //  Description..: vector colors definition
 //
-#ifndef _COLORS_
-#define _COLORS_
+#pragma once
 
 #include "math/Vector.h"
-
 
 #define Aquamarine                  Vector( 0.439216, 0.858824, 0.576471 )
 #define Black                       Vector( 0, 0, 0 )
@@ -82,6 +80,3 @@
 #define LightWood                   Vector( 0.6, 0.24, 0.1 )
 #define MedianWood                  Vector( 0.3, 0.12, 0.03 )
 #define DarkWood                    Vector( 0.05, 0.01, 0.005 )
-
-
-#endif // _COLORS_ //

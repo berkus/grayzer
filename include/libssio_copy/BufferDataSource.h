@@ -1,5 +1,4 @@
-#ifndef _BUFFERDATASOURCE_H
-#define _BUFFERDATASOURCE_H
+#pragma once
 
 #include "DataSource.h"
 
@@ -93,6 +92,4 @@ namespace libssio {
          unsigned char *getPtr() { return buf_ptr; };
    };
 
-};
-
-#endif /* _BUFFERDATASOURCE_H */
+} // libssio namespace

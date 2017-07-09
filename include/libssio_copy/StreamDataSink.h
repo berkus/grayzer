@@ -1,5 +1,4 @@
-#ifndef _STREAMDATASINK_H
-#define _STREAMDATASINK_H
+#pragma once
 
 #include <fstream>
 #include "DataSink.h"
@@ -85,6 +84,4 @@ namespace libssio {
          virtual unsigned int getPos() { return out->tellp(); };
    };
 
-};
-
-#endif /* _STREAMDATASINK_H */
+} // libssio namespace

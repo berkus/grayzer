@@ -1,5 +1,4 @@
-#ifndef _BUFFERDATASINK_H
-#define _BUFFERDATASINK_H
+#pragma once
 
 #include <assert.h>
 #include "DataSink.h"
@@ -91,6 +90,4 @@ namespace libssio {
          unsigned char *getPtr() { return buf_ptr; };
    };
 
-};
-
-#endif /* _BUFFERDATASINK_H */
+} // libssio namespace

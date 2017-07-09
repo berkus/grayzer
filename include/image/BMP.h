@@ -1,11 +1,9 @@
 //
 //  @brief class BmpImage for .BMP images handling
 //
-#ifndef _BMP_
-#define _BMP_
+#pragma once
 
 #include "image/Image.h"
-
 
 class bmp_image : public image
 {
@@ -23,6 +21,3 @@ class bmp_image : public image
         virtual rgb get_pixel( int, int );
         inline void put_pixel( rgb ) {}
 };
-
-
-#endif // _BMP_

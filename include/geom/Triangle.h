@@ -1,11 +1,9 @@
 //
 //  @brief geometric object triangle
 //
-#ifndef _TRIANGLE_
-#define _TRIANGLE_
+#pragma once
 
 #include "geom/Rect.h"
-
 
 class triangle : public rectangle
 {
@@ -14,6 +12,3 @@ class triangle : public rectangle
 
         virtual bool intersect( ray&, double& );
 };
-
-
-#endif // _TRIANGLE_

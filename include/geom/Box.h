@@ -1,12 +1,10 @@
 //
 //  @brief Box basic geometric object
 //
-#ifndef _BOX_
-#define _BOX_
+#pragma once
 
 #include "math/Vector.h"
 #include "geom/GeomObj.h"
-
 
 class box : public geometric_object
 {
@@ -27,6 +25,3 @@ class box : public geometric_object
     private:
         void init_normals();
 };
-
-
-#endif // _BOX_ //

@@ -2,14 +2,9 @@
 //  File.........: transfrm.hpp
 //  Description..: class transformation
 //
-#ifndef _TRANSFRM_
-#define _TRANSFRM_
+#pragma once
 
-
-#ifndef _MATRIX_
 #include "math/Matrix.h"
-#endif
-
 
 class transformation
 {
@@ -36,12 +31,8 @@ class transformation
                                            const transformation& );
 };
 
-
 // clashes with `matrix scale( const vector& )'
 transformation t_scale( const vector& );
 transformation t_translate( const vector& );
 transformation t_rotate( const vector& );
-//transformation tinversion();
-
-
-#endif // _TRANSFRM_ //
+//transformation t_inversion();

@@ -2,11 +2,9 @@
 //  File.........: ray.hpp
 //  Description..: class ray
 //
-#ifndef _RAY_
-#define _RAY_
+#pragma once
 
 #include "math/Vector.h"
-
 
 class ray
 {
@@ -19,6 +17,3 @@ class ray
 
         Vector point( double t ) { return org + dir * t; }
 };
-
-
-#endif // _RAY_

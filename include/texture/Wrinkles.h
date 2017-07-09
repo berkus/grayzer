@@ -1,11 +1,9 @@
 //
 //  Description..: wrinkles procedural perturbation texture
 //
-#ifndef _WRINKLES_
-#define _WRINKLES_
+#pragma once
 
 #include "texture/Texture.h"
-
 
 class wrinkles : public texture
 {
@@ -16,6 +14,3 @@ class wrinkles : public texture
 
         virtual void apply( Vector&, surface_data& );
 };
-
-
-#endif // _WRINKLES_

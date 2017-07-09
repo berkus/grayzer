@@ -1,12 +1,10 @@
 //
 //  Description......: Bump map texture
 //
-#ifndef _BUMPMAP_
-#define _BUMPMAP_
+#pragma once
 
 #include "texture/Texture.h"
 #include "image/Image.h"
-
 
 class bump_map : public texture
 {
@@ -21,7 +19,6 @@ class bump_map : public texture
         double amount;
 };
 
-
 inline bump_map::bump_map( image *i, double a )
 : texture()
 , map( i )
@@ -30,6 +27,3 @@ inline bump_map::bump_map( image *i, double a )
 
 inline bump_map::~bump_map()
 {   delete map; }
-
-
-#endif // _BUMPMAP_ //

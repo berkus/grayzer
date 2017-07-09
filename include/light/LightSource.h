@@ -1,11 +1,9 @@
 //
 //  @brief base class LightSource for light sources control
 //
-#ifndef _LIGHTSRC_
-#define _LIGHTSRC_
+#pragma once
 
 #include "math/Vector.h"
-
 
 class light_source
 {
@@ -17,6 +15,3 @@ class light_source
 
         virtual double shadow( Vector&, Vector& ) = 0;
 };
-
-
-#endif // _LIGHTSRC_

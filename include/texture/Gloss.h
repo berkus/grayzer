@@ -1,11 +1,9 @@
 //
 //  Description......: gloss procedural texture
 //
-#ifndef _GLOSS_
-#define _GLOSS_
+#pragma once
 
 #include "texture/Texture.h"
-
 
 class gloss : public texture
 {
@@ -14,6 +12,3 @@ class gloss : public texture
 
         virtual void apply( Vector&, surface_data& );
 };
-
-
-#endif // _GLOSS_

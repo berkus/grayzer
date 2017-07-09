@@ -1,8 +1,7 @@
 /*
  * Scene
  */
-#ifndef _ENVIRON_
-#define _ENVIRON_
+#pragma once
 
 #include "math/Vector.h"
 #include <qptrlist.h>
@@ -10,7 +9,6 @@
 class Ray;
 class LightSource;
 class GeometricObject;
-
 
 class Fog
 {
@@ -34,7 +32,7 @@ class Scene
 
         Fog *envFog;
 
-	Scene() : envFog(0) { light.setAutoDelete(TRUE); solid.setAutoDelete(TRUE); };
+    Scene() : envFog(0) { light.setAutoDelete(TRUE); solid.setAutoDelete(TRUE); };
         virtual ~Scene();
 
         void add(LightSource *);
@@ -43,6 +41,3 @@ class Scene
         virtual GeometricObject *intersect(Ray&, double&);
         virtual Vector shadeBackground(Ray&);
 };
-
-
-#endif // _ENVIRON_

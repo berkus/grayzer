@@ -1,5 +1,4 @@
-#ifndef _DATASINK_H
-#define _DATASINK_H
+#pragma once
 
 #include "DataTypes.h"
 
@@ -38,6 +37,4 @@ namespace libssio {
          virtual position getPos()        =0;
    };
 
-};
-
-#endif /* _DATASINK_H */
+} // libssio namespace

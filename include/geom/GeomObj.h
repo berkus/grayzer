@@ -4,8 +4,7 @@
 //    98/01/26
 //      added Translate,Scale,Rotate transforms
 //
-#ifndef _GEOMOBJ_
-#define _GEOMOBJ_
+#pragma once
 
 #include "math/Vector.h"
 #include "Ray.h"
@@ -13,9 +12,7 @@
 #include "texture/Texture.h"
 #include "map/Map.h"
 
-
 extern surface_data default_material;
-
 
 class geometric_object
 {
@@ -66,13 +63,9 @@ class geometric_object
         const Vector& map_coord() const { return def_material.map_coord; }
 };
 
-
 inline geometric_object::geometric_object()
 : def_material( default_material )
 , mapping( 0 )
 , material( 0 )
 //, transform( 0 )
 {}
-
-
-#endif // _GEOMOBJ_

@@ -2,14 +2,9 @@
 //  File.........: planemap.hpp
 //  Description..: planar mapping class plane_map
 //
-#ifndef _PLANEMAP_
-#define _PLANEMAP_
+#pragma once
 
-
-#ifndef _MAP_
 #include "map.hpp"
-#endif
-
 
 class plane_map : public map
 {
@@ -21,7 +16,6 @@ class plane_map : public map
         virtual vector apply( vector& p );
         virtual void find_tangent( vector&, vector& tu, vector& tv );
 };
-
 
 inline plane_map::plane_map( vector& n, vector& e1 )
 : eu( e1 - n * (n & e1) / (n & n) )
@@ -38,6 +32,3 @@ inline void vector::find_tangent( vector&, vector& tu, vector& tv )
     tu = eu;
     tv = ev;
 }
-
-
-#endif // _PLANEMAP_

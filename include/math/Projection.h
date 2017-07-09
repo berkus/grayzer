@@ -1,5 +1,4 @@
-#ifndef LIB3D_PROJECT_HPP
-#define LIB3D_PROJECT_HPP
+#pragma once
 
 #include "Matrix.h"
 
@@ -26,5 +25,3 @@ class Projection
       // - перспективные проекции: одно-, двух- и трехточечные
       static Matrix perspective(double dist_x, double dist_y, double dist_z);
 };
-
-#endif

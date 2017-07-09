@@ -1,11 +1,9 @@
 //
 //  Description......: Brick procedural texture
 //
-#ifndef _BRICK_
-#define _BRICK_
+#pragma once
 
 #include "texture/Texture.h"
-
 
 class brick : public texture
 {
@@ -22,7 +20,6 @@ class brick : public texture
             mortar_color;
 };
 
-
 inline brick::brick(const Vector& bs, const Vector& ms, const Vector& bc, const Vector& mc)
 : texture()
 , brick_size( bs )
@@ -30,6 +27,3 @@ inline brick::brick(const Vector& bs, const Vector& ms, const Vector& bc, const 
 , brick_color( bc )
 , mortar_color( mc )
 {}
-
-
-#endif // _BRICK_

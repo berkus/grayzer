@@ -1,12 +1,10 @@
 //
 //  Description..: granite procedural texture
 //
-#ifndef _GRANITE_
-#define _GRANITE_
+#pragma once
 
 #include "texture/Texture.h"
 #include "ColorTable.h"
-
 
 class granite : public texture
 {
@@ -17,6 +15,3 @@ class granite : public texture
 
         virtual void apply( Vector&, surface_data& );
 };
-
-
-#endif // _GRANITE_ //

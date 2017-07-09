@@ -1,11 +1,9 @@
 //
 //  @brief Interpolated Color Table
 //
-#ifndef _COLORTBL_
-#define _COLORTBL_
+#pragma once
 
 #include "math/Vector.h"
-
 
 class color_table_entry
 {
@@ -13,7 +11,6 @@ class color_table_entry
         double ta,tb;
         Vector ca,cb;
 };
-
 
 class color_table
 {
@@ -31,6 +28,3 @@ class color_table
         int max_entries;
         color_table_entry *entries;
 };
-
-
-#endif // _COLORTBL_

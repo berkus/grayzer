@@ -1,12 +1,10 @@
 //
 //  @brief Cylinder basic geometric object
 //
-#ifndef _CYLINDER_
-#define _CYLINDER_
+#pragma once
 
 #include "math/Vector.h"
 #include "geom/GeomObj.h"
-
 
 class cylinder : public geometric_object
 {
@@ -26,6 +24,3 @@ class cylinder : public geometric_object
         double len, len2;
         double radius2, radius4; // radius squared and radius fourth power
 };
-
-
-#endif // _CYLINDER_ //

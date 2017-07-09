@@ -5,7 +5,7 @@
 #include <string.h>
 //---
 #include "image/BMP.h"
-#include "libssio_copy/.h"
+#include "libssio_copy/FileDataSink.h"
 
 
 #define	BI_RGB	0L

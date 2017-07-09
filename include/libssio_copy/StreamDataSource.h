@@ -1,5 +1,4 @@
-#ifndef _STREAMDATASOURCE_H
-#define _STREAMDATASOURCE_H
+#pragma once
 
 #include <fstream>
 #include "DataSource.h"
@@ -96,6 +95,4 @@ namespace libssio {
          virtual unsigned int getPos() { return in->tellg(); };
    };
 
-};
-
-#endif /* _STREAMDATASOURCE_H */
+} // libssio namespace

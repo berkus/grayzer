@@ -1,5 +1,4 @@
-#ifndef _DATASOURCE_H
-#define _DATASOURCE_H
+#pragma once
 
 #include "DataTypes.h"
 
@@ -59,6 +58,4 @@ namespace libssio {
          virtual position getPos()         =0;
    };
 
-};
-
-#endif /* _DATASOURCE_H */
+} // libssio namespace

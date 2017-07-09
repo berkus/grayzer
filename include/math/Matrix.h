@@ -1,5 +1,4 @@
-#ifndef BASEMATH_MATRIX_HPP
-#define BASEMATH_MATRIX_HPP
+#pragma once
 
 #include "math/Vector.h"
 
@@ -43,5 +42,3 @@ Matrix rotate( const Vector&, double );
 Matrix mirror_x();
 Matrix mirror_y();
 Matrix mirror_z();
-
-#endif

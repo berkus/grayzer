@@ -8,18 +8,10 @@
 //      we use bounds object as bounding volume and can use common
 //      bounding_volume class for many different types of BVs.
 //
-#ifndef _BOUNDVOL_
-#define _BOUNDVOL_
+#pragma once
 
-
-#ifndef _TYPES_
 #include "types.h"
-#endif
-
-#ifndef _GEOMOBJ_
 #include "geomobj.hpp"
-#endif
-
 
 class bounding_volume
 {
@@ -39,6 +31,3 @@ class bounding_volume
 
         geometric_object *intersect( ray&, double& );
 };
-
-
-#endif // _BOUNDVOL_
