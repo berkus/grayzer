@@ -2,7 +2,7 @@
 //  @brief Environment
 //
 #include "environment/Environment.h"
-#include "go/GeomObj.h"
+#include "geom/GeomObj.h"
 #include "light/LightSource.h"
 #include "environment/Geometry.h"
 #include "Tracer.h"

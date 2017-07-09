@@ -3,7 +3,7 @@
 //
 #include "Externs.h"
 #include "environment/Geometry.h"
-#include "go/Box.h"
+#include "geom/Box.h"
 
 
 box::box( Vector& l, Vector& s1, Vector& s2, Vector& s3	)

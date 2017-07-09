@@ -4,7 +4,7 @@
 #ifndef _TRIANGLE_
 #define _TRIANGLE_
 
-#include "go/Rect.h"
+#include "geom/Rect.h"
 
 
 class triangle : public rectangle

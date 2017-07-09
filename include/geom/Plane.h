@@ -5,7 +5,7 @@
 #define _PLANE_
 
 #include "math/Vector.h"
-#include "go/GeomObj.h"
+#include "geom/GeomObj.h"
 
 //
 //  уравнение плоскости: (normal,r) + dist = 0

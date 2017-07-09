@@ -3,7 +3,7 @@
 //
 #include "Externs.h"
 #include "environment/Geometry.h"
-#include "go/Rect.h"
+#include "geom/Rect.h"
 
 
 rectangle::rectangle( const Vector& l, const Vector& s1, const Vector& s2  )

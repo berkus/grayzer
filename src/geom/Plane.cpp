@@ -3,7 +3,7 @@
 //
 #include "Externs.h"
 #include "environment/Geometry.h"
-#include "go/Plane.h"
+#include "geom/Plane.h"
 
 
 //

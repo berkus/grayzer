@@ -4,7 +4,7 @@
 #ifndef _SPHERE_
 #define _SPHERE_
 
-#include "go/GeomObj.h"
+#include "geom/GeomObj.h"
 
 
 class sphere : public geometric_object

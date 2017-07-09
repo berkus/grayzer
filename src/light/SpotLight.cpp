@@ -3,7 +3,7 @@
 //
 #include "light/SpotLight.h"
 #include "SurfaceData.h"
-#include "go/GeomObj.h"
+#include "geom/GeomObj.h"
 #include "environment/Environment.h"
 #include "Tracer.h"
 

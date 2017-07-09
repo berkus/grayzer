@@ -4,7 +4,7 @@
 //
 #include "Externs.h"
 #include "environment/Geometry.h"
-#include "go/Sphere.h"
+#include "geom/Sphere.h"
 
 
 bool sphere::intersect( ray& ray, double& t  )

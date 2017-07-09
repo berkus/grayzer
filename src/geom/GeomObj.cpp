@@ -1,7 +1,7 @@
 //
 //  @brief base class geometric_object realization
 //
-#include "go/GeomObj.h"
+#include "geom/GeomObj.h"
 
 
 geometric_object::~geometric_object()

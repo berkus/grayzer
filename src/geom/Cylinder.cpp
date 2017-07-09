@@ -3,7 +3,7 @@
 //
 #include "Externs.h"
 #include "environment/Geometry.h"
-#include "go/Cylinder.h"
+#include "geom/Cylinder.h"
 
 
 cylinder::cylinder(  Vector&  l, Vector& d, double r )

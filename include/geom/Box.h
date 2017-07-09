@@ -5,7 +5,7 @@
 #define _BOX_
 
 #include "math/Vector.h"
-#include "go/GeomObj.h"
+#include "geom/GeomObj.h"
 
 
 class box : public geometric_object

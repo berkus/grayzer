@@ -3,7 +3,7 @@
 //
 #include "Externs.h"
 #include "environment/Geometry.h"
-#include "go/Triangle.h"
+#include "geom/Triangle.h"
 
 
 bool triangle::intersect( ray& r, double& t  )

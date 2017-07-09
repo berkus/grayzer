@@ -6,7 +6,7 @@
 #include "light/PointLight.h"
 #include "environment/Environment.h"
 #include "Externs.h"
-#include "go/Rect.h"
+#include "geom/Rect.h"
 // textures
 #include "texture/Gloss.h"
 #include "texture/Bozo.h"

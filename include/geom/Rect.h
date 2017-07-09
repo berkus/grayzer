@@ -4,7 +4,7 @@
 #ifndef _RECT_
 #define _RECT_
 
-#include "go/GeomObj.h"
+#include "geom/GeomObj.h"
 
 
 class rectangle : public geometric_object

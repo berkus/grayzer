@@ -1,7 +1,7 @@
 //
 // Description......: bump_map   realization
 //
-#include "go/GeomObj.h"
+#include "geom/GeomObj.h"
 #include "Tracer.h"
 #include "texture/BumpMap.h"
 

@@ -5,7 +5,7 @@
 #define _CYLINDER_
 
 #include "math/Vector.h"
-#include "go/GeomObj.h"
+#include "geom/GeomObj.h"
 
 
 class cylinder : public geometric_object

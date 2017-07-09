@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "Tracer.h"
 #include "environment/Environment.h"
-#include "go/GeomObj.h"
+#include "geom/GeomObj.h"
 #include "environment/Geometry.h"
 #include "light/LightSource.h"
 
