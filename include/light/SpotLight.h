@@ -15,7 +15,7 @@ class SpotLight final : public LightSource
     double dist_scale;
 
 public:
-    SpotLight( Vector& l, Vector& d, double a, double da,
+    SpotLight(Vector const& l, Vector const& d, double a, double da,
                                       int bd, double ds = 1.0 )
         : LightSource()
         , loc( l )

@@ -17,7 +17,7 @@ public:
     double distance;
     Vector fog_color;
 
-    Fog( double d, Vector& c ) : distance( d ), fog_color( c ) {}
+    Fog( double d, Vector const& c ) : distance( d ), fog_color( c ) {}
 
     virtual void shade( Vector& color, double dist );
 };
@@ -60,5 +60,6 @@ public:
     Color trace( Grayzer::Medium&, double, Ray& );
     Color shade( Grayzer::Medium&, double, Vector, Vector, GeometricObject * );
 
+    void setFog(std::shared_ptr<Fog> fog) { envFog = fog; }
     void setBackground(Color bg) { background = bg; }
 };

@@ -15,7 +15,7 @@ public:
     rgb   *palette;
     unsigned char *data;
 
-    BmpImage( char * );
+    BmpImage( char const* );
     ~BmpImage();
 
     virtual rgb get_pixel( int, int );
