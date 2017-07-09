@@ -12,6 +12,7 @@ add_library(grayzer STATIC
     geom/Rect.cpp
     geom/Sphere.cpp
     geom/Triangle.cpp
+    image/BMP.cpp
     image/Targa.cpp
     light/PointLight.cpp
     light/SphericLight.cpp
