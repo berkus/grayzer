@@ -26,18 +26,23 @@ int main()
     s1->transmittance(0.0);
     s1->phong_size(30);
     s1->color(Yellow);
-    s1->def_material.med = Grayzer::Medium::glass;
-    s2->def_material = s1->def_material;
+    s1->medium(Grayzer::Medium::glass);
+
+    s2->surface_data(s1->surface_data());
     s2->color(Red);
-    s3->def_material = s1->def_material;
+
+    s3->surface_data(s1->surface_data());
     s3->color(Blue);
-    p->def_material = s1->def_material;
+
+    p->surface_data(s1->surface_data());
     p->ambient(0.1);
     p->diffuse(0.5);
     p->specular(0.4);
     p->reflection(0.4);
     p->color(Blue);
+
     s1->reflection(0.3);
+
 	Light1 = new PointLight(Vector(10,5,-10),17);
     scene->add(s1);
 	scene->add(s2);

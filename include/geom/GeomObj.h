@@ -48,25 +48,29 @@ class GeometricObject
         //
         //  texture/material manage
         //
-        void ambient( double ka ) { def_material.ka = ka; }
-        void diffuse( double kd ) { def_material.kd = kd; }
-        void specular( double ks ) { def_material.ks = ks; }
-        void reflection( double kr ) { def_material.kr = kr; }
-        void transmittance( double kt ) { def_material.kt = kt; }
-        void ior( double ior ) { def_material.med.ior = ior; }
-        void beta(double beta) { def_material.med.beta = beta; }
-        void phong_size( int p ) { def_material.p = p; }
-        void color( Vector c ) { def_material.color = c; }
-        void map_coord( Vector c ) { def_material.map_coord = c; }
+    void surface_data(Grayzer::SurfaceData mat) { def_material = mat; }
+    void ambient( double ka ) { def_material.ka = ka; }
+    void diffuse( double kd ) { def_material.kd = kd; }
+    void specular( double ks ) { def_material.ks = ks; }
+    void reflection( double kr ) { def_material.kr = kr; }
+    void transmittance( double kt ) { def_material.kt = kt; }
+    void medium(Grayzer::Medium med) { def_material.med = med; }
+    void ior( double ior ) { def_material.med.ior = ior; }
+    void beta(double beta) { def_material.med.beta = beta; }
+    void phong_size( int p ) { def_material.p = p; }
+    void color( Vector c ) { def_material.color = c; }
+    void map_coord( Vector c ) { def_material.map_coord = c; }
 
-        double const ambient() const { return def_material.ka; }
-        double const diffuse() const { return def_material.kd; }
-        double const specular() const { return def_material.ks; }
-        double const reflection() const { return def_material.kr; }
-        double const transmittance() const { return def_material.kt; }
-        double const ior() const { return def_material.med.ior; }
-        double const beta() const { return def_material.med.beta; }
-        int const    phong_size() const { return def_material.p; }
-        Vector const& color() const { return def_material.color; }
-        Vector const& map_coord() const { return def_material.map_coord; }
+    Grayzer::SurfaceData const surface_data() const { return def_material; }
+    double const ambient() const { return def_material.ka; }
+    double const diffuse() const { return def_material.kd; }
+    double const specular() const { return def_material.ks; }
+    double const reflection() const { return def_material.kr; }
+    double const transmittance() const { return def_material.kt; }
+    Grayzer::Medium const medium() const { return def_material.med; }
+    double const ior() const { return def_material.med.ior; }
+    double const beta() const { return def_material.med.beta; }
+    int const    phong_size() const { return def_material.p; }
+    Vector const& color() const { return def_material.color; }
+    Vector const& map_coord() const { return def_material.map_coord; }
 };
