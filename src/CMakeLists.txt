@@ -1,7 +1,6 @@
 add_library(grayzer STATIC
     Camera.cpp
     ColorTable.cpp
-    Draw.cpp
     Stats.cpp
     Noise.cpp
     Shade.cpp
