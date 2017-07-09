@@ -20,7 +20,6 @@ Plane::Plane( double a, double b, double c,  double d )
 bool Plane::intersect(Ray& r, double& t)
 {
    STAT( PlaneTestCount++  );
-   STAT( PlaneTestMisses++ );
 
    double vd = normal & r.dir;
 
@@ -32,15 +31,11 @@ bool Plane::intersect(Ray& r, double& t)
 
    t =   -((normal & r.org) + dist) / vd;
 
-#ifdef STATISTICS
    if(   t >   geom_threshold )
       return true;
    else
    {
-      PlaneTestMisses++;
+      STAT(PlaneTestMisses++);
       return false;
    }
-#else
-    return  t >   geom_threshold;
-#endif
 }

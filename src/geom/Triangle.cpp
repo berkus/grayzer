@@ -8,7 +8,6 @@
 bool Triangle::intersect(Ray& r, double& t)
 {
    STAT( TriangleTestCount++  );
-   STAT( TriangleTestMisses++ );
 
    double vd = n &   r.dir;
 
@@ -25,18 +24,14 @@ bool Triangle::intersect(Ray& r, double& t)
    }
 
    Vector p = r.point(t);
-   double u = u0 +   (p & ku);
-   double v = v0 +   (p & kv);
+   double u = u0 + (p & ku);
+   double v = v0 + (p & kv);
 
-#ifdef STATISTICS
-   if(   u >   0 && v > 0 && u   + v   < 1   )
+   if(u > 0 && v > 0 && u + v < 1)
       return true;
    else
    {
-      TriangleTestMisses++;
+      STAT(TriangleTestMisses++);
       return false;
    }
-#else
-   return u > 0 &&   v >   0 && u + v < 1;
-#endif
 }

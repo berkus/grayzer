@@ -28,10 +28,7 @@ Cylinder::Cylinder(Vector& l, Vector& d, double r)
 
 bool Cylinder::intersect(Ray& r,double& t)
 {
-#ifdef STATISTICS
-   CylinderTestCount++;
-   CylinderTestMisses++;
-#endif
+   STAT(CylinderTestCount++);
 
    Vector l = r.org - loc;
    double u0 = l &   e1;
@@ -47,9 +44,7 @@ bool Cylinder::intersect(Ray& r,double& t)
 
    if(d <=  0.0)
    {
-#ifdef STATISTICS
-      CylinderTestMisses++;
-#endif
+      STAT(CylinderTestMisses++);
       return false;
    }
    d =   sqrt(d);
@@ -124,18 +119,14 @@ bool Cylinder::intersect(Ray& r,double& t)
       t =   t1;
       return true;
    }
-#ifdef STATISTICS
    t =   t2;
    if(   t >   geom_threshold )
       return true;
    else
    {
-      CylinderTestMisses++;
+      STAT(CylinderTestMisses++);
       return false;
    }
-#else
-   return (t = t2)   > geom_threshold;
-#endif
 }
 
 Vector Cylinder::find_normal(Vector& p)

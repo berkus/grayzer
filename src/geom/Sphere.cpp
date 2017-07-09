@@ -9,7 +9,6 @@
 bool Sphere::intersect(Ray& ray, double& t)
 {
    STAT( SphereTestCount++  );
-   STAT( SphereTestMisses++ );
 
    Vector l = loc - ray.org;
    double l20c = l   & l;
@@ -38,17 +37,13 @@ bool Sphere::intersect(Ray& ray, double& t)
 
    if(   fabs(t)  < geom_threshold ) t = t2;
 
-#ifdef STATISTICS
    if(   t >   geom_threshold )
       return true;
    else
    {
-      SphereTestMisses++;
+      STAT(SphereTestMisses++);
       return false;
    }
-#else
-   return t > geom_threshold;
-#endif
 }
 
 

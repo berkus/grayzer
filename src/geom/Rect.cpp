@@ -26,7 +26,6 @@ Rectangle::Rectangle( const Vector& l, const Vector& s1, const Vector& s2  )
 bool Rectangle::intersect(Ray& r, double& t)
 {
    STAT( RectTestCount++  );
-   STAT( RectTestMisses++ );
 
    double vd = n &   r.dir;
 
@@ -46,15 +45,11 @@ bool Rectangle::intersect(Ray& r, double& t)
    double u = u0 +   (p & ku);
    double v = v0 +   (p & kv);
 
-#ifdef STATISTICS
    if(   u >   0 && v > 0 && u   < 1   && v < 1 )
       return true;
    else
    {
-      RectTestMisses++;
+      STAT(RectTestMisses++);
       return false;
    }
-#else
-   return u > 0 &&   v >   0 && u < 1 && v   < 1;
-#endif
 }
