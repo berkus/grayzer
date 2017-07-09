@@ -24,14 +24,14 @@
 
 int main()
 {
-   rectangle *r[12];
-   point_light *Light1;
+   Rectangle *r[12];
+   PointLight *Light1;
 
-   init_default_material();
-   default_material.color = Green;
-   default_material.p = 30;
+   initDefaultMaterial();
+   defaultMaterial.color = Green;
+   defaultMaterial.p = 30;
 
-   scene = new Scene;
+   Scene* scene = new Scene;
 
 //
 // screen area 22 x 13
@@ -39,46 +39,46 @@ int main()
 //
    for( int y = 0;   y <   4; y++ )
       for( int x = 0;   x <   5; x++ )
-         r[y*4+x] = new rectangle(Vector(-11+5.5*x,6.5-4.3*y,10),Vector(5,0,0),Vector(0,-4,0));
+         r[y*4+x] = new Rectangle(Vector(-11+5.5*x,6.5-4.3*y,10),Vector(5,0,0),Vector(0,-4,0));
 
-   wood *woo = new   wood (15,7,5);
+   Wood *woo = new Wood (15,7,5);
 
-   marble *marb = new marble (0.7,1);
+   Marble *marb = new Marble (0.7,1);
    marb->tbl.add_entry(0.0,0.8,Vector(0.8,0.8,0.6),Vector(0.8,0.4,0.4));
    marb->tbl.add_entry(0.8,1.0,Vector(0.8,0.4,0.4),Vector(0.8,0.2,0.2));
 
-   granite  *granit  = new granite;
+   Granite  *granit  = new Granite;
    granit->tbl.add_entry(0.000,0.178,Vector(0.831,0.631,0.569),Vector(0.925,0.831,0.714));
    granit->tbl.add_entry(0.178,0.356,Vector(0.925,0.831,0.714),Vector(0.871,0.702,0.659));
    granit->tbl.add_entry(0.356,0.525,Vector(0.871,0.702,0.659),Vector(0.831,0.631,0.569));
    granit->tbl.add_entry(0.525,0.729,Vector(0.831,0.631,0.569),Vector(0.937,0.882,0.820));
    granit->tbl.add_entry(0.729,1.000,Vector(0.937,0.882,0.820),Vector(0.831,0.631,0.569));
 
-   checker  *checkr  = new checker (SkyBlue,Yellow);
+   Checker  *checkr = new Checker (SkyBlue,Yellow);
 
-   gradient *grad = new gradient (Vector(1,1,0));
+   Gradient *grad = new Gradient (Vector(1,1,0));
    grad->tbl.add_entry(0,.5,Black,White);
    grad->tbl.add_entry(.5,1,White,Aquamarine);
    grad->offs = Vector(30,20,0);
 
-   wrinkles *wrink   = new wrinkles (7.0);
+   Wrinkles *wrink = new Wrinkles (7.0);
 
-   dents *dent = new dents (3.0);
+   Dents *dent = new Dents (3.0);
 
-   gloss *glos = new gloss;
+   Gloss *glos = new Gloss;
 
    // from  palace.pov
-   bozo *boz = new   bozo (0.5);
+   Bozo *boz = new Bozo (0.5);
    boz->tbl.add_entry(0.0,0.5,Vector(.25,.25,.5),Vector(.25,.25,.5));
    boz->tbl.add_entry(0.5,0.6,Vector(.25,.25,.5),Vector(.7,.7,.7));
    boz->tbl.add_entry(0.6,1.001,Vector(.7,.7,.7),Vector(.3,.3,.3));
 
-   bumps *bump = new bumps (7.0);
+   Bumps *bump = new Bumps (7.0);
 
-   brick *brik = new brick (Vector(11,6,5),Vector(0.1),Red,Gray);
+   Brick *brik = new Brick (Vector(11,6,5),Vector(0.1),Red,Gray);
    brik->scale = Vector(4);
 
-   ripples  *ripp =  new   ripples(Vector(8.5,-4.5,10),4.0,0.4);
+   Ripples  *ripp = new Ripples(Vector(8.5,-4.5,10),4.0,0.4);
 
    // wood,marble,granite,checker
    // gradient,wrinkles,dents,gloss
@@ -108,9 +108,9 @@ int main()
    r[10]->add(brik);
    r[11]->add(ripp);
 
-   Light1 = new point_light(Vector(10,5,-30),40);
+   Light1 = new PointLight(Vector(10,5,-30),40);
 
-   for(int  i =   0; i < 12; i++)
+   for(int i = 0; i < 12; i++)
       scene->add(r[i]);
 
    scene->add(Light1);

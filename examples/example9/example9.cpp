@@ -1,12 +1,15 @@
-#include "tracer.hpp"
-#include "geometry.hpp"
-#include "render.h"
-#include "colors.h"
-#include "map.hpp"
-#include "bmp.hpp"
-#include "planemap.hpp"
+#include "Tracer.h"
+#include "Render.h"
+#include "Colors.h"
+#include "map/Map.h"
+#include "image/BMP.h"
+#include "map/PlaneMap.h"
+#include "geom/Box.h"
+#include "environment/Scene.h"
+#include "light/PointLight.h"
+#include "texture/ColorMap.h"
 
-void main()
+int main()
 {
     Box *b = new Box(Vector(0,-2,5),Vector(8,0,3),Vector(-8,0,3),Vector(0,-3,0));
 //  Sphere *s = new Sphere(Vector(0,0,5),50);
@@ -14,25 +17,25 @@ void main()
     BmpImage *img = new BmpImage("backgnd.bmp");
     ColorMap *cmap = new ColorMap(img);
 
-    cmap->Scale = 25;
+    cmap->scale = 25;
 
-    Scene = new Environment;
+    Scene* scene = new Scene;
 
-    b->Mapping = new PlaneMap(Vector(0,-1,-1),Vector(1,0,0));
-    b->Add(cmap);
-    b->Ambient(0.3);
-    b->Diffuse(0.8);
-    b->Specular(0.3);
-    b->Reflection(0.0);
-    b->Refraction(0.0);
-    b->PhongSize(5);
-    b->DefMaterial.Med = Glass;
-    b->DefMaterial.Color = 1;
+    b->mapping = new PlaneMap(Vector(0,-1,-1),Vector(1,0,0));
+    b->add(cmap);
+    b->ambient(0.3);
+    b->diffuse(0.8);
+    b->specular(0.3);
+    b->reflection(0.0);
+    b->ior(0.0);
+    b->phong_size(5);
+    b->medium(Grayzer::Medium::glass);
+    b->color(1);
 
-    Scene->Add(b);
-    Scene->Add(Light1);
+    scene->add(b);
+    scene->add(Light1);
 
-    Background = SkyBlue;
-    SetCamera(Vector(0),Vector(0,0,1),Vector(0,1,0));
-    RenderScene(1.6,1.0,320,200,"SAMPLE90.TGA");
+    scene->setBackground(SkyBlue);
+    scene->setCamera(Vector(0),Vector(0,0,1),Vector(0,1,0));
+    render_scene(scene, 1.6,1.0,320,200,"SAMPLE90.TGA");
 }

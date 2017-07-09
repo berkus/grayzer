@@ -1,38 +1,36 @@
-#include "tracer.hpp"
-#include "geometry.hpp"
-#include "render.h"
-#include "colors.h"
-#include "wood.hpp"
-#include "box.hpp"
-#include "pointlit.hpp"
-#include "environ.hpp"
+#include "Tracer.h"
+#include "Render.h"
+#include "Colors.h"
+#include "texture/Wood.h"
+#include "geom/Box.h"
+#include "light/PointLight.h"
+#include "environment/Scene.h"
 
-void
-main()
+int main()
 {
-    Box *b=new Box(Vector(-1,-1,-2),Vector(2,0,0),Vector(0,2,0),Vector(0,0,4));
-    PPointLight Light1,Light2;
+    Scene* scene = new Scene;
 
-    Scene = new Environment;
-    b->Ambient(0.3);
-    b->Diffuse(0.7);
-    b->Specular(0.5);
-    b->DefMaterial.Kr=0.0;
-    b->DefMaterial.Kt=0.0;
-    b->PhongSize(30);
-    b->DefMaterial.Color=Yellow;
-    b->DefMaterial.Med=Glass;
-    b->Add(new Wood(35,6,5));
+    Box* b=new Box(Vector(-1,-1,-2),Vector(2,0,0),Vector(0,2,0),Vector(0,0,4));
+    b->ambient(0.3);
+    b->diffuse(0.7);
+    b->specular(0.5);
+    b->reflection(0.0);
+    b->transmittance(0.0);
+    b->phong_size(30);
+    b->color(Yellow);
+    b->medium(Grayzer::Medium::glass);
+    b->add(new Wood(35,6,5));
 
-    Light1 = new PointLight(Vector(10,5,-10),17);
-    Light2 = new PointLight(Vector(-10,-5,-10),17);
+    PointLight* Light1 = new PointLight(Vector(10,5,-10),17);
+    PointLight* Light2 = new PointLight(Vector(-10,-5,-10),17);
 
-    Scene->Add(b);
-    Scene->Add(Light1);
-    Scene->Add(Light2);
-    Background = SkyBlue;
-    InitNoise();
-    SetCamera(Vector(-4,8,-4),Vector(2,-5,2),Vector(0,1,0));
-    RenderScene(1.6,1.0,320,200,"SAMPLE60.TGA");
-    DoneNoise();
+    scene->add(b);
+    scene->add(Light1);
+    scene->add(Light2);
+    scene->setBackground(SkyBlue);
+
+    init_noise();
+    scene->setCamera(Vector(-4,8,-4),Vector(2,-5,2),Vector(0,1,0));
+    render_scene(scene, 1.6,1.0,320,200,"SAMPLE60.TGA");
+    done_noise();
 }

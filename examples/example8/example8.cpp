@@ -1,42 +1,41 @@
-#include "tracer.hpp"
-#include "geometry.hpp"
-#include "render.h"
-#include "colors.h"
-#include "noise.h"
-#include "bumps.hpp"
-#include "sphere.hpp"
-#include "pointlit.hpp"
-#include "environ.hpp"
+#include "Tracer.h"
+#include "Render.h"
+#include "Colors.h"
+#include "Noise.h"
+#include "texture/Bumps.h"
+#include "geom/Sphere.h"
+#include "light/PointLight.h"
+#include "environment/Scene.h"
 
-void main()
+int main()
 {
-    PSphere Sphere1;
-    PLightSource Light1,Light2;
+    Sphere* Sphere1;
+    LightSource *Light1,*Light2;
 
-    Scene = new Environment;
+    Scene* scene = new Scene;
     Sphere1 = new Sphere(Vector(0,0,0),4);
 
-    Sphere1->Ambient(0.3);
-    Sphere1->Diffuse(0.2);
-    Sphere1->Specular(0.7);
-    Sphere1->Reflection(0.0);
-    Sphere1->Refraction(0.0);
-    Sphere1->PhongSize(30);
-    Sphere1->DefMaterial.Med = Glass;
-    Sphere1->Color(Red);
-    Sphere1->Add(new Bumps(7.0));
+    Sphere1->ambient(0.3);
+    Sphere1->diffuse(0.2);
+    Sphere1->specular(0.7);
+    Sphere1->reflection(0.0);
+    Sphere1->ior(0.0);
+    Sphere1->phong_size(30);
+    Sphere1->medium(Grayzer::Medium::glass);
+    Sphere1->color(Red);
+    Sphere1->add(new Bumps(7.0));
 
     Light1 = new PointLight(Vector(-10,8,-20),20);
     Light2 = new PointLight(Vector(10,8,-20),20);
 
-    Scene->Add(Sphere1);
-    Scene->Add(Light1);
-    Scene->Add(Light2);
+    scene->add(Sphere1);
+    scene->add(Light1);
+    scene->add(Light2);
 
-    Background = SkyBlue;
+    scene->setBackground(SkyBlue);
 
-    InitNoise();
-    SetCamera(Vector(0,0,-7),Vector(0,0,1),Vector(0,1,0));
-    RenderScene(1.5,1.0,300,200,"SAMPLE80.TGA");
-    DoneNoise();
+    init_noise();
+    scene->setCamera(Vector(0,0,-7),Vector(0,0,1),Vector(0,1,0));
+    render_scene(scene, 1.5,1.0,300,200,"SAMPLE80.TGA");
+    done_noise();
 }

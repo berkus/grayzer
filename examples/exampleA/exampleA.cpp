@@ -1,99 +1,87 @@
-#include <noise.h>
-#include <render.h>
-#include <colors.h>
-#include <tracer.hpp>
-#include <geometry.hpp>
-#include "sphere.hpp"
-#include "pointlit.hpp"
-#include "environ.hpp"
-#include "gloss.hpp"
-#include "bozo.hpp"
-#include "checker.hpp"
-#include "externs.h"
-#include "bumps.hpp"
-#include "rect.hpp"
+#include "Noise.h"
+#include "Render.h"
+#include "Colors.h"
+#include "Tracer.h"
+#include "geom/Sphere.h"
+#include "light/PointLight.h"
+#include "environment/Scene.h"
+#include "Externs.h"
+#include "geom/Rect.h"
+#include "texture/Bumps.h"
+#include "texture/Gloss.h"
+#include "texture/Bozo.h"
+#include "texture/Checker.h"
+#include "texture/Gradient.h"
+#include "texture/Wrinkles.h"
+#include "texture/Dents.h"
+#include "texture/Wood.h"
 
-#include "gradient.hpp"
-#include "wrinkles.hpp"
-#include "dents.hpp"
-#include "wood.hpp"
-
-
-unsigned _stklen = 64000;
-
-void
-main()
+int main()
 {
-//  Options = OPT_DEBUG;
+    initDefaultMaterial();
 
-    PSphere s1,s2,s3,s4;
-    PPointLight Light1;
-    PBozo bozo;
+    Scene* scene = new Scene;
+    Sphere *s1 = new Sphere(Vector(-2.2,2.2,10),1.2); // tl
+    Sphere *s2 = new Sphere(Vector(2.2,2.2,10),1.2);  // tr
+    Sphere *s3 = new Sphere(Vector(-2.2,-2.2,10),1.2);// bl
+    Sphere *s4 = new Sphere(Vector(2.2,-2.2,10),1.2); // br
+    Sphere *s5 = new Sphere(Vector(0,0,9),1.2); // mid
+    Rectangle* r = new Rectangle(Vector(-5,-5,15),Vector(9,0,0),Vector(0,6,0));
 
-    InitDefaultMaterial();
-
-    Scene = new Environment;
-    s1 = new Sphere(Vector(-2.2,2.2,10),1.2); // tl
-    s2 = new Sphere(Vector(2.2,2.2,10),1.2);  // tr
-    s3 = new Sphere(Vector(-2.2,-2.2,10),1.2);// bl
-    s4 = new Sphere(Vector(2.2,-2.2,10),1.2); // br
-    PSphere s5 = new Sphere(Vector(0,0,9),1.2); // mid
-    PRect r = new Rect(Vector(-5,-5,15),Vector(9,0,0),Vector(0,6,0));
-
-    s1->Diffuse(0.6);
-    s1->Specular(0.7);
-    s1->PhongSize(30);
-    PGradient g = new Gradient (Vector(0,1,0));
-    g->Tbl.AddEntry(0,.5,Black,White);
-    g->Tbl.AddEntry(.5,1,White,Black);
-    s1->Add(g);
+    s1->diffuse(0.6);
+    s1->specular(0.7);
+    s1->phong_size(30);
+    Gradient* g = new Gradient (Vector(0,1,0));
+    g->tbl.add_entry(0,.5,Black,White);
+    g->tbl.add_entry(.5,1,White,Black);
+    s1->add(g);
 
     // from palace.pov
-    bozo = new Bozo (0.5);
-    bozo->Tbl.AddEntry(0.0,0.5,Vector(.25,.25,.5),Vector(.25,.25,.5));
-    bozo->Tbl.AddEntry(0.5,0.6,Vector(.25,.25,.5),Vector(.7,.7,.7));
-    bozo->Tbl.AddEntry(0.6,1.001,Vector(.7,.7,.7),Vector(.3,.3,.3));
+    Bozo *bozo = new Bozo (0.5);
+    bozo->tbl.add_entry(0.0,0.5,Vector(.25,.25,.5),Vector(.25,.25,.5));
+    bozo->tbl.add_entry(0.5,0.6,Vector(.25,.25,.5),Vector(.7,.7,.7));
+    bozo->tbl.add_entry(0.6,1.001,Vector(.7,.7,.7),Vector(.3,.3,.3));
 
-    s2->DefMaterial = s1->DefMaterial;
-    s2->Ambient(0.6);
-    s2->Diffuse(0.4);
-    s2->Add(bozo);
+    s2->surface_data(s1->surface_data());
+    s2->ambient(0.6);
+    s2->diffuse(0.4);
+    s2->add(bozo);
 
-    s3->DefMaterial = s1->DefMaterial;
-    s3->PhongSize(10);
-    s3->Color(Aquamarine);
-    s3->Add(new Wrinkles(7.0));
+    s3->surface_data(s1->surface_data());
+    s3->phong_size(10);
+    s3->color(Aquamarine);
+    s3->add(new Wrinkles(7.0));
 
-    s4->DefMaterial = s1->DefMaterial;
-    s4->Color(Goldenrod);
-    s4->Add(new Dents(3.0));
+    s4->surface_data(s1->surface_data());
+    s4->color(Goldenrod);
+    s4->add(new Dents(3.0));
 
-    s5->DefMaterial = s1->DefMaterial;
-    s5->Transmittance(0.7);
-    s5->Color(Coral);
-    s5->Add(new Gloss);
+    s5->surface_data(s1->surface_data());
+    s5->transmittance(0.7);
+    s5->color(Coral);
+    s5->add(new Gloss);
 
-    r->Add(new Wood(15,7,5));
+    r->add(new Wood(15,7,5));
 
-    Light1 = new PointLight(Vector(10,5,-30),40);
+    PointLight *Light1 = new PointLight(Vector(10,5,-30),40);
 
-    Scene->Add(s1);
-    Scene->Add(s2);
-    Scene->Add(s3);
-    Scene->Add(s4);
-    Scene->Add(s5);
-    Scene->Add(r);
-    Scene->Add(Light1);
-    Scene->Fog = new Fog(200,White);
+    scene->add(s1);
+    scene->add(s2);
+    scene->add(s3);
+    scene->add(s4);
+    scene->add(s5);
+    scene->add(r);
+    scene->add(Light1);
 
-    Background = Black;
+    scene->setFog(std::make_shared<Fog>(200,White));
+    scene->setBackground(Black);
 
-    InitNoise();
-    SetCamera(Vector(0),Vector(0,0,1.5),Vector(0,1,0));
+    init_noise();
+    scene->setCamera(Vector(0),Vector(0,0,1.5),Vector(0,1,0));
 //  Aperture = 5.0;
 //  Focus = 12.0;
-    RenderScene(1.6,1.0,320,200,"SAMPLEA0.TGA");
-//  DistributedRenderScene(1.6,1.0,320,200,5,5,"SAMPLEA1.TGA");
-//  AdaptiveDistributedRenderScene(1.6,1.0,320,200,5,5,0.01,"SAMPLEA2.TGA");
-    DoneNoise();
+    render_scene(scene, 1.6,1.0,320,200,"SAMPLEA0.TGA");
+    distributed_render_scene(scene, 1.6,1.0,320,200,5,5,"SAMPLEA1.TGA");
+    adaptive_distributed_render_scene(scene, 1.6,1.0,320,200,5,5,0.01,"SAMPLEA2.TGA");
+    done_noise();
 }
