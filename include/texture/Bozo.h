@@ -8,16 +8,16 @@
 
 class Bozo : public Texture
 {
-    public:
-        Bozo( double t = 0.0 )
-            : Texture()
-            , tbl()
-        {
-            turb = t;
-        }
+public:
+    Bozo( double t = 0.0 )
+        : Texture()
+        , tbl()
+    {
+        turb = t;
+    }
 
-        void apply( Vector&, Grayzer::SurfaceData& ) override;
+    void apply( Vector&, Grayzer::SurfaceData& ) override;
 
-    public:
-        ColorTable tbl;
+public:
+    ColorTable tbl;
 };

@@ -7,17 +7,17 @@
 
 class SphericLight : public LightSource
 {
-    public:
-        Vector loc;
-        double radius;
-        double dist_scale;
+public:
+    Vector loc;
+    double radius;
+    double dist_scale;
 
-        SphericLight( Vector& l, double r, double d = 1.0 )
-            : LightSource()
-            , loc( l )
-            , radius( r )
-            , dist_scale( d )
-        {}
+    SphericLight( Vector& l, double r, double d = 1.0 )
+        : LightSource()
+        , loc( l )
+        , radius( r )
+        , dist_scale( d )
+    {}
 
-        double shadow( Vector&, Vector& ) override;
+    double shadow( Vector&, Vector& ) override;
 };

@@ -8,20 +8,20 @@
 
 class BumpMap : public Texture
 {
-    public:
-        BumpMap(Image *i, double a)
-            : Texture()
-            , map(i)
-            , amount(a)
-        {}
-       ~BumpMap()
-        {
-            delete map;
-        }
+public:
+    BumpMap(Image *i, double a)
+        : Texture()
+        , map(i)
+        , amount(a)
+    {}
+   ~BumpMap()
+    {
+        delete map;
+    }
 
-        void apply( Vector&, Grayzer::SurfaceData& ) override;
+    void apply( Vector&, Grayzer::SurfaceData& ) override;
 
-    public:
-        Image *map;
-        double amount;
+public:
+    Image *map;
+    double amount;
 };

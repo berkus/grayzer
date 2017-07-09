@@ -7,11 +7,11 @@
 
 class LightSource
 {
-    public:
-        Vector color;
+public:
+    Vector color;
 
-        LightSource() : color( 1 ) {}
-        virtual ~LightSource() {}
+    LightSource() : color(1.0) {}
+    virtual ~LightSource() {}
 
-        virtual double shadow( Vector&, Vector& ) = 0;
+    virtual double shadow( Vector&, Vector& ) = 0;
 };

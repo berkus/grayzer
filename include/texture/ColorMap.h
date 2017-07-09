@@ -9,11 +9,11 @@
 
 class ColorMap : public Texture
 {
-    public:
-        std::shared_ptr<Image> map;
+public:
+    std::shared_ptr<Image> map;
 
-        ColorMap( Image *i ) : Texture(), map(i) {}
-       ~ColorMap() {}
+    ColorMap( Image *i ) : Texture(), map(i) {}
+    ~ColorMap() {}
 
-        void apply(Vector&, Grayzer::SurfaceData&) override;
+    void apply(Vector&, Grayzer::SurfaceData&) override;
 };

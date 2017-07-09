@@ -7,15 +7,15 @@
 
 class PointLight : public LightSource
 {
-    public:
-        Vector loc;
-        double dist_scale;
+public:
+    Vector loc;
+    double dist_scale;
 
-        PointLight( const Vector& l, double d = 1.0 )
-            : LightSource()
-            , loc( l )
-            , dist_scale( d )
-        {}
+    PointLight( const Vector& l, double d = 1.0 )
+        : LightSource()
+        , loc( l )
+        , dist_scale( d )
+    {}
 
-        double shadow( Vector&, Vector& ) override;
+    double shadow( Vector&, Vector& ) override;
 };

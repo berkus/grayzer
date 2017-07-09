@@ -7,12 +7,12 @@
 
 class Image
 {
-    public:
-        int width, height;
+public:
+    int width, height;
 
-        Image() {}
-        virtual ~Image() {}
+    Image() {}
+    virtual ~Image() {}
 
-        virtual rgb get_pixel( int, int ) = 0;
-        virtual void put_pixel( rgb ) = 0;
+    virtual rgb get_pixel(int, int) = 0;
+    virtual void put_pixel(rgb) = 0;
 };

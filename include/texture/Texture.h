@@ -9,23 +9,23 @@
 
 class Texture
 {
-    public:
-        Texture*          next;
-        GeometricObject*  object;
-        double            turb;
-        int               octaves;
-        Vector            offs, scale;
+public:
+    Texture*          next;
+    GeometricObject*  object;
+    double            turb;
+    int               octaves;
+    Vector            offs, scale;
 
-        Texture()
-            : next( 0 )
-            , object( 0 )
-            , turb( 0.0 )
-            , octaves( 6 )
-            , offs( 0 )
-            , scale( 1 )
-        {}
+    Texture()
+        : next( 0 )
+        , object( 0 )
+        , turb( 0.0 )
+        , octaves( 6 )
+        , offs( 0 )
+        , scale( 1 )
+    {}
 
-        virtual ~Texture() {}
+    virtual ~Texture() {}
 
-        virtual void apply( Vector&, Grayzer::SurfaceData& ) = 0;
+    virtual void apply( Vector&, Grayzer::SurfaceData& ) = 0;
 };

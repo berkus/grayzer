@@ -43,14 +43,14 @@ int main()
 
     s1->reflection(0.3);
 
-	Light1 = new PointLight(Vector(10,5,-10),17);
+    Light1 = new PointLight(Vector(10,5,-10),17);
     scene->add(s1);
-	scene->add(s2);
+    scene->add(s2);
     scene->add(s3);
     scene->add(p);
     scene->add(Light1);
     background = SkyBlue;
     setCamera(Vector(0),Vector(0,0,1),Vector(0,1,0));
-	render_scene(1.5,1.0,300,200,"SAMPLE20.TGA");
-	distributed_render_scene(1.5,1.0,300,200,5,5,"SAMPLE21.TGA");
+    render_scene(1.5,1.0,300,200,"SAMPLE20.TGA");
+    distributed_render_scene(1.5,1.0,300,200,5,5,"SAMPLE21.TGA");
 }

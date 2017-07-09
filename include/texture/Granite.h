@@ -8,10 +8,10 @@
 
 class Granite : public Texture
 {
-    public:
-        ColorTable tbl;
+public:
+    ColorTable tbl;
 
-        Granite() : Texture(), tbl() {}
+    Granite() : Texture(), tbl() {}
 
-        void apply( Vector&, Grayzer::SurfaceData& ) override;
+    void apply( Vector&, Grayzer::SurfaceData& ) override;
 };

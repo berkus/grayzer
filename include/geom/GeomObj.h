@@ -16,38 +16,38 @@ class Texture;
 
 class GeometricObject
 {
-    public:
-        Grayzer::SurfaceData def_material;
-        Map *mapping;
-        Texture *material;
-//      Transformation *transform;
+public:
+    Grayzer::SurfaceData def_material;
+    Map *mapping;
+    Texture *material;
+    // Transformation *transform;
 
-    public:
-        GeometricObject()
-            : def_material(defaultMaterial)
-            , mapping(0)
-            , material(0)
-            //, transform(0)
-        {}
+public:
+    GeometricObject()
+        : def_material(defaultMaterial)
+        , mapping(0)
+        , material(0)
+        //, transform(0)
+    {}
 
-        virtual ~GeometricObject();
+    virtual ~GeometricObject();
 
-        void find_texture(Vector&, Grayzer::SurfaceData&);
+    void find_texture(Vector&, Grayzer::SurfaceData&);
 
-        void add(Texture*);
+    void add(Texture*);
 
-        virtual bool intersect(Ray&, double&) = 0;
-        virtual Vector find_normal(Vector&) = 0;
+    virtual bool intersect(Ray&, double&) = 0;
+    virtual Vector find_normal(Vector&) = 0;
 
-        //
-        //  transformations
-        //
-        void scale( const Vector& scale );
-        void translate( const Vector& loc );
-        void rotate( const Vector& rotate );
-        //
-        //  texture/material manage
-        //
+    //
+    //  transformations
+    //
+    void scale(Vector const& scale);
+    void translate(Vector const& loc);
+    void rotate(Vector const& rotate);
+    //
+    //  texture/material manage
+    //
     void surface_data(Grayzer::SurfaceData mat) { def_material = mat; }
     void ambient( double ka ) { def_material.ka = ka; }
     void diffuse( double kd ) { def_material.kd = kd; }

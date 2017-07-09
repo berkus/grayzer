@@ -7,10 +7,10 @@
 
 class Bumps : public Texture
 {
-    public:
-        double amount;
+public:
+    double amount;
 
-        Bumps( double a = 1.0 ) : Texture(), amount(a) {}
+    Bumps( double a = 1.0 ) : Texture(), amount(a) {}
 
-        void apply(Vector&, Grayzer::SurfaceData&) override;
+    void apply(Vector&, Grayzer::SurfaceData&) override;
 };

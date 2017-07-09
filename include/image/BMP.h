@@ -7,17 +7,17 @@
 
 class BmpImage : public Image
 {
-    public:
-        class error {};
-        class alloc_error : public error {};
+public:
+    class error {};
+    class alloc_error : public error {};
 
-    public:
-        rgb   *palette;
-        unsigned char *data;
+public:
+    rgb   *palette;
+    unsigned char *data;
 
-        BmpImage( char * );
-       ~BmpImage();
+    BmpImage( char * );
+    ~BmpImage();
 
-        virtual rgb get_pixel( int, int );
-        inline void put_pixel( rgb ) {}
+    virtual rgb get_pixel( int, int );
+    inline void put_pixel( rgb ) {}
 };

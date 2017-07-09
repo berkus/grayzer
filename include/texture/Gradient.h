@@ -8,11 +8,11 @@
 
 class Gradient : public Texture
 {
-    public:
-        Vector     grad;
-        ColorTable tbl;
+public:
+    Vector     grad;
+    ColorTable tbl;
 
-        Gradient( Vector g ) : Texture(), grad( g ), tbl() {}
+    Gradient( Vector g ) : Texture(), grad( g ), tbl() {}
 
-        void apply(Vector&, Grayzer::SurfaceData&) override;
+    void apply(Vector&, Grayzer::SurfaceData&) override;
 };

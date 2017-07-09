@@ -13,19 +13,19 @@
 
 class BoundingVolume
 {
-    public:
-        GeometricObject * bounds;     // the bounds
-        BoundingVolume *  sub;        // subcontained bounding volume
-        BoundingVolume *  next;       // next bv of the same level
-        GeometricObject **obj_list;   // objects enclosed in this bv
-        int obj_count, obj_limit;      // for dynamic object array
+public:
+    GeometricObject * bounds;     // the bounds
+    BoundingVolume *  sub;        // subcontained bounding volume
+    BoundingVolume *  next;       // next bv of the same level
+    GeometricObject **obj_list;   // objects enclosed in this bv
+    int obj_count, obj_limit;      // for dynamic object array
 
-        BoundingVolume();
-       ~BoundingVolume();
+    BoundingVolume();
+   ~BoundingVolume();
 
-        void add( GeometricObject * );
-        void add( BoundingVolume * );
-        void set_bounds( GeometricObject * );
+    void add( GeometricObject * );
+    void add( BoundingVolume * );
+    void set_bounds( GeometricObject * );
 
-        GeometricObject *intersect( Ray&, double& );
+    GeometricObject *intersect(Ray&, double&);
 };

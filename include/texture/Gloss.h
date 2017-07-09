@@ -7,8 +7,8 @@
 
 class Gloss : public Texture
 {
-    public:
-        Gloss() : Texture() {}
+public:
+    Gloss() : Texture() {}
 
-        void apply(Vector&, Grayzer::SurfaceData&) override;
+    void apply(Vector&, Grayzer::SurfaceData&) override;
 };

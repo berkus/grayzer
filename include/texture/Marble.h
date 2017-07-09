@@ -8,17 +8,17 @@
 
 class Marble : public Texture
 {
-    public:
-        int        squeeze;
-        ColorTable tbl;
+public:
+    int        squeeze;
+    ColorTable tbl;
 
-        Marble( double t = 1.0, int s = 1 )
-            : Texture()
-            , squeeze( s )
-            , tbl()
-        {
-            turb = t;
-        }
+    Marble( double t = 1.0, int s = 1 )
+        : Texture()
+        , squeeze( s )
+        , tbl()
+    {
+        turb = t;
+    }
 
-        void apply( Vector&, Grayzer::SurfaceData& ) override;
+    void apply( Vector&, Grayzer::SurfaceData& ) override;
 };

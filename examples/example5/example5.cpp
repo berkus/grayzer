@@ -8,9 +8,9 @@
 void
 main()
 {
-	Sphere *s1,*s2,*s3;
-	Plane *p;
-	PointLight *Light1;
+    Sphere *s1,*s2,*s3;
+    Plane *p;
+    PointLight *Light1;
 
     Scene = new Environment();
     s1 = new Sphere(Vector(0,1,5),1);
@@ -44,6 +44,6 @@ main()
     Scene->Add(Light1);
     Background = SkyBlue;
     SetCamera(Vector(0),Vector(0,0,-1),Vector(0,1,0));
-	DistributedRenderScene(3.2,2.0,320,200,3,3,"sample4.tga");
-	DrawTargaFile("sample4.tga");
+    DistributedRenderScene(3.2,2.0,320,200,3,3,"sample4.tga");
+    DrawTargaFile("sample4.tga");
 }

@@ -8,12 +8,12 @@
 
 class Ray
 {
-    public:
-        Vector org;
-        Vector dir; // direction must be normalized
+public:
+    Vector org;
+    Vector dir; // direction must be normalized
 
-        Ray() {};
-        Ray( Vector& o, Vector& d ) : org( o ), dir( d ) {}
+    Ray() {};
+    Ray( Vector& o, Vector& d ) : org( o ), dir( d ) {}
 
-        Vector point( double t ) { return org + dir * t; }
+    Vector point( double t ) { return org + dir * t; }
 };

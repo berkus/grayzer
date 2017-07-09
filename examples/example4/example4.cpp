@@ -14,7 +14,7 @@ extern unsigned _stklen = 64000U;
 
 void main()
 {
-	PointLight *Light1,*Light2;
+    PointLight *Light1,*Light2;
     Rect *Facet1,*Facet2,*Facet3;
     Sphere *Sphere1,*Sphere2,*Sphere3;
 
@@ -25,28 +25,28 @@ void main()
     Sphere1 = new Sphere(Vector(15,10,-30),15);
     Sphere2 = new Sphere(Vector(10,-40,-5),15);
     Sphere3 = new Sphere(Vector(45,-10,-20),15);
-	Light1 = new PointLight(Vector(-20,20,-25),40); //SphericLight(Vector(-20,20,-25),50,40);
-	Light2 = new PointLight(Vector(30,-23,15),40);
-	Facet1->Add(new Brick(Vector(11,6,5),Vector(0.1),Firebrick,Vector(0.5)));
-	Facet2->Add(new Brick(Vector(11,6,5),Vector(0.1),Firebrick,Vector(0.5)));
-	Facet3->Add(new Brick(Vector(11,6,5),Vector(0.1),Firebrick,Vector(0.5)));
+    Light1 = new PointLight(Vector(-20,20,-25),40); //SphericLight(Vector(-20,20,-25),50,40);
+    Light2 = new PointLight(Vector(30,-23,15),40);
+    Facet1->Add(new Brick(Vector(11,6,5),Vector(0.1),Firebrick,Vector(0.5)));
+    Facet2->Add(new Brick(Vector(11,6,5),Vector(0.1),Firebrick,Vector(0.5)));
+    Facet3->Add(new Brick(Vector(11,6,5),Vector(0.1),Firebrick,Vector(0.5)));
     Facet1->DefMaterial.Ka = 0.25;
-	Facet1->DefMaterial.Kt = 0.0;
-	Facet1->DefMaterial.Kr = 0.0;
-	Facet1->DefMaterial.Ks = 0.0;
-	Facet1->DefMaterial.Kd = 1.0;
+    Facet1->DefMaterial.Kt = 0.0;
+    Facet1->DefMaterial.Kr = 0.0;
+    Facet1->DefMaterial.Ks = 0.0;
+    Facet1->DefMaterial.Kd = 1.0;
     Facet1->DefMaterial.p = 1;
     Facet1->DefMaterial.Med = Air;
     Facet2->DefMaterial = Facet1->DefMaterial;
-	Facet3->DefMaterial = Facet1->DefMaterial;
-	Sphere1->Add(new Ripples(Vector(0,0,5),2,0.3));
+    Facet3->DefMaterial = Facet1->DefMaterial;
+    Sphere1->Add(new Ripples(Vector(0,0,5),2,0.3));
     Sphere1->DefMaterial.Ka = 0.25;
     Sphere1->DefMaterial.Kd = 0.0;
     Sphere1->DefMaterial.Ks = 0.3;
     Sphere1->DefMaterial.Kr = 0.3;
     Sphere1->DefMaterial.Kt = 0.8;
     Sphere1->DefMaterial.p = 100;
-	Sphere1->DefMaterial.Med.ior = 1.35;
+    Sphere1->DefMaterial.Med.ior = 1.35;
     Sphere1->DefMaterial.Med.Betta = 0;
     Sphere1->DefMaterial.Color = 0;
     Sphere2->DefMaterial.Ka = 0.25;
@@ -68,7 +68,7 @@ void main()
     Scene->Add(Light2);
     Threshold = 0.05;
     SetCamera(Vector(30,180,200),Vector(-50,-320,-350),Vector(0,1,0));
-	RenderScene(160,100,320,200,"SAMP0030.TGA");
+    RenderScene(160,100,320,200,"SAMP0030.TGA");
 //  DistributedRenderScene(150,100,300,200,3,3,"SAMP0031.TGA");
-//	AdaptiveDistributedRenderScene(128,120,256,240,3,3,0.01,"SAMP0032.TGA");
+//  AdaptiveDistributedRenderScene(128,120,256,240,3,3,0.01,"SAMP0032.TGA");
 }

@@ -5,83 +5,89 @@
 
 namespace libssio {
 
-   class StreamDataSink : public DataSink
-   {
-      private:
-         std::ofstream *out;
+class StreamDataSink : public DataSink
+{
+private:
+    std::ofstream *out;
 
-      public:
-         StreamDataSink(std::ofstream *data_stream)
-         {
-            out = data_stream;
-         };
+public:
+    StreamDataSink(std::ofstream *data_stream) {
+        out = data_stream;
+    }
 
-         virtual ~StreamDataSink() {};
+    virtual ~StreamDataSink() {}
 
-         /*
-          *	Write a 1-byte value.
-          */
-         virtual void write1(uint32_t val)
-         {
-            out->put(static_cast<char>(val&0xff));
-         }
+    /*
+    *	Write a 1-byte value.
+    */
+    void write1(uint32_t val) override {
+        out->put(static_cast<char>(val&0xff));
+    }
 
-         /*
-          *	Write a 2-byte value, lsb first.
-          */
-         virtual void write2(uint16_t val)
-         {
-            out->put(static_cast<char>(val&0xff));
-            out->put(static_cast<char>((val>>8)&0xff));
-         }
+    /*
+    *	Write a 2-byte value, lsb first.
+    */
+    void write2(uint16_t val) override
+    {
+        out->put(static_cast<char>(val&0xff));
+        out->put(static_cast<char>((val>>8)&0xff));
+    }
 
-         /*
-          *	Write a 2-byte value, msb first.
-          */
-         virtual void write2big(uint16_t val)
-         {
-            out->put(static_cast<char>((val>>8)&0xff));
-            out->put(static_cast<char>(val&0xff));
-         }
+    /*
+    *	Write a 2-byte value, msb first.
+    */
+    void write2big(uint16_t val) override
+    {
+        out->put(static_cast<char>((val>>8)&0xff));
+        out->put(static_cast<char>(val&0xff));
+    }
 
-         /*
-          *	Write a 4-byte value, lsb first.
-          */
-         virtual void write4(uint32_t val)
-         {
-            out->put(static_cast<char>(val&0xff));
-            out->put(static_cast<char>((val>>8)&0xff));
-            out->put(static_cast<char>((val>>16)&0xff));
-            out->put(static_cast<char>((val>>24)&0xff));
-         }
+    /*
+    *	Write a 4-byte value, lsb first.
+    */
+    void write4(uint32_t val) override
+    {
+        out->put(static_cast<char>(val&0xff));
+        out->put(static_cast<char>((val>>8)&0xff));
+        out->put(static_cast<char>((val>>16)&0xff));
+        out->put(static_cast<char>((val>>24)&0xff));
+    }
 
-         /*
-          *	Write a 4-byte value, msb first.
-          */
-         virtual void write4big(uint32_t val)
-         {
-            out->put(static_cast<char>((val>>24)&0xff));
-            out->put(static_cast<char>((val>>16)&0xff));
-            out->put(static_cast<char>((val>>8)&0xff));
-            out->put(static_cast<char>(val&0xff));
-         }
+    /*
+    *	Write a 4-byte value, msb first.
+    */
+    void write4big(uint32_t val) override
+    {
+        out->put(static_cast<char>((val>>24)&0xff));
+        out->put(static_cast<char>((val>>16)&0xff));
+        out->put(static_cast<char>((val>>8)&0xff));
+        out->put(static_cast<char>(val&0xff));
+    }
 
-         virtual void write(char *b, int len) { out->write(b, len); };
+    void write(char *b, int len) override {
+        out->write(b, len);
+    }
 
-         virtual void seek(unsigned int pos) { out->seekp(pos); };
+    void seek(unsigned int pos) override {
+        out->seekp(pos);
+    }
 
-         virtual void skip(int pos) { out->seekp(pos, std::ios::cur); };
+    void skip(int pos) override {
+        out->seekp(pos, std::ios::cur);
+    }
 
-         virtual unsigned int getSize()
-         {
-            long pos = out->tellp();
-            out->seekp(0, std::ios::end);
-            long len = out->tellp();
-            out->seekp(pos);
-            return len;
-         };
+    size getSize() override
+    {
+        long pos = out->tellp();
+        out->seekp(0, std::ios::end);
+        long len = out->tellp();
+        out->seekp(pos);
+        return len;
+    }
 
-         virtual unsigned int getPos() { return out->tellp(); };
-   };
+    position getPos() override {
+        return out->tellp();
+    }
+};
 
 } // libssio namespace

@@ -1,57 +1,57 @@
+// @todo Perhaps Eigen is better for this
 #pragma once
 
 #include <math.h>
 #include <stdlib.h>
+#include <algorithm>
 
 class Vector
 {
-    public:
-        double x, y, z;
+public:
+    double x, y, z;
 
-        Vector() {};
-        Vector(double v) { x = y = z = v; };
-        Vector(const Vector& v) { x = v.x;y = v.y;z = v.z; };
-        Vector(double vx,double vy,double vz) { x = vx;y = vy;z = vz; };
-        Vector& operator = (const Vector& v) { x = v.x;y = v.y; z = v.z; return *this; };
-        Vector& operator = (double v) { x=y=z=v; return *this; };
-        Vector operator - () const;
-        Vector& operator += (const Vector&);
-        Vector& operator -= (const Vector&);
-        Vector& operator *= (const Vector&);
-        Vector& operator *= (double);
-        Vector& operator /= (double);
+    Vector() {};
+    Vector(double v) { x = y = z = v; };
+    Vector(const Vector& v) { x = v.x;y = v.y;z = v.z; };
+    Vector(double vx,double vy,double vz) { x = vx;y = vy;z = vz; };
+    Vector& operator = (const Vector& v) { x = v.x;y = v.y; z = v.z; return *this; };
+    Vector& operator = (double v) { x=y=z=v; return *this; };
+    Vector operator - () const;
+    Vector& operator += (const Vector&);
+    Vector& operator -= (const Vector&);
+    Vector& operator *= (const Vector&);
+    Vector& operator *= (double);
+    Vector& operator /= (double);
 
-        friend Vector operator + ( const Vector&, const Vector& );
-        friend Vector operator - ( const Vector&, const Vector& );
-        friend Vector operator * ( const Vector&, const Vector& );
-        friend Vector operator * ( double, const Vector& );
-        friend Vector operator * ( const Vector&, double ); // $???$
-        friend Vector operator / ( const Vector&, double );
-        friend Vector operator / ( const Vector&, const Vector& );
-        //
-        //  Dot product -- gives scalar angle between Vectors
-        //
-        friend double operator & ( const Vector& u,const Vector& v )
-        {
-            return u.x*v.x + u.y*v.y + u.z*v.z;
-        }
-        //
-        //  Cross product
-        //
-        friend Vector operator ^ ( const Vector& u,const Vector& v )
-        {
-            return Vector (u.y*v.z - u.z*v.y,u.z*v.x - u.x*v.z,u.x*v.y - u.y*v.x);
-        }
-        // length
-        double operator ! () { return (double)sqrt(x*x+y*y+z*z); }
-        // component
-        double& operator [](int n) { return(*(&x+n)); };
-        // comparison
-        int operator < (double v) { return x < v && y < v && z < v; };
-        int operator > (double v) { return x > v && y > v && z > v; };
-//        int operator < (const Vector&); $$
+    friend Vector operator + ( const Vector&, const Vector& );
+    friend Vector operator - ( const Vector&, const Vector& );
+    friend Vector operator * ( const Vector&, const Vector& );
+    friend Vector operator * ( double, const Vector& );
+    friend Vector operator * ( const Vector&, double ); // $???$
+    friend Vector operator / ( const Vector&, double );
+    friend Vector operator / ( const Vector&, const Vector& );
+    //
+    //  Dot product -- gives scalar angle between Vectors
+    //
+    friend double operator & ( const Vector& u,const Vector& v ) {
+        return u.x*v.x + u.y*v.y + u.z*v.z;
+    }
+    //
+    //  Cross product
+    //
+    friend Vector operator ^ ( const Vector& u,const Vector& v ) {
+        return Vector (u.y*v.z - u.z*v.y,u.z*v.x - u.x*v.z,u.x*v.y - u.y*v.x);
+    }
+    // length
+    double operator ! () { return (double)sqrt(x*x+y*y+z*z); }
+    // component
+    double& operator [](int n) { return(*(&x+n)); };
+    // comparison
+    int operator < (double v) { return x < v and y < v and z < v; };
+    int operator > (double v) { return x > v and y > v and z > v; };
+    // int operator < (const Vector&); $$
 
-        static Vector rnd_vector();
+    static Vector rnd_vector();
 };
 
 /*inline int Vector::operator < (const Vector& v)
@@ -162,26 +162,17 @@ inline Vector halfway( Vector u, Vector v )
 //
 inline Vector Vector::rnd_vector()
 {
-    Vector v (rand()-0.5*RAND_MAX,rand()-0.5*RAND_MAX,rand()-0.5*RAND_MAX);
+    Vector v (rand()-0.5*RAND_MAX, rand()-0.5*RAND_MAX, rand()-0.5*RAND_MAX);
     return normalize(v);
 }
 
 inline Vector clip(Vector v)
 {
-    if(v.x < 0.0) v.x = 0.0;
-    else
-    if(v.x > 1.0) v.x = 1.0;
-
-    if(v.y < 0.0) v.y = 0.0;
-    else
-    if(v.y > 1.0) v.y = 1.0;
-
-    if(v.z < 0.0) v.z = 0.0;
-    else
-    if(v.z > 1.0) v.z = 1.0;
-
+    v.x = std::clamp(v.x, 0.0, 1.0);
+    v.y = std::clamp(v.y, 0.0, 1.0);
+    v.z = std::clamp(v.z, 0.0, 1.0);
     return v;
 }
 
 // A handy type substitution.
-typedef Vector Color;
+using Color = Vector;
