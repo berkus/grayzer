@@ -8,4 +8,4 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 message("Supported features = ${CMAKE_CXX_COMPILE_FEATURES}")
 
 add_subdirectory(src)
-#add_subdirectory(examples)
+add_subdirectory(examples)
