@@ -4,9 +4,6 @@
 //
 #pragma once
 
-// OBSOLETE - replace with std::chrono
-#define TICKS_PER_SEC ((double)18.2)
-
 //
 //  Remark this and recompile to remove statistics code
 //
