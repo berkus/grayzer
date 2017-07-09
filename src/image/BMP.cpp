@@ -79,6 +79,7 @@ BmpImage::BmpImage(char const* fname)
     unsigned char *     buf;
 
     FILE *fp = fopen(fname, "r");
+    if (!fp) throw error();
     FileDataSource io(fp);
 
     //
