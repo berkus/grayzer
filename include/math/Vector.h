@@ -168,9 +168,14 @@ inline Vector Vector::rnd_vector()
 
 inline Vector clip(Vector v)
 {
-    v.x = std::clamp(v.x, 0.0, 1.0);
-    v.y = std::clamp(v.y, 0.0, 1.0);
-    v.z = std::clamp(v.z, 0.0, 1.0);
+    // when libc++ catches up with c++17:
+    // v.x = std::clamp(v.x, 0.0, 1.0);
+    // v.y = std::clamp(v.y, 0.0, 1.0);
+    // v.z = std::clamp(v.z, 0.0, 1.0);
+
+    v.x = std::max(0.0, std::min(v.x, 1.0));
+    v.y = std::max(0.0, std::min(v.y, 1.0));
+    v.z = std::max(0.0, std::min(v.z, 1.0));
     return v;
 }
 
