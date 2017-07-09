@@ -19,5 +19,5 @@ public:
         , dist_scale( d )
     {}
 
-    double shadow( Vector&, Vector& ) override;
+    double shadow(Scene* scene, Vector&, Vector&) override;
 };

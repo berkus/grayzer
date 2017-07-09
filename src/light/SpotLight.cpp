@@ -9,7 +9,7 @@
 
 using Grayzer::SurfaceData;
 
-double SpotLight::shadow( Vector& p, Vector& l )
+double SpotLight::shadow(Scene* scene, Vector& p, Vector& l)
 {
    l =   loc   - p;
    double dist = !l;

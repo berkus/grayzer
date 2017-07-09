@@ -9,9 +9,9 @@
 #include "Tracer.h"
 #include "Externs.h"
 #include "Ray.h"
-#include "Draw.h"
+#include "environment/Scene.h"
 
-void render_scene( double half_width, double half_height,
+void render_scene(Scene* scene, double half_width, double half_height,
                int nx, int ny,
                char const* fname)
 {
@@ -22,11 +22,8 @@ void render_scene( double half_width, double half_height,
    Vector color;
    int   i, j;
 
-   TargaImage *tga = new TargaImage( fname, nx, ny );
+   auto tga = std::make_unique<TargaImage>( fname, nx, ny );
    rgb   c;
-//    display_init(nx,ny);
-
-//   START_TIME( time_used );
 
 /* $NB$ what is it? where it from?  how   it got here?
 
@@ -44,9 +41,9 @@ void render_scene( double half_width, double half_height,
       {
          TotalPixels++;
 
-         camera(  x, y, ray );
+         scene->camera(x, y, ray);
 
-         color =  trace( Grayzer::Medium::air, 1.0, ray );
+         color = scene->trace( Grayzer::Medium::air, 1.0, ray );
          clip( color );
 
          c.r   = color.x * 255;
@@ -54,18 +51,6 @@ void render_scene( double half_width, double half_height,
          c.b   = color.z * 255;
 
          tga->put_pixel(c);
-//         draw_pixel( j, i, color );
-
-/*         if(   kbhit()  )
-         {
-            while( kbhit() ) getch();
-            goto endRender;
-         }*/
       }
    }
-// endRender:
-//   STOP_TIME( time_used );
-   delete tga;
-//   display_close();
-//   stats("render_scene");
 }

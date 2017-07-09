@@ -9,9 +9,10 @@
 
 using Grayzer::SurfaceData;
 
-double PointLight::shadow(   Vector&  p, Vector& l )
+double PointLight::shadow(Scene* scene, Vector&  p, Vector& l)
 {
-   l =   loc   - p;
+   l = loc - p;
+
    double t;
    double dist = !l;
    double attenuation = dist_scale  / dist;
@@ -23,15 +24,15 @@ double PointLight::shadow(   Vector&  p, Vector& l )
    SurfaceData texture;
    GeometricObject *occlude;
 
-   while( (occlude   = scene->intersect(r,t)) !=   0   && dist  > t   )
+   while ((occlude = scene->intersect(r,t)) != 0 && dist > t)
    {
-      r.org =  r.point(t);
+      r.org = r.point(t);
 
-      occlude->find_texture( r.org, texture );
+      occlude->find_texture(r.org, texture);
 
-      if(   texture.kt < threshold ) return  0; // объект непрозрачен
-      if(   (attenuation *=   texture.kt) < threshold ) return 0;
-      dist -=  t;
+      if (texture.kt < threshold) return 0; // объект непрозрачен
+      if ((attenuation *= texture.kt) < threshold) return 0;
+      dist -= t;
    }
    return attenuation;
 }

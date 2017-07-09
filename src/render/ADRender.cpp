@@ -7,11 +7,12 @@
 #include "Tracer.h"
 #include "Externs.h"
 #include "Ray.h"
-#include "Draw.h"
+#include "environment/Scene.h"
 
 auto& air = Grayzer::Medium::air;
 
 void adaptive_distributed_render_scene(
+   Scene* scene,
    double HalfWidth,double HalfHeight,
    int   nx,int ny,int nxSub,int nySub,
    double Variance,
@@ -30,13 +31,8 @@ void adaptive_distributed_render_scene(
    Vector Mean;
    int   Count;
 
-   // make  next in  some higher-level module as: RenderOutFile = new Targa...
-   TargaImage *tga = new TargaImage(PicFileName, nx, ny);
+   auto tga = std::make_unique<TargaImage>(PicFileName, nx, ny);
    rgb   c;
-
-//    display_init( nx, ny );
-
-//    START_TIME( time_used );
 
    for(i = 0, y = HalfHeight; i < ny; i++, y -= hy)
    {
@@ -54,14 +50,16 @@ void adaptive_distributed_render_scene(
 
          do {
             for(int  iSub = 0; iSub < nxSub; iSub++)
+            {
                for(int  jSub = 0; jSub < nySub; jSub++)
                {
-                  camera(x1+hxSub*(iSub+rnd()),y1+hySub*(jSub+rnd()),ray);
-                  Color =  trace( air, 1.0, ray );
-                  Sum   += Color;
-                  Disp +=  Color &  Color;
+                  scene->camera(x1+hxSub*(iSub+rnd()),y1+hySub*(jSub+rnd()),ray);
+                  Color = scene->trace( air, 1.0, ray );
+                  Sum  += Color;
+                  Disp += Color & Color;
                   Count++;
                }
+            }
             Mean = Sum / Count;
             d =   (Disp /  Count -  (Mean &  Mean)) * Count / (Count - 1);
          } while(d / Count >= Variance && Count < 99);
@@ -71,24 +69,7 @@ void adaptive_distributed_render_scene(
          c.g   = Mean.y * 255;
          c.b   = Mean.z * 255;
 
-         tga->put_pixel(   c );
-//          draw_pixel( j, i, Color );
-         //
-         // abandon  render if key is hit
-         //
-/*         if(   kbhit()  )
-         {
-            while( !getch()   )
-               getch();
-            goto endRender;
-         }*/
+         tga->put_pixel(c);
       }
    }
-// endRender:
-//    STOP_TIME( time_used );
-
-   delete tga;
-//    display_close();
-
-//    stats("adaptive_distributed_render_scene");
 }

@@ -1,9 +1,7 @@
 add_library(grayzer STATIC
-    Camera.cpp
     ColorTable.cpp
     Stats.cpp
     Noise.cpp
-    Shade.cpp
     Tracer.cpp
     environment/Scene.cpp
     environment/Fog.cpp

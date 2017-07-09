@@ -5,6 +5,8 @@
 
 #include "math/Vector.h"
 
+class Scene;
+
 class LightSource
 {
 public:
@@ -13,5 +15,5 @@ public:
     LightSource() : color(1.0) {}
     virtual ~LightSource() {}
 
-    virtual double shadow( Vector&, Vector& ) = 0;
+    virtual double shadow(Scene* scene, Vector&, Vector&) = 0;
 };

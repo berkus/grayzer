@@ -5,9 +5,8 @@
 
 #include "light/LightSource.h"
 
-class SpotLight : public LightSource
+class SpotLight final : public LightSource
 {
-public:
     Vector loc;
     Vector dir;
     double cone_angle,
@@ -15,6 +14,7 @@ public:
     int    beam_distribution;
     double dist_scale;
 
+public:
     SpotLight( Vector& l, Vector& d, double a, double da,
                                       int bd, double ds = 1.0 )
         : LightSource()
@@ -26,5 +26,5 @@ public:
         , dist_scale( ds )
     {}
 
-    double shadow( Vector&, Vector& ) override;
+    double shadow(Scene* scene, Vector&, Vector&) override;
 };

@@ -9,11 +9,12 @@
 #include "Tracer.h"
 #include "Externs.h"
 #include "Ray.h"
-#include "Draw.h"
+#include "environment/Scene.h"
 
 auto& air = Grayzer::Medium::air;
 
 void distributed_render_scene(
+   Scene* scene,
    double half_width, double half_height,
    int   nx,   int   ny,
    int   nx_sub,  int   ny_sub,
@@ -30,12 +31,8 @@ void distributed_render_scene(
    Vector color;
 
    // make  next in  some higher-level module as: RenderOutFile = new Targa...
-   TargaImage *tga = new TargaImage( fname,nx,ny );
+   auto tga = std::make_unique<TargaImage>( fname,nx,ny );
    rgb   c;
-
-//    display_init( nx,ny  );
-
-//    START_TIME( time_used );
 
    for( i = 0, y =   half_height; i < ny; i++, y   -= hy )
    {
@@ -50,9 +47,9 @@ void distributed_render_scene(
          for( int iSub =   0; iSub  < nx_sub; iSub++ )
             for( int jSub =   0; jSub  < ny_sub; jSub++ )
             {
-               camera(x1 + hx_sub * (iSub + rnd()),
+               scene->camera(x1 + hx_sub * (iSub + rnd()),
                      y1 +  hy_sub * (jSub + rnd()), ray );
-               color += trace(   air, 1.0, ray );
+               color += scene->trace(air, 1.0, ray);
             }
          color /= primary_samples;
          clip(color);
@@ -62,20 +59,6 @@ void distributed_render_scene(
          c.b   = color.z * 255;
 
          tga->put_pixel(c);
-//          draw_pixel(j,i,color);
-/*         if(kbhit())
-         {
-            if(!getch())
-               getch();
-            goto end_render;
-         }*/
       }
    }
-// end_render:
-//    STOP_TIME( time_used );
-
-   delete tga;
-//    display_close();
-
-//    stats("distributed_render_scene");
 }

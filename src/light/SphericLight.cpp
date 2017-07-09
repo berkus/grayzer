@@ -9,7 +9,7 @@
 
 using Grayzer::SurfaceData;
 
-double SphericLight::shadow( Vector& p, Vector& l )
+double SphericLight::shadow(Scene* scene, Vector& p, Vector& l)
 {
    l =   loc   - p   + Vector::rnd_vector() * radius;
    double dist = !l;

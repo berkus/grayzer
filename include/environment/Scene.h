@@ -27,13 +27,22 @@ using SolidPtrList = std::vector<std::shared_ptr<GeometricObject>>;
 
 class Scene
 {
-public:
     LightSourcePtrList light;
     SolidPtrList solid;
 
     std::shared_ptr<Fog> envFog;
 
-    Scene() {};
+    //
+    //  camera parameters
+    //
+    Vector eye{0.0, 0.0, 0.0};
+    Vector eye_dir{0.0, 0.0, 1.0};
+    Vector view_x{1.0, 0.0, 0.0}, view_y{0.0, 1.0, 0.0};
+    double aperture{0.0};// pадиус линзы
+    double focus{0.0};   // фокусное pасстояние
+
+public:
+    Scene() {}
     virtual ~Scene() {}
 
     void add(LightSource *l) { light.emplace_back(l); }
@@ -41,4 +50,10 @@ public:
 
     virtual GeometricObject *intersect(Ray&, double&);
     virtual Vector shade_background(Ray&);
+
+    void camera( double, double, Ray& );
+    void setCamera( const Vector&, const Vector&, const Vector& );
+
+    Color trace( Grayzer::Medium&, double, Ray& );
+    Color shade( Grayzer::Medium&, double, Vector, Vector, GeometricObject * );
 };
