@@ -1,5 +1,4 @@
 //
-//  File.........: externs.h
 //  Description..: some external statistic vars declaration
 //
 #pragma once
@@ -16,7 +15,7 @@
 #define OPT_DEBUG   128
 
 extern unsigned long
-    TotalRays,TotalPixels,
+    TotalPixels,
     BoxTestCount,BoxTestMisses,
     CylinderTestCount,CylinderTestMisses,
     SphereTestCount,SphereTestMisses,
