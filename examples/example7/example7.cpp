@@ -79,8 +79,8 @@ main()
 
     InitNoise();
     SetCamera(Vector(0),Vector(0,0,2),Vector(0,1,0));
-    RenderScene(1.6,1.2,320,240,"SAMP0060.TGA");
-//  DistributedRenderScene(1.6,1.0,320,200,5,5,"SAMPLE61.TGA");
-//  AdaptiveDistributedRenderScene(1.6,1.2,320,240,5,5,0.1,"SAMP0062.TGA");
+    RenderScene(1.6,1.2,320,240,"SAMPLE70.TGA");
+//  DistributedRenderScene(1.6,1.0,320,200,5,5,"SAMPLE71.TGA");
+//  AdaptiveDistributedRenderScene(1.6,1.2,320,240,5,5,0.1,"SAMPLE72.TGA");
     DoneNoise();
 }

@@ -118,9 +118,9 @@ int main()
 
    init_noise();
    scene->setCamera(Vector(0),Vector(0,0,1.5),Vector(0,1,0));
-//   render_scene(1.6,1.0,320,200,"SAMP0100.TGA");
-// distributed_render_scene(1.6,1.0,320,200,5,5,"SAMP0101.TGA");
-   adaptive_distributed_render_scene(scene, 1.6,1.0,1280,1024,5,5,0.01,"SAMP0102.TGA");
+//   render_scene(1.6,1.0,320,200,"SAMPLEB0.TGA");
+// distributed_render_scene(1.6,1.0,320,200,5,5,"SAMPLEB1.TGA");
+   adaptive_distributed_render_scene(scene, 1.6,1.0,1280,1024,5,5,0.01,"SAMPLEB2.TGA");
    done_noise();
 
    return 0;

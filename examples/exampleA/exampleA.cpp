@@ -92,8 +92,8 @@ main()
     SetCamera(Vector(0),Vector(0,0,1.5),Vector(0,1,0));
 //  Aperture = 5.0;
 //  Focus = 12.0;
-    RenderScene(1.6,1.0,320,200,"SAMPLE90.TGA");
-//  DistributedRenderScene(1.6,1.0,320,200,5,5,"SAMPLE91.TGA");
-//  AdaptiveDistributedRenderScene(1.6,1.0,320,200,5,5,0.01,"SAMPLE92.TGA");
+    RenderScene(1.6,1.0,320,200,"SAMPLEA0.TGA");
+//  DistributedRenderScene(1.6,1.0,320,200,5,5,"SAMPLEA1.TGA");
+//  AdaptiveDistributedRenderScene(1.6,1.0,320,200,5,5,0.01,"SAMPLEA2.TGA");
     DoneNoise();
 }

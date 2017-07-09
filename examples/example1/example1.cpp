@@ -48,5 +48,5 @@ int main()
     scene->add(Light2);
     scene->setCamera(Vector(0,10,20),Vector(-5,-32,-35),Vector(1,1,1));
 
-    render_scene(scene, 160,100,320,200,"PIC01.OUT");
+    render_scene(scene, 160,100,320,200,"SAMPLE10.TGA");
 }

@@ -34,5 +34,5 @@ void main()
 
     Background = SkyBlue;
     SetCamera(Vector(0),Vector(0,0,1),Vector(0,1,0));
-    RenderScene(1.6,1.0,320,200,"SAMP0080.TGA");
+    RenderScene(1.6,1.0,320,200,"SAMPLE90.TGA");
 }

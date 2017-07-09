@@ -37,6 +37,6 @@ void main()
 
     InitNoise();
     SetCamera(Vector(0,0,-7),Vector(0,0,1),Vector(0,1,0));
-    RenderScene(1.5,1.0,300,200,"SAMPLE70.TGA");
+    RenderScene(1.5,1.0,300,200,"SAMPLE80.TGA");
     DoneNoise();
 }

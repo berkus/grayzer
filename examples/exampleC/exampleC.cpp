@@ -58,5 +58,5 @@ void main()
 
     Threshold = 0.05;
     SetCamera(Vector(30,180,200),Vector(-50,-320,-350),Vector(0,1,0));
-    RenderScene(150,100,600,400,"MYSAMP.TGA");
+    RenderScene(150,100,600,400,"SAMPLEC0.TGA");
 }

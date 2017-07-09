@@ -49,7 +49,7 @@ int main()
 
     background = SkyBlue;
     scene->setCamera(Vector(0,0,-10), Vector(0,0,1), Vector(0,1,0) );
-//  RenderScene(0.3,0.2,300,200,"SAMP0010.TGA");
-//  DistributedRenderScene(0.3,0.2,300,200,5,5,"SAMP0011.TGA");
-    adaptive_distributed_render_scene(scene, 0.3,0.2,300,200,3,3,0.01,"SAMP0012.TGA");
+//  RenderScene(0.3,0.2,300,200,"SAMPLE20.TGA");
+//  DistributedRenderScene(0.3,0.2,300,200,5,5,"SAMPLE21.TGA");
+    adaptive_distributed_render_scene(scene, 0.3,0.2,300,200,3,3,0.01,"SAMPLE22.TGA");
 }

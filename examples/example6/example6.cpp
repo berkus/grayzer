@@ -33,6 +33,6 @@ main()
     Background = SkyBlue;
     InitNoise();
     SetCamera(Vector(-4,8,-4),Vector(2,-5,2),Vector(0,1,0));
-    RenderScene(1.6,1.0,320,200,"SAMPLE50.TGA");
+    RenderScene(1.6,1.0,320,200,"SAMPLE60.TGA");
     DoneNoise();
 }
