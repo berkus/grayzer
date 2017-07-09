@@ -9,8 +9,6 @@
 #include "Ray.h"
 #include "environment/Scene.h"
 
-auto& air = Grayzer::Medium::air;
-
 void adaptive_distributed_render_scene(
    Scene* scene,
    double HalfWidth,double HalfHeight,
@@ -54,7 +52,7 @@ void adaptive_distributed_render_scene(
                for(int  jSub = 0; jSub < nySub; jSub++)
                {
                   scene->camera(x1+hxSub*(iSub+rnd()),y1+hySub*(jSub+rnd()),ray);
-                  Color = scene->trace( air, 1.0, ray );
+                  Color = scene->trace( Grayzer::Medium::air, 1.0, ray );
                   Sum  += Color;
                   Disp += Color & Color;
                   Count++;

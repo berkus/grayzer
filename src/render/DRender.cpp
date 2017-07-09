@@ -11,8 +11,6 @@
 #include "Ray.h"
 #include "environment/Scene.h"
 
-auto& air = Grayzer::Medium::air;
-
 void distributed_render_scene(
    Scene* scene,
    double half_width, double half_height,
@@ -49,7 +47,7 @@ void distributed_render_scene(
             {
                scene->camera(x1 + hx_sub * (iSub + rnd()),
                      y1 +  hy_sub * (jSub + rnd()), ray );
-               color += scene->trace(air, 1.0, ray);
+               color += scene->trace(Grayzer::Medium::air, 1.0, ray);
             }
          color /= primary_samples;
          clip(color);
