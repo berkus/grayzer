@@ -41,6 +41,9 @@ class Scene
     double aperture{0.0};// pадиус линзы
     double focus{0.0};   // фокусное pасстояние
 
+    Color ambient{1.0};
+    Color background{0.0, 0.05, 0.05};
+
 public:
     Scene() {}
     virtual ~Scene() {}
@@ -56,4 +59,6 @@ public:
 
     Color trace( Grayzer::Medium&, double, Ray& );
     Color shade( Grayzer::Medium&, double, Vector, Vector, GeometricObject * );
+
+    void setBackground(Color bg) { background = bg; }
 };

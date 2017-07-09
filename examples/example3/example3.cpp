@@ -49,7 +49,7 @@ int main()
     scene->add(s3);
     scene->add(p);
     scene->add(Light1);
-    background = SkyBlue;
+    scene->setBackground(SkyBlue);
     scene->setCamera(Vector(0),Vector(0,0,1),Vector(0,1,0));
     render_scene(scene, 1.5,1.0,300,200,"SAMPLE30.TGA");
     distributed_render_scene(scene, 1.5,1.0,300,200,5,5,"SAMPLE31.TGA");

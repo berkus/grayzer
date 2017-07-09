@@ -47,7 +47,7 @@ int main()
     light1 = new PointLight( Vector(10,5,-10),15 );
     scene->add( light1 );
 
-    background = SkyBlue;
+    scene->setBackground(SkyBlue);
     scene->setCamera(Vector(0,0,-10), Vector(0,0,1), Vector(0,1,0) );
 //  RenderScene(0.3,0.2,300,200,"SAMPLE20.TGA");
 //  DistributedRenderScene(0.3,0.2,300,200,5,5,"SAMPLE21.TGA");

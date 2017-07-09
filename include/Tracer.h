@@ -22,9 +22,6 @@ extern int level;
 extern int maxLevel;
 extern double threshold;
 
-extern Color ambient;
-extern Color background;
-
 extern long timeUsed;
 
 //

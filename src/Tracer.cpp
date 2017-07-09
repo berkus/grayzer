@@ -15,9 +15,6 @@ using namespace Grayzer;
 // Globals
 //
 
-Color ambient   (1.0);
-Color background (0.0, 0.05, 0.05);
-
 Grayzer::Medium Grayzer::Medium::air   =   { 1.0, 0 };
 Grayzer::Medium Grayzer::Medium::glass =   { 1.6, 0 };
 
