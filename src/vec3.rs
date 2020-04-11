@@ -1,7 +1,6 @@
 use core::ops;
-use std::ops::{Add, Mul};
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Copy, Clone)]
 pub struct Vec3
 {
     pub x: f32,
@@ -13,6 +12,23 @@ impl Vec3 {
     pub fn new(x: f32, y: f32, z: f32) -> Self {
         Self { x, y, z }
     }
+
+    pub fn normalized(self) -> Self {
+        self / self.length()
+    }
+
+    pub fn into_normalized(self) -> Self {
+        let len = self.length();
+        self / len
+    }
+
+    pub fn length(&self) -> f32 {
+        (self.x * self.x + self.y * self.y + self.z * self.z).sqrt()
+    }
+
+    pub fn r(&self) -> f32 { self.x }
+    pub fn g(&self) -> f32 { self.y }
+    pub fn b(&self) -> f32 { self.z }
 }
 
 impl ops::Add for Vec3 {
@@ -36,6 +52,14 @@ impl ops::Mul<f32> for Vec3 {
 
     fn mul(self, rhs: f32) -> Self::Output {
         Vec3 { x: self.x * rhs, y: self.y * rhs, z: self.z * rhs }
+    }
+}
+
+impl ops::Div<f32> for Vec3 {
+    type Output = Vec3;
+
+    fn div(self, rhs: f32) -> Self::Output {
+        Vec3 { x: self.x / rhs, y: self.y / rhs, z: self.z / rhs }
     }
 }
 
