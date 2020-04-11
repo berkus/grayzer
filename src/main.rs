@@ -1,8 +1,10 @@
+mod geom;
 mod vec3;
 mod ray;
 
 use vec3::Vec3;
 use ray::Ray;
+use geom::Sphere;
 
 fn write_ppm(w: i32, h: i32, max_value: i32) {
     let lower_left_corner = Vec3::new(-2.0, -1.0, -1.0);
@@ -29,23 +31,11 @@ fn write_ppm(w: i32, h: i32, max_value: i32) {
     }
 }
 
-fn hit_sphere(center: Vec3, radius: f32, ray: &Ray) -> f32 {
-    let oc = ray.origin - center;
-    let a = ray.direction.length_squared();
-    let half_b = vec3::dot(oc, ray.direction);
-    let c = oc.length_squared() - radius * radius;
-    let discriminant = half_b * half_b - a * c;
-    if discriminant < 0.0 {
-        return -1.0
-    } else {
-        return (-half_b - discriminant.sqrt()) / a;
-    }
-}
-
 fn ray_color(ray: &Ray) -> Vec3 {
-    let t = hit_sphere(Vec3::new(0.0,0.0,-1.0), 0.5, ray);
-    if t > 0.0 {
-        let n = (ray.point_at(t) - Vec3::new(0.0, 0.0, -1.0)).normalized();
+    use crate::ray::Hittable;
+    let sphere = Sphere::new(Vec3::new(0.0,0.0,-1.0), 0.5);
+    if let Some(hit) = sphere.hit(ray, 0.0, 1.0) {
+        let n = (ray.point_at(hit.t) - Vec3::new(0.0, 0.0, -1.0)).normalized();
         return 0.5 * Vec3::new(n.x + 1.0, n.y + 1.0, n.z + 1.0);
     }
 

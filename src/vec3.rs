@@ -35,6 +35,14 @@ impl Vec3 {
     pub fn b(&self) -> f32 { self.z }
 }
 
+impl ops::Neg for Vec3 {
+    type Output = Self;
+
+    fn neg(self) -> Self::Output {
+        Vec3 { x: -self.x, y: -self.y, z: -self.z }
+    }
+}
+
 impl ops::Add for Vec3 {
     type Output = Self;
 
