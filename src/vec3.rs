@@ -39,6 +39,14 @@ impl ops::Add for Vec3 {
     }
 }
 
+impl ops::Sub for Vec3 {
+    type Output = Self;
+
+    fn sub(self, rhs: Self) -> Self::Output {
+        Vec3 { x: self.x - rhs.x, y: self.y - rhs.y, z: self.z - rhs.z }
+    }
+}
+
 impl ops::Mul<Vec3> for f32 {
     type Output = Vec3;
 
@@ -61,6 +69,10 @@ impl ops::Div<f32> for Vec3 {
     fn div(self, rhs: f32) -> Self::Output {
         Vec3 { x: self.x / rhs, y: self.y / rhs, z: self.z / rhs }
     }
+}
+
+pub fn dot(lhs: Vec3, rhs: Vec3) -> f32 {
+    lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z
 }
 
 #[cfg(test)]

@@ -29,11 +29,24 @@ fn write_ppm(w: i32, h: i32, max_value: i32) {
     }
 }
 
+fn hit_sphere(center: Vec3, radius: f32, ray: &Ray) -> bool {
+    let oc = ray.origin - center;
+    let a = vec3::dot(ray.direction, ray.direction);
+    let b = 2.0 * vec3::dot(oc, ray.direction);
+    let c = vec3::dot(oc, oc) - radius * radius;
+    let discriminant = b * b - 4.0 * a * c;
+    discriminant > 0.0
+}
+
 fn ray_color(ray: &Ray) -> Vec3 {
+    if hit_sphere(Vec3::new(0.0,0.0,-1.0), 0.5, ray) {
+        return Vec3::new(1.0, 0.0, 0.0);
+    }
+
     let t = 0.5 * (ray.direction.y + 1.0);
     (1.0 - t) * Vec3::new(1.0, 1.0, 1.0) + t * Vec3::new(0.5, 0.7, 1.0)
 }
 
 fn main() {
-    write_ppm(200, 200, 255);
+    write_ppm(200, 100, 255);
 }
