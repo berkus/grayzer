@@ -1,4 +1,4 @@
-use crate::vec3::{Vec3, dot};
+use crate::vec3::{dot, Vec3};
 
 pub struct Hit {
     pub t: f32,
@@ -15,8 +15,17 @@ impl Hit {
     // a matter of preference and you'll see both implementations in the literature.
     pub fn new(t: f32, point: Vec3, outward_normal: Vec3, ray: &Ray) -> Self {
         let front_face = dot(ray.direction, outward_normal) < 0.0;
-        let normal = if front_face { outward_normal } else { -outward_normal };
-        Hit { t, point, normal, front_face }
+        let normal = if front_face {
+            outward_normal
+        } else {
+            -outward_normal
+        };
+        Hit {
+            t,
+            point,
+            normal,
+            front_face,
+        }
     }
 }
 
@@ -30,8 +39,7 @@ pub trait WithNormal {
 }
 
 #[derive(Debug, Copy, Clone)]
-pub struct Ray
-{
+pub struct Ray {
     pub origin: Vec3,
     /// Direction is normalized.
     pub direction: Vec3,
@@ -39,7 +47,10 @@ pub struct Ray
 
 impl Ray {
     pub fn new(origin: Vec3, direction: Vec3) -> Self {
-        Ray { origin, direction: direction.normalized() }
+        Ray {
+            origin,
+            direction: direction.normalized(),
+        }
     }
 
     pub fn point_at(self, t: f32) -> Vec3 {
@@ -52,7 +63,5 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_ray_point_at() {
-
-    }
+    fn test_ray_point_at() {}
 }

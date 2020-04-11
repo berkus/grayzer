@@ -1,4 +1,4 @@
-use crate::ray::{Hittable, Hit, Ray};
+use crate::ray::{Hit, Hittable, Ray};
 
 pub struct Scene {
     pub solids: Vec<Box<dyn Hittable>>,

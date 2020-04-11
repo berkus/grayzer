@@ -1,9 +1,9 @@
-use crate::vec3::{dot, Vec3};
 use crate::ray::{Hit, Ray};
+use crate::vec3::{dot, Vec3};
 
 pub struct Sphere {
     center: Vec3,
-    radius: f32
+    radius: f32,
 }
 
 impl Sphere {
