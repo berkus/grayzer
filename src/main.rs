@@ -10,6 +10,8 @@ use geom::Sphere;
 use ray::Ray;
 use vec3::Vec3;
 
+const SAMPLES_PER_PIXEL: u32 = 100;
+
 fn render_ppm(w: i32, h: i32, max_value: i32) {
     println!("P3\n{} {}\n{}", w, h, max_value);
 
@@ -20,11 +22,21 @@ fn render_ppm(w: i32, h: i32, max_value: i32) {
 
     for y in (0..h).rev() {
         for x in 0..w {
-            let u = x as f32 / w as f32;
-            let v = y as f32 / h as f32;
+            let mut color = Vec3::new(0.0, 0.0, 0.0);
+            for _ in 0..SAMPLES_PER_PIXEL {
+                use rand::Rng;
 
-            let r = camera.ray(u, v);
-            let color = ray_color(&r, &scene);
+                let u_r: f32 = rand::thread_rng().gen();
+                let v_r: f32 = rand::thread_rng().gen();
+
+                let u = (x as f32 + u_r) / w as f32;
+                let v = (y as f32 + v_r) / h as f32;
+
+                let r = camera.ray(u, v);
+                color += ray_color(&r, &scene);
+            }
+
+            color /= SAMPLES_PER_PIXEL as f32;
 
             let ir = (255.999 * color.r()) as i32;
             let ig = (255.999 * color.g()) as i32;
