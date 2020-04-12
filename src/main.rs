@@ -23,12 +23,20 @@ const EPSILON: f32 = std::f32::EPSILON;
 fn render_ppm(w: i32, h: i32, max_value: i32) {
     println!("P3\n{} {}\n{}", w, h, max_value);
 
+    let aspect_ratio = w as f32 / h as f32;
+    let look_from = Vec3::new(3.0, 3.0, 2.0);
+    let look_at = Vec3::new(0.0, 0.0, -1.0);
+    let view_up = Vec3::new(0.0, 1.0, 0.0);
+    let dist_to_focus = (look_from - look_at).length();
+    let aperture = 2.0;
     let camera = Camera::new_free(
-        Vec3::new(-2.0, 2.0, 1.0),
-        Vec3::new(0.0, 0.0, -1.0),
-        Vec3::new(0.0, 1.0, 0.0),
+        look_from,
+        look_at,
+        view_up,
         20.0,
-        w as f32 / h as f32,
+        aspect_ratio,
+        aperture,
+        dist_to_focus,
     );
     let mut scene = Scene::new();
 
@@ -99,6 +107,7 @@ fn ray_color(ray: &Ray, scene: &Scene, depth: i32) -> Vec3 {
         return Vec3::new(0.0, 0.0, 0.0);
     }
 
+    // Background color
     let t = 0.5 * (ray.direction.y + 1.0);
     (1.0 - t) * Vec3::new(1.0, 1.0, 1.0) + t * Vec3::new(0.5, 0.7, 1.0)
 }
