@@ -195,6 +195,14 @@ pub fn dot(lhs: Vec3, rhs: Vec3) -> f32 {
     lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z
 }
 
+pub fn cross(lhs: Vec3, rhs: Vec3) -> Vec3 {
+    Vec3::new(
+        lhs.y * rhs.z - lhs.z * rhs.y,
+        lhs.z * rhs.x - lhs.x * rhs.z,
+        lhs.x * rhs.y - lhs.y * rhs.x,
+    )
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

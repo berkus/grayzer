@@ -23,7 +23,13 @@ const EPSILON: f32 = std::f32::EPSILON;
 fn render_ppm(w: i32, h: i32, max_value: i32) {
     println!("P3\n{} {}\n{}", w, h, max_value);
 
-    let camera = Camera::new(90.0, w as f32 / h as f32);
+    let camera = Camera::new_free(
+        Vec3::new(-2.0, 2.0, 1.0),
+        Vec3::new(0.0, 0.0, -1.0),
+        Vec3::new(0.0, 1.0, 0.0),
+        90.0,
+        w as f32 / h as f32,
+    );
     let mut scene = Scene::new();
 
     let mat1 = Rc::new(Lambertian::new(Vec3::new(0.1, 0.2, 0.5)));
@@ -45,19 +51,6 @@ fn render_ppm(w: i32, h: i32, max_value: i32) {
     // a negative radius, the geometry is unaffected but the surface normal points inward,
     // so it can be used as a bubble to make a hollow glass sphere:
     scene.add_solid(box Sphere::new(Vec3::new(-1.0, 0.0, -1.0), -0.45, diel1));
-
-    // Camera test
-    let r = (std::f32::consts::PI / 4.0).cos();
-    scene.add_solid(box Sphere::new(
-        Vec3::new(-r, 0.0, -1.0),
-        r,
-        Rc::new(Lambertian::new(Vec3::new(0.0, 0.0, 1.0))),
-    ));
-    scene.add_solid(box Sphere::new(
-        Vec3::new(r, 0.0, -1.0),
-        r,
-        Rc::new(Lambertian::new(Vec3::new(1.0, 0.0, 0.0))),
-    ));
 
     for y in (0..h).rev() {
         for x in 0..w {
