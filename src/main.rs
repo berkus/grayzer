@@ -1,4 +1,5 @@
 #![feature(box_syntax)]
+#![feature(clamp)]
 
 mod environment;
 mod geom;
@@ -38,9 +39,9 @@ fn render_ppm(w: i32, h: i32, max_value: i32) {
 
             color /= SAMPLES_PER_PIXEL as f32;
 
-            let ir = (255.999 * color.r()) as i32;
-            let ig = (255.999 * color.g()) as i32;
-            let ib = (255.999 * color.b()) as i32;
+            let ir = ((255.999 * color.r()) as i32).clamp(0, 255);
+            let ig = ((255.999 * color.g()) as i32).clamp(0, 255);
+            let ib = ((255.999 * color.b()) as i32).clamp(0, 255);
 
             println!("{} {} {}", ir, ig, ib);
         }
