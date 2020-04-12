@@ -40,13 +40,18 @@ fn render_ppm(w: i32, h: i32, max_value: i32) {
 
             color /= SAMPLES_PER_PIXEL as f32;
 
-            let ir = ((255.999 * color.r()) as i32).clamp(0, 255);
-            let ig = ((255.999 * color.g()) as i32).clamp(0, 255);
-            let ib = ((255.999 * color.b()) as i32).clamp(0, 255);
+            let ir = prepare_color(color.r());
+            let ig = prepare_color(color.g());
+            let ib = prepare_color(color.b());
 
             println!("{} {} {}", ir, ig, ib);
         }
     }
+}
+
+fn prepare_color(component: f32) -> i32 {
+    const GAMMA: f32 = 2.0;
+    ((255.999 * component.powf(1.0 / GAMMA)) as i32).clamp(0, 255)
 }
 
 fn ray_color(ray: &Ray, scene: &Scene, depth: i32) -> Vec3 {
