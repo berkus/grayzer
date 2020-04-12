@@ -51,7 +51,8 @@ fn render_ppm(w: i32, h: i32, max_value: i32) {
 fn ray_color(ray: &Ray, scene: &Scene) -> Vec3 {
     use crate::ray::Hittable;
     if let Some(hit) = scene.hit(ray, 0.0, f32::INFINITY) {
-        return 0.5 * (hit.normal + Vec3::new(1.0, 1.0, 1.0));
+        let target = hit.point + hit.normal + Vec3::random_in_unit_sphere();
+        return 0.5 * ray_color(&Ray::new(hit.point, target - hit.point), scene);
     }
 
     let t = 0.5 * (ray.direction.y + 1.0);

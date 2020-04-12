@@ -1,4 +1,5 @@
 use core::ops;
+use rand::Rng;
 
 #[derive(Debug, PartialEq, Copy, Clone)]
 pub struct Vec3 {
@@ -37,6 +38,31 @@ impl Vec3 {
     }
     pub fn b(&self) -> f32 {
         self.z
+    }
+
+    pub fn random() -> Self {
+        Self {
+            x: rand::thread_rng().gen(),
+            y: rand::thread_rng().gen(),
+            z: rand::thread_rng().gen(),
+        }
+    }
+
+    pub fn random_between(min: f32, max: f32) -> Self {
+        Self {
+            x: rand::thread_rng().gen_range(min, max),
+            y: rand::thread_rng().gen_range(min, max),
+            z: rand::thread_rng().gen_range(min, max),
+        }
+    }
+
+    pub fn random_in_unit_sphere() -> Self {
+        loop {
+            let p = Vec3::random_between(-1.0, 1.0);
+            if p.length_squared() < 1.0 {
+                return p;
+            }
+        }
     }
 }
 
