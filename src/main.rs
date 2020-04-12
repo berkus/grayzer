@@ -4,11 +4,14 @@
 mod environment;
 mod geom;
 mod ray;
+mod texture;
 mod vec3;
 
 use environment::{Camera, Scene};
 use geom::Sphere;
 use ray::Ray;
+use std::rc::Rc;
+use texture::lambertian::Lambertian;
 use vec3::Vec3;
 
 const SAMPLES_PER_PIXEL: u32 = 100;
@@ -20,8 +23,12 @@ fn render_ppm(w: i32, h: i32, max_value: i32) {
 
     let camera = Camera::new_default();
     let mut scene = Scene::new();
-    scene.add_solid(box Sphere::new(Vec3::new(0.0, 0.0, -1.0), 0.5));
-    scene.add_solid(box Sphere::new(Vec3::new(0.0, -100.5, -1.0), 100.0));
+
+    let mat1 = Rc::new(Lambertian::new(Vec3::new(1.0, 0.8, 0.8)));
+    let mat2 = Rc::new(Lambertian::new(Vec3::new(0.8, 1.0, 0.6)));
+
+    scene.add_solid(box Sphere::new(Vec3::new(0.0, 0.0, -1.0), 0.5, mat1));
+    scene.add_solid(box Sphere::new(Vec3::new(0.0, -100.5, -1.0), 100.0, mat2));
 
     for y in (0..h).rev() {
         for x in 0..w {
@@ -56,7 +63,7 @@ fn prepare_color(component: f32) -> i32 {
 }
 
 fn ray_color(ray: &Ray, scene: &Scene, depth: i32) -> Vec3 {
-    use crate::ray::Hittable;
+    use crate::geom::hittable::Hittable;
 
     // If we've exceeded the ray bounce limit, no more light is gathered.
     if depth <= 0 {
@@ -64,8 +71,10 @@ fn ray_color(ray: &Ray, scene: &Scene, depth: i32) -> Vec3 {
     }
 
     if let Some(hit) = scene.hit(ray, EPSILON, f32::INFINITY) {
-        let target = hit.point + hit.normal + Vec3::random_unit_vector();
-        return 0.5 * ray_color(&Ray::new(hit.point, target - hit.point), scene, depth - 1);
+        if let Some(scatter) = hit.material.scatter(ray, &hit) {
+            return scatter.attenuation * ray_color(&scatter.scattered, scene, depth - 1);
+        }
+        return Vec3::new(0.0, 0.0, 0.0);
     }
 
     let t = 0.5 * (ray.direction.y + 1.0);

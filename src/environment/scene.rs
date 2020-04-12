@@ -1,4 +1,5 @@
-use crate::ray::{Hit, Hittable, Ray};
+use crate::geom::hittable::{Hit, Hittable};
+use crate::ray::Ray;
 
 pub struct Scene {
     pub solids: Vec<Box<dyn Hittable>>,
