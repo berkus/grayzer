@@ -12,6 +12,7 @@ use ray::Ray;
 use vec3::Vec3;
 
 const SAMPLES_PER_PIXEL: u32 = 100;
+const MAX_DEPTH: i32 = 50;
 
 fn render_ppm(w: i32, h: i32, max_value: i32) {
     println!("P3\n{} {}\n{}", w, h, max_value);
@@ -34,7 +35,7 @@ fn render_ppm(w: i32, h: i32, max_value: i32) {
                 let v = (y as f32 + v_r) / h as f32;
 
                 let r = camera.ray(u, v);
-                color += ray_color(&r, &scene);
+                color += ray_color(&r, &scene, MAX_DEPTH);
             }
 
             color /= SAMPLES_PER_PIXEL as f32;
@@ -48,11 +49,17 @@ fn render_ppm(w: i32, h: i32, max_value: i32) {
     }
 }
 
-fn ray_color(ray: &Ray, scene: &Scene) -> Vec3 {
+fn ray_color(ray: &Ray, scene: &Scene, depth: i32) -> Vec3 {
     use crate::ray::Hittable;
+
+    // If we've exceeded the ray bounce limit, no more light is gathered.
+    if depth <= 0 {
+        return Vec3::new(0.0, 0.0, 0.0);
+    }
+
     if let Some(hit) = scene.hit(ray, 0.0, f32::INFINITY) {
         let target = hit.point + hit.normal + Vec3::random_in_unit_sphere();
-        return 0.5 * ray_color(&Ray::new(hit.point, target - hit.point), scene);
+        return 0.5 * ray_color(&Ray::new(hit.point, target - hit.point), scene, depth - 1);
     }
 
     let t = 0.5 * (ray.direction.y + 1.0);
