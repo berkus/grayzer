@@ -72,6 +72,16 @@ impl Vec3 {
         let r = (1.0 - z * z).sqrt();
         Vec3::new(r * a.cos(), r * a.sin(), z)
     }
+
+    pub fn random_in_hemisphere(normal: Vec3) -> Self {
+        let in_unit_sphere = Vec3::random_in_unit_sphere();
+        return if dot(in_unit_sphere, normal) > 0.0 {
+            // In the same hemisphere as the normal
+            in_unit_sphere
+        } else {
+            -in_unit_sphere
+        };
+    }
 }
 
 impl ops::Neg for Vec3 {
