@@ -20,24 +20,7 @@ const SAMPLES_PER_PIXEL: u32 = 100;
 const MAX_DEPTH: i32 = 50;
 const EPSILON: f32 = std::f32::EPSILON;
 
-fn render_ppm(w: i32, h: i32, max_value: i32) {
-    println!("P3\n{} {}\n{}", w, h, max_value);
-
-    let aspect_ratio = w as f32 / h as f32;
-    let look_from = Vec3::new(3.0, 3.0, 2.0);
-    let look_at = Vec3::new(0.0, 0.0, -1.0);
-    let view_up = Vec3::new(0.0, 1.0, 0.0);
-    let dist_to_focus = (look_from - look_at).length();
-    let aperture = 2.0;
-    let camera = Camera::new_free(
-        look_from,
-        look_at,
-        view_up,
-        20.0,
-        aspect_ratio,
-        aperture,
-        dist_to_focus,
-    );
+fn make_scene() -> Scene {
     let mut scene = Scene::new();
 
     let mat1 = Rc::new(Lambertian::new(Vec3::new(0.1, 0.2, 0.5)));
@@ -59,6 +42,29 @@ fn render_ppm(w: i32, h: i32, max_value: i32) {
     // a negative radius, the geometry is unaffected but the surface normal points inward,
     // so it can be used as a bubble to make a hollow glass sphere:
     scene.add_solid(box Sphere::new(Vec3::new(-1.0, 0.0, -1.0), -0.45, diel1));
+    scene
+}
+
+fn render_ppm(w: i32, h: i32, max_value: i32) {
+    println!("P3\n{} {}\n{}", w, h, max_value);
+
+    let aspect_ratio = w as f32 / h as f32;
+    let look_from = Vec3::new(3.0, 3.0, 2.0);
+    let look_at = Vec3::new(0.0, 0.0, -1.0);
+    let view_up = Vec3::new(0.0, 1.0, 0.0);
+    let dist_to_focus = (look_from - look_at).length();
+    let aperture = 2.0;
+    let camera = Camera::new_free(
+        look_from,
+        look_at,
+        view_up,
+        20.0,
+        aspect_ratio,
+        aperture,
+        dist_to_focus,
+    );
+
+    let scene = make_scene();
 
     for y in (0..h).rev() {
         for x in 0..w {
