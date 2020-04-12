@@ -13,6 +13,7 @@ use vec3::Vec3;
 
 const SAMPLES_PER_PIXEL: u32 = 100;
 const MAX_DEPTH: i32 = 50;
+const EPSILON: f32 = std::f32::EPSILON;
 
 fn render_ppm(w: i32, h: i32, max_value: i32) {
     println!("P3\n{} {}\n{}", w, h, max_value);
@@ -62,7 +63,7 @@ fn ray_color(ray: &Ray, scene: &Scene, depth: i32) -> Vec3 {
         return Vec3::new(0.0, 0.0, 0.0);
     }
 
-    if let Some(hit) = scene.hit(ray, 0.0, f32::INFINITY) {
+    if let Some(hit) = scene.hit(ray, EPSILON, f32::INFINITY) {
         let target = hit.point + hit.normal + Vec3::random_in_unit_sphere();
         return 0.5 * ray_color(&Ray::new(hit.point, target - hit.point), scene, depth - 1);
     }
