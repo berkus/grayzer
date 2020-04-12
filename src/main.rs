@@ -27,7 +27,7 @@ fn render_ppm(w: i32, h: i32, max_value: i32) {
         Vec3::new(-2.0, 2.0, 1.0),
         Vec3::new(0.0, 0.0, -1.0),
         Vec3::new(0.0, 1.0, 0.0),
-        90.0,
+        20.0,
         w as f32 / h as f32,
     );
     let mut scene = Scene::new();
