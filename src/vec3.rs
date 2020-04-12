@@ -82,6 +82,10 @@ impl Vec3 {
             -in_unit_sphere
         };
     }
+
+    pub fn reflect(v: Vec3, normal: Vec3) -> Vec3 {
+        v - 2.0 * dot(v, normal) * normal
+    }
 }
 
 impl ops::Neg for Vec3 {
