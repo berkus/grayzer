@@ -1,5 +1,6 @@
 use core::ops;
 use rand::Rng;
+use std::f32::consts::PI;
 
 #[derive(Debug, PartialEq, Copy, Clone)]
 pub struct Vec3 {
@@ -63,6 +64,13 @@ impl Vec3 {
                 return p;
             }
         }
+    }
+
+    pub fn random_unit_vector() -> Self {
+        let a = rand::thread_rng().gen_range(0.0, 2.0 * PI);
+        let z: f32 = rand::thread_rng().gen_range(-1.0, 1.0);
+        let r = (1.0 - z * z).sqrt();
+        Vec3::new(r * a.cos(), r * a.sin(), z)
     }
 }
 

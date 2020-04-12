@@ -64,7 +64,7 @@ fn ray_color(ray: &Ray, scene: &Scene, depth: i32) -> Vec3 {
     }
 
     if let Some(hit) = scene.hit(ray, EPSILON, f32::INFINITY) {
-        let target = hit.point + hit.normal + Vec3::random_in_unit_sphere();
+        let target = hit.point + hit.normal + Vec3::random_unit_vector();
         return 0.5 * ray_color(&Ray::new(hit.point, target - hit.point), scene, depth - 1);
     }
 
