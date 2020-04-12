@@ -1,6 +1,6 @@
 use crate::geom::hittable::Hit;
 use crate::ray::Ray;
-use crate::texture::material::{Material, Scatter};
+use crate::texture::material::{schlick, Material, Scatter};
 use crate::vec3::{dot, Vec3};
 
 pub struct Dielectric {
@@ -25,6 +25,14 @@ impl Material for Dielectric {
         let sin_theta = (1.0 - cos_theta * cos_theta).sqrt();
         if etai_over_etat * sin_theta > 1.0 {
             // Could not refract, reflect instead.
+            let reflected = Vec3::reflect(ray_in.direction, hit.normal);
+            let scattered = Ray::new(hit.point, reflected);
+            return Some(Scatter::new(Vec3::new(1.0, 1.0, 1.0), scattered));
+        }
+
+        use rand::Rng;
+        let reflect_probability = schlick(cos_theta, etai_over_etat);
+        if rand::thread_rng().gen::<f32>() < reflect_probability {
             let reflected = Vec3::reflect(ray_in.direction, hit.normal);
             let scattered = Ray::new(hit.point, reflected);
             return Some(Scatter::new(Vec3::new(1.0, 1.0, 1.0), scattered));
