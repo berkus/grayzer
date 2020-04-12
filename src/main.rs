@@ -7,6 +7,7 @@ mod ray;
 mod texture;
 mod vec3;
 
+use crate::texture::dielectric::Dielectric;
 use crate::texture::metal::Metal;
 use environment::{Camera, Scene};
 use geom::Sphere;
@@ -28,13 +29,13 @@ fn render_ppm(w: i32, h: i32, max_value: i32) {
     let mat1 = Rc::new(Lambertian::new(Vec3::new(0.7, 0.3, 0.3)));
     let mat2 = Rc::new(Lambertian::new(Vec3::new(0.8, 0.8, 0.0)));
     let metal1 = Rc::new(Metal::new(Vec3::new(0.8, 0.6, 0.2), 0.3));
-    let metal2 = Rc::new(Metal::new(Vec3::new(0.8, 0.8, 0.8), 0.1));
+    let diel1 = Rc::new(Dielectric::new(1.5));
 
     scene.add_solid(box Sphere::new(Vec3::new(0.0, 0.0, -1.0), 0.5, mat1));
     scene.add_solid(box Sphere::new(Vec3::new(0.0, -100.5, -1.0), 100.0, mat2));
 
     scene.add_solid(box Sphere::new(Vec3::new(1.0, 0.0, -1.0), 0.5, metal1));
-    scene.add_solid(box Sphere::new(Vec3::new(-1.0, 0.0, -1.0), 0.5, metal2));
+    scene.add_solid(box Sphere::new(Vec3::new(-1.0, 0.0, -1.0), 0.5, diel1));
 
     for y in (0..h).rev() {
         for x in 0..w {

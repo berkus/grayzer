@@ -86,6 +86,13 @@ impl Vec3 {
     pub fn reflect(v: Vec3, normal: Vec3) -> Vec3 {
         v - 2.0 * dot(v, normal) * normal
     }
+
+    pub fn refract(uv: Vec3, normal: Vec3, etai_over_etat: f32) -> Vec3 {
+        let cos_theta = dot(-uv, normal);
+        let r_out_parallel = etai_over_etat * (uv + cos_theta * normal);
+        let r_out_perpendicular = -(1.0 - r_out_parallel.length_squared()).sqrt() * normal;
+        r_out_parallel + r_out_perpendicular
+    }
 }
 
 impl ops::Neg for Vec3 {
