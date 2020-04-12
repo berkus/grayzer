@@ -1,7 +1,7 @@
 use crate::geom::hittable::Hit;
 use crate::ray::Ray;
 use crate::texture::material::{Material, Scatter};
-use crate::vec3::Vec3;
+use crate::vec3::{dot, Vec3};
 
 pub struct Dielectric {
     pub refraction_index: f32,
@@ -20,6 +20,16 @@ impl Material for Dielectric {
         } else {
             self.refraction_index
         };
+
+        let cos_theta = dot(-ray_in.direction, hit.normal).min(1.0);
+        let sin_theta = (1.0 - cos_theta * cos_theta).sqrt();
+        if etai_over_etat * sin_theta > 1.0 {
+            // Could not refract, reflect instead.
+            let reflected = Vec3::reflect(ray_in.direction, hit.normal);
+            let scattered = Ray::new(hit.point, reflected);
+            return Some(Scatter::new(Vec3::new(1.0, 1.0, 1.0), scattered));
+        }
+
         let refracted = Vec3::refract(ray_in.direction, hit.normal, etai_over_etat);
         let scattered = Ray::new(hit.point, refracted);
         return Some(Scatter::new(Vec3::new(1.0, 1.0, 1.0), scattered));
