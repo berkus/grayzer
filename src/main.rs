@@ -11,37 +11,86 @@ use crate::texture::dielectric::Dielectric;
 use crate::texture::metal::Metal;
 use environment::{Camera, Scene};
 use geom::Sphere;
+use rand::Rng;
 use ray::Ray;
 use std::rc::Rc;
 use texture::lambertian::Lambertian;
 use vec3::Vec3;
 
-const SAMPLES_PER_PIXEL: u32 = 100;
+const SAMPLES_PER_PIXEL: u32 = 10;
 const MAX_DEPTH: i32 = 50;
 const EPSILON: f32 = std::f32::EPSILON;
 
 fn make_scene() -> Scene {
     let mut scene = Scene::new();
 
-    let mat1 = Rc::new(Lambertian::new(Vec3::new(0.1, 0.2, 0.5)));
-    let mat2 = Rc::new(Lambertian::new(Vec3::new(0.8, 0.8, 0.0)));
-    let metal1 = Rc::new(Metal::new(Vec3::new(0.8, 0.6, 0.2), 0.3));
-    let diel1 = Rc::new(Dielectric::new(1.5));
-
-    scene.add_solid(box Sphere::new(Vec3::new(0.0, 0.0, -1.0), 0.5, mat1));
-    scene.add_solid(box Sphere::new(Vec3::new(0.0, -100.5, -1.0), 100.0, mat2));
-
-    scene.add_solid(box Sphere::new(Vec3::new(1.0, 0.0, -1.0), 0.5, metal1));
     scene.add_solid(box Sphere::new(
-        Vec3::new(-1.0, 0.0, -1.0),
-        0.5,
-        diel1.clone(),
+        Vec3::new(0.0, -1000.0, -1.0),
+        1000.0,
+        Rc::new(Lambertian::new(Vec3::new(0.5, 0.5, 0.5))),
     ));
 
-    // An interesting and easy trick with dielectric spheres is to note that if you use
-    // a negative radius, the geometry is unaffected but the surface normal points inward,
-    // so it can be used as a bubble to make a hollow glass sphere:
-    scene.add_solid(box Sphere::new(Vec3::new(-1.0, 0.0, -1.0), -0.45, diel1));
+    for a in -11..11 {
+        for b in -11..11 {
+            let chosen_material: f32 = rand::thread_rng().gen();
+            let center = Vec3::new(
+                a as f32 + 0.9 * rand::thread_rng().gen::<f32>(),
+                0.2,
+                b as f32 + 0.9 * rand::thread_rng().gen::<f32>(),
+            );
+            if (center - Vec3::new(4.0, 0.2, 0.0)).length() > 0.9 {
+                match chosen_material {
+                    x if x < 0.8 => {
+                        // Diffuse
+                        let albedo = Vec3::random() * Vec3::random();
+                        scene.add_solid(box Sphere::new(
+                            center,
+                            0.2,
+                            Rc::new(Lambertian::new(albedo)),
+                        ));
+                    }
+                    y if y < 0.95 => {
+                        // Metal
+                        let albedo = Vec3::random_between(0.5, 1.0);
+                        let fuzz: f32 = rand::thread_rng().gen_range(0.0, 0.5);
+                        scene.add_solid(box Sphere::new(
+                            center,
+                            0.2,
+                            Rc::new(Metal::new(albedo, fuzz)),
+                        ));
+                    }
+                    _ => {
+                        let refraction_index: f32 = rand::thread_rng().gen_range(1.3, 2.0);
+                        // Glass
+                        scene.add_solid(box Sphere::new(
+                            center,
+                            0.2,
+                            Rc::new(Dielectric::new(refraction_index)),
+                        ));
+                    }
+                }
+            }
+        }
+    }
+
+    scene.add_solid(box Sphere::new(
+        Vec3::new(0.0, 1.0, 0.0),
+        1.0,
+        Rc::new(Dielectric::new(1.5)),
+    ));
+
+    scene.add_solid(box Sphere::new(
+        Vec3::new(-4.0, 1.0, 0.0),
+        1.0,
+        Rc::new(Lambertian::new(Vec3::new(0.4, 0.2, 0.1))),
+    ));
+
+    scene.add_solid(box Sphere::new(
+        Vec3::new(4.0, 1.0, 0.0),
+        1.0,
+        Rc::new(Metal::new(Vec3::new(0.7, 0.6, 0.5), 0.0)),
+    ));
+
     scene
 }
 
@@ -49,11 +98,11 @@ fn render_ppm(w: i32, h: i32, max_value: i32) {
     println!("P3\n{} {}\n{}", w, h, max_value);
 
     let aspect_ratio = w as f32 / h as f32;
-    let look_from = Vec3::new(3.0, 3.0, 2.0);
-    let look_at = Vec3::new(0.0, 0.0, -1.0);
+    let look_from = Vec3::new(13.0, 2.0, 3.0);
+    let look_at = Vec3::new(0.0, 0.0, 0.0);
     let view_up = Vec3::new(0.0, 1.0, 0.0);
-    let dist_to_focus = (look_from - look_at).length();
-    let aperture = 2.0;
+    let dist_to_focus = 10.0;
+    let aperture = 0.1;
     let camera = Camera::new_free(
         look_from,
         look_at,
@@ -70,8 +119,6 @@ fn render_ppm(w: i32, h: i32, max_value: i32) {
         for x in 0..w {
             let mut color = Vec3::new(0.0, 0.0, 0.0);
             for _ in 0..SAMPLES_PER_PIXEL {
-                use rand::Rng;
-
                 let u_r: f32 = rand::thread_rng().gen();
                 let v_r: f32 = rand::thread_rng().gen();
 
@@ -119,5 +166,5 @@ fn ray_color(ray: &Ray, scene: &Scene, depth: i32) -> Vec3 {
 }
 
 fn main() {
-    render_ppm(400, 200, 255);
+    render_ppm(1200, 800, 255);
 }
