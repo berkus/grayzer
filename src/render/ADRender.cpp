@@ -18,6 +18,10 @@ void adaptive_distributed_render_scene(
 {
    double x,y;                // sample point
    Ray   ray;                 // pixel ray
+   
+   nx *= 4;
+   ny *= 4;
+   
    double hx = 2.0   * HalfWidth / nx;   // pixel width
    double hy = 2.0   * HalfHeight / ny;     // pixel height
    double hxSub = hx /  nxSub;

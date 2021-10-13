@@ -22,7 +22,7 @@ void targa_header::save(DataSink& ds)
 
 TargaImage::TargaImage( char const*name, int width, int height, char *comment )
 {
-    FILE *fp = fopen(name, "w");
+    FILE *fp = fopen(name, "wb");
     file = new FileDataSink(fp);
     buf_size = 1000;
     buffer = new rgb [buf_size];
