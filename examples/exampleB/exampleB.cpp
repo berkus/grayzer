@@ -24,7 +24,7 @@
 
 int main()
 {
-   Rectangle *r[12];
+   Rectangle *r[25];
    PointLight *Light1;
 
    initDefaultMaterial();

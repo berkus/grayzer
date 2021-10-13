@@ -20,6 +20,11 @@ void distributed_render_scene(
 {
    double x,y;                // sample point
    Ray   ray;                 // pixel ray
+   
+   
+   nx *= 4;
+   ny *= 4;
+   
    double hx = 2.0   * half_width / nx;      // pixel width
    double hy = 2.0   * half_height /   ny;      // pixel height
    double hx_sub =   hx / nx_sub;         // hz subdivision

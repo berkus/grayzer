@@ -16,6 +16,10 @@ void render_scene(Scene* scene, double half_width, double half_height,
                char const* fname)
 {
    double x, y;
+   
+   nx *= 4;
+   ny *= 4;
+   
    double hx = 2.0   * half_width  /   nx;
    double hy = 2.0   * half_height /   ny;
    Ray   ray;
